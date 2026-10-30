@@ -12,7 +12,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Tanda">
 
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Fuente: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -568,7 +568,7 @@
 </div>
 
 <script>
-// ¡IMPORTANTE! Asegúrate de que esta URL sea la de "Cualquier persona" (Anyone)
+// Pega aquí la URL de tu Web App de Apps Script terminada en /exec
 const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec'; 
 
 const D = [
@@ -706,8 +706,15 @@ async function load() {
     S.req = new Set(j.req);
     S.con = new Set(j.con);
     S.ent = new Set(j.ent);
+    
+    // Lectura protegida de cuentas (tanto Array como Objeto clave-valor)
     S.cta = {};
-    (j.cta || []).forEach(x => S.cta[x[0]] = x[1]);
+    if (Array.isArray(j.cta)) {
+      j.cta.forEach(x => { if (x && x[0] != null) S.cta[x[0]] = x[1]; });
+    } else if (j.cta && typeof j.cta === 'object') {
+      Object.entries(j.cta).forEach(([k, v]) => { S.cta[k] = v; });
+    }
+    
     S.nm = {};
     (j.pers || []).forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
     all();
