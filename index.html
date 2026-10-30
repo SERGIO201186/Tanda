@@ -101,6 +101,48 @@
       letter-spacing: -0.01em;
     }
 
+    /* Barra de herramientas para modo de prueba */
+    #test-bar {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #test-bar .tb-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    #test-bar select {
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid #4338ca;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      flex: 1;
+    }
+    .badge-test {
+      background: #ef4444;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 800;
+      display: inline-block;
+    }
+
     .card {
       background: var(--card);
       border: 1px solid var(--ln);
@@ -445,6 +487,33 @@
 </head>
 <body>
 
+<!-- Barra Flotante de Modo de Prueba -->
+<div id="test-bar">
+  <div class="tb-header">
+    <div>🧪 MODO PRUEBA ACTIVO <span class="badge-test">SANDBOX</span></div>
+    <div style="font-size:11px;color:#c7d2fe">Simulador en tiempo real</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <label style="font-size:12px;color:#e0e7ff;font-weight:600">Simular que soy:</label>
+    <select id="test-impersonate">
+      <option value="">-- Modo Normal (Mi cuenta) --</option>
+      <option value="admin">👑 Administrador</option>
+      <option value="1">👤 Turno 1 (Sergio)</option>
+      <option value="2">👤 Turno 2 (Rosa)</option>
+      <option value="3">👤 Turno 3 (Alejandro)</option>
+      <option value="4">👤 Turno 4 (David Lirus)</option>
+      <option value="5">👤 Turno 5 (Reyna Villa)</option>
+      <option value="6">👤 Turno 6 (Ivana)</option>
+      <option value="7">👤 Turno 7 (Gaby Viveros)</option>
+      <option value="8">👤 Turno 8 (David Viveros)</option>
+      <option value="9">👤 Turno 9 (David Viveros)</option>
+      <option value="10">👤 Turno 10 (Cesar Ceballos)</option>
+      <option value="11">👤 Turno 11</option>
+    </select>
+    <button id="test-btn-refresh" class="s" style="background:#4338ca;font-size:12px;padding:6px 10px">🔄 Recargar</button>
+  </div>
+</div>
+
 <!-- Login -->
 <div id="login" class="card card-cur">
   <h2 style="font-size:22px;margin-bottom:6px">💰 Entrar a la tanda</h2>
@@ -465,7 +534,7 @@
       <div style="font-size:24px;line-height:1">⚠️</div>
       <div style="flex:1">
         <div style="font-weight:700;color:var(--accent-rose);font-size:15px;margin-bottom:4px">Falta subir tu identificación (INE)</div>
-        <div class="mu" style="color:var(--tx);font-size:13px;line-height:1.4">Para mayor seguridad de la tanda, adjunta tu foto de la credencial INE (frente y reverso).</div>
+        <div class="mu" style="color:var(--tx);font-size:13px;line-height:1.4">Para mayor seguridad y respaldo del ahorro, adjunta tu foto de la credencial INE (frente y reverso).</div>
         <button id="ine-upload-btn" class="s" style="margin-top:10px;background:linear-gradient(135deg,#f43f5e,#be123c)">📷 Subir fotos de mi INE</button>
       </div>
     </div>
@@ -510,9 +579,9 @@
   </div>
 
   <div class="card card-pg">
-    <h2>📄 Mis pagarés electrónicos</h2>
+    <h2>📋 Comprobantes de Compromiso de Ahorro</h2>
     <div id="pg"></div>
-    <div class="mu" style="margin-top: 6px;">Se cancelan automáticamente al confirmarse tu pago quincenal.</div>
+    <div class="mu" style="margin-top: 6px;">Se acreditan y cancelan de forma automática en cuanto se confirma tu aportación quincenal.</div>
   </div>
 
   <div class="card card-pend">
@@ -559,7 +628,7 @@
     </div>
     <label class="lgc" id="lgk1">
       <input type="checkbox" id="lgk">
-      <span>He leído y acepto el Aviso de Privacidad y el Compromiso de Pago, autorizo el uso de mi información, acepto mis pagarés electrónicos y me obligo a cubrir todos mis pagos hasta el número 11.</span>
+      <span>He leído y acepto el Aviso de Privacidad y el Compromiso de Ahorro, autorizo el uso técnico de mis datos, acepto los comprobantes electrónicos de aportación y me comprometo a cubrir puntualmente todas mis aportaciones hasta el número 11.</span>
     </label>
     <div class="lgc" id="lgk2" hidden style="justify-content: flex-end;">
       <button id="lgx">Cerrar</button>
@@ -569,7 +638,10 @@
 
 <script>
 // Pega aquí la URL de tu Web App de Apps Script terminada en /exec
-const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec'; 
+const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec' ; 
+
+// Variable para el simulador de prueba
+let TEST_AS = localStorage.getItem('test_as') || '';
 
 const D = [
   [2026, 10, 1], [2026, 10, 16],
@@ -588,7 +660,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';'
 const N = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const CFG = {
   nombre: 'SERGIO ARMANDO CADENA HUERTA',
-  domicilio: 'NICOLAS BRAVO 11,ZONA CENTRO, XALAPA, VERACRUZ',
+  domicilio: 'NICOLAS BRAVO 11, ZONA CENTRO, XALAPA, VERACRUZ',
   correo: 'KDNA.ARSE@GMAIL.COM',
   fecha: '30 de octubre de 2026',
   ver: 'v2'
@@ -598,9 +670,9 @@ function legal() {
   const c = k => `<b>${esc(CFG[k])}</b>`;
   return `
 <h2>AVISO DE PRIVACIDAD</h2><div class="mu">Vigente a partir del ${c('fecha')}</div>
-<h3>1. Responsable</h3><p>${c('nombre')}, con correo ${c('correo')}, es responsable del tratamiento de datos personales.</p>
-<h3>2. Compromiso de pago</h3><p>Ahorro voluntario entre particulares de 11 números. Cada número aporta $1,000 por quincena. Turnos: ${D.map((d, i) => 'N.º ' + (i + 1) + ': ' + fmt(d)).join('; ')}.</p>
-<h3>3. Pagarés</h3><p>Se generan pagarés electrónicos automáticos por cada quincena a cubrir, los cuales se cancelan al registrarse el pago.</p>`;
+<h3>1. Responsable</h3><p>${c('nombre')}, con correo ${c('correo')}, es responsable de la administración técnica de este ejercicio de ahorro colaborativo.</p>
+<h3>2. Compromiso de Aportación</h3><p>Ahorro solidario y voluntario entre particulares de 11 números. Cada número aporta puntualmente $1,000 por quincena. Turnos: ${D.map((d, i) => 'N.º ' + (i + 1) + ': ' + fmt(d)).join('; ')}.</p>
+<h3>3. Comprobantes de Compromiso</h3><p>Se generan folios electrónicos de compromiso de aportación mutua por cada quincena a cubrir, los cuales quedan formalmente liberados y acreditados en cuanto se registra tu aportación.</p>`;
 }
 
 function openLegal(ro) {
@@ -625,10 +697,11 @@ async function api(a, d) {
   if (!API || API.includes('PEGA_AQUI')) {
     throw new Error('Debes configurar la URL de tu Apps Script en la variable API.');
   }
+  const payload = Object.assign({ a: a, t: TOK, test_as: TEST_AS }, d);
   const r = await fetch(API, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(Object.assign({ a: a, t: TOK }, d))
+    body: JSON.stringify(payload)
   });
   if (!r.ok) {
     throw new Error(`Error de conexión con el servidor (${r.status})`);
@@ -655,12 +728,22 @@ const act = async (a, d) => {
 };
 
 function show() {
-  $('login').hidden = !!TOK;
-  $('app').hidden = !TOK;
-  if (TOK) {
+  const hasAccess = !!TOK || !!TEST_AS;
+  $('login').hidden = hasAccess;
+  $('app').hidden = !hasAccess;
+  if (hasAccess) {
     load();
   }
 }
+
+// Selector de simulación para pruebas
+$('test-impersonate').value = TEST_AS;
+$('test-impersonate').onchange = () => {
+  TEST_AS = $('test-impersonate').value;
+  localStorage.setItem('test_as', TEST_AS);
+  load();
+};
+$('test-btn-refresh').onclick = () => load();
 
 $('lb').onclick = async () => {
   $('le').textContent = '';
@@ -688,6 +771,8 @@ $('lb').onclick = async () => {
 $('lgo').onclick = () => {
   if (confirm('¿Deseas cerrar tu sesión?')) {
     TOK = null;
+    TEST_AS = '';
+    localStorage.removeItem('test_as');
     try { localStorage.removeItem('tk'); } catch (e) {}
     show();
   }
@@ -696,7 +781,7 @@ $('lgo').onclick = () => {
 async function load() {
   try {
     const j = await api('state');
-    if (!j.me.acc) {
+    if (!j.me.acc && !TEST_AS) {
       S = { me: j.me };
       openLegal(false);
       return;
@@ -707,7 +792,7 @@ async function load() {
     S.con = new Set(j.con);
     S.ent = new Set(j.ent);
     
-    // Lectura protegida de cuentas (tanto Array como Objeto clave-valor)
+    // Lectura protegida de cuentas
     S.cta = {};
     if (Array.isArray(j.cta)) {
       j.cta.forEach(x => { if (x && x[0] != null) S.cta[x[0]] = x[1]; });
@@ -717,6 +802,12 @@ async function load() {
     
     S.nm = {};
     (j.pers || []).forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
+
+    (j.pers || []).forEach(p => {
+      const opt = $('test-impersonate').querySelector(`option[value="${p.n}"]`);
+      if (opt) opt.textContent = `👤 Turno ${p.n} (${p.nombre || 'Sin nombre'})`;
+    });
+
     all();
   } catch (e) {
     console.error('Error al cargar datos:', e);
@@ -728,6 +819,8 @@ async function load() {
 const mine = n => (S.me && S.me.nums) ? S.me.nums.includes(n) : false;
 
 function cur() {
+  const T0 = new Date();
+  T0.setHours(0, 0, 0, 0);
   for (const n of N) {
     if (!S.ent.has(n)) return n;
   }
@@ -744,12 +837,12 @@ function head() {
   } else {
     const d = D[c - 1];
     $('cur').textContent = `Número ${c} · ${S.nm[c] || 'Asignando'}`;
-    $('dt').textContent = "Recibe $10,000 el " + fmt(d) + " · Pagos a más tardar el " + fmtS(dueD(c));
+    $('dt').textContent = "Recibe $10,000 el " + fmt(d) + " · Aportaciones a más tardar el " + fmtS(dueD(c));
     const t = new Date();
     t.setHours(0, 0, 0, 0);
     const n = Math.round((d - t) / 864e5), el = $('cd');
     el.className = n <= 3 ? 'alert' : '';
-    el.textContent = n > 1 ? (n <= 3 ? `¡Solo faltan ${n} días! ` : `Faltan ${n} días `) + "para la entrega" : n === 1 ? "¡Falta 1 día! Mañana se entrega" : n === 0 ? "¡Hoy es la entrega! Recuerda enviar tu pago" : "Entrega en curso";
+    el.textContent = n > 1 ? (n <= 3 ? `¡Solo faltan ${n} días! ` : `Faltan ${n} días `) + "para la entrega" : n === 1 ? "¡Falta 1 día! Mañana se entrega" : n === 0 ? "¡Hoy es la entrega! Recuerda enviar tu aportación" : "Entrega en curso";
     const a = S.cta[c];
     $('acc').textContent = a || "Aún no ha compartido sus datos bancarios.";
     const m = mine(c);
@@ -757,9 +850,11 @@ function head() {
     if (m && document.activeElement !== $('accT')) $('accT').value = a || "";
   }
   $('pb').style.width = ((S.pay.size || 0) / 110 * 100) + '%';
-  $('pt').textContent = `${S.pay.size || 0} de 110 abonos pagados · ${S.ent.size || 0} de 11 entregados`;
+  $('pt').textContent = `${S.pay.size || 0} de 110 aportaciones cubiertas · ${S.ent.size || 0} de 11 entregados`;
+  
   const nm = (S.me.nums || []).map(n => S.nm[n]);
-  $('hi').textContent = (S.me.admin ? 'Administrador · ' : '') + (nm.length ? 'Hola, ' + nm[0] : '');
+  const rolTxt = S.me.admin ? '👑 Administrador' : (nm.length ? '👤 ' + nm[0] + ` (Núm. ${S.me.nums.join(',')})` : '👤 Sin número asignado');
+  $('hi').innerHTML = (TEST_AS ? `<span class="badge-test" style="margin-right:6px">SIMULANDO</span>` : '') + rolTxt;
 }
 
 function grid() {
@@ -802,7 +897,7 @@ function pend() {
     let b = '';
     if (mine(g.q) && !ok) b += `<button class="s" data-c="${ks}">Confirmo que lo recibí ($${g.ks.length * 1000})</button> `;
     if (S.me.admin) {
-      b += `<button class="s" data-ps="${ks}">Marcar pagado${g.ks.length > 1 ? ' (todo)' : ''}</button> `;
+      b += `<button class="s" data-ps="${ks}">Marcar acreditado${g.ks.length > 1 ? ' (todo)' : ''}</button> `;
       if (g.ks.length > 1) g.ks.forEach((k, i) => b += `<button class="s" data-ps="${k}">Solo núm. ${g.ns[i]}</button> `);
     }
     return `<div class="q">${esc(g.name)} (núm. ${g.ns.join(' y ')}) → quincena ${g.q} · recibe ${esc(S.nm[g.q])} · $${g.ks.length * 1000}<br>${ok ? '✔ Receptor confirmó' : 'Esperando confirmación del receptor'}<br>${b}</div>`;
@@ -818,23 +913,63 @@ $('pend').onclick = e => {
 function mypay() {
   const M = N.filter(mine);
   if (!M.length) {
-    $('mp').innerHTML = '<div class="mu">Tu número aún no tiene lugar asignado en la tanda.</div>';
+    $('mp').innerHTML = '<div class="mu">El perfil seleccionado no tiene número asignado en la tanda (puedes elegir otro turno en la barra de prueba arriba).</div>';
     return;
   }
-  const q = N.find(x => M.some(n => n !== x && !S.pay.has(n + '_' + x)));
-  if (!q) {
-    $('mp').innerHTML = '<div class="q">✅ ¡Felicidades! Ya pagaste todas tus quincenas de la tanda.</div>';
+
+  const currentTurn = cur();
+  if (!currentTurn) {
+    $('mp').innerHTML = '<div class="q">✅ ¡Felicidades! Todos los turnos de la tanda se han completado.</div>';
     return;
   }
-  const due = M.filter(n => n !== q && !S.pay.has(n + '_' + q));
-  const todo = due.filter(n => !S.req.has(n + '_' + q));
-  $('mp').innerHTML = `<div class="q"><b>Quincena ${q}</b> (${D[q - 1].getDate()}/${D[q - 1].getMonth() + 1})<br>Depositar <b>$${due.length * 1000}</b> a <b>${esc(S.nm[q])}</b><br>Fecha límite: <b>${fmtS(dueD(q))}</b>`
-    + (due.length > 1 ? `<br>Cubre tus números ${due.join(' y ')} en una sola transferencia` : `<br>Número asignado: ${due[0]}`) + '<br>'
-    + (todo.length ? '<button class="s" data-q="1" style="margin-top:6px">Ya envié mi comprobante · Solicitar revisión</button>' : '⏳ Pendiente de revisión' + (due.length < M.length && M.length > 1 ? ' (restante: núm. ' + due.join(' y ') + ')' : '')) + '</div>';
+
+  let targetQ = null;
+  let isAtrasado = false;
+
+  for (let q = 1; q < currentTurn; q++) {
+    const hasUnpaid = M.some(n => n !== q && !S.pay.has(n + '_' + q));
+    if (hasUnpaid) {
+      targetQ = q;
+      isAtrasado = true;
+      break;
+    }
+  }
+
+  if (!targetQ) {
+    const hasUnpaidCurrent = M.some(n => n !== currentTurn && !S.pay.has(n + '_' + currentTurn));
+    if (hasUnpaidCurrent) {
+      targetQ = currentTurn;
+    }
+  }
+
+  if (!targetQ) {
+    $('mp').innerHTML = `<div class="q">
+      ✅ <b>Estás al corriente con tus aportaciones.</b><br>
+      <span class="mu">La siguiente quincena (Turno ${currentTurn + 1}) se habilitará automáticamente al completarse la entrega del Turno ${currentTurn}.</span>
+    </div>`;
+    return;
+  }
+
+  const due = M.filter(n => n !== targetQ && !S.pay.has(n + '_' + targetQ));
+  const todo = due.filter(n => !S.req.has(n + '_' + targetQ));
+
+  const avisoAtrasado = isAtrasado 
+    ? `<div style="display:inline-block;background:var(--accent-rose-subtle);color:var(--accent-rose);padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;margin-bottom:6px">⚠️ APORTACIÓN PENDIENTE ANTERIOR</div><br>` 
+    : `<div style="display:inline-block;background:var(--primary-subtle);color:var(--primary);padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;margin-bottom:6px">APORTACIÓN DEL TURNO ACTUAL</div><br>`;
+
+  $('mp').innerHTML = `<div class="q">
+    ${avisoAtrasado}
+    <b>Quincena ${targetQ}</b> (${D[targetQ - 1].getDate()}/${D[targetQ - 1].getMonth() + 1})<br>
+    Depositar <b>$${due.length * 1000}</b> a <b>${esc(S.nm[targetQ])}</b><br>
+    Fecha límite: <b>${fmtS(dueD(targetQ))}</b>
+    ${due.length > 1 ? `<br>Cubre tus números ${due.join(' y ')} en una sola transferencia` : `<br>Número asignado: ${due[0]}`}<br>
+    ${todo.length ? `<button class="s" data-q="${targetQ}" style="margin-top:8px">Ya envié mi comprobante · Solicitar revisión</button>` : '⏳ Pendiente de revisión'}
+  </div>`;
 }
 
 $('mp').onclick = e => {
-  if (e.target.dataset.q) act('req', {});
+  const q = e.target.dataset && e.target.dataset.q;
+  if (q) act('req', { q: +q });
 };
 
 $('accB').onclick = () => {
@@ -923,10 +1058,10 @@ function pgr() {
   const T0 = new Date();
   T0.setHours(0, 0, 0, 0);
   const todos = S.pgr || [], L = todos.filter(x => mine(x[1])), o = $('pg').querySelector('details'), op = o && o.open;
-  const st = x => x[3] === 'Cancelado' ? '✅ Cancelado' : dueD(x[2]) < T0 ? '⚠️ Vencido' : 'Vigente';
+  const st = x => x[3] === 'Cancelado' ? '✅ Acreditado / Cumplido' : dueD(x[2]) < T0 ? '⚠️ Fuera de plazo' : 'Compromiso Vigente';
   const c = L.filter(x => x[3] === 'Cancelado').length;
-  let h = S.me.admin ? `<div class="mu" style="margin-bottom:6px">Todos los pagarés: ${todos.filter(x => x[3] === 'Cancelado').length} cancelados · ${todos.filter(x => x[3] !== 'Cancelado').length} vigentes</div>` : '';
-  h += L.length ? `<details${op ? ' open' : ''}><summary>${c} cancelados · ${L.length - c} vigentes</summary>` + L.map(x => `<div class="q">${esc(x[0])} · Quincena ${x[2]} · $1,000 · Vence ${fmtS(dueD(x[2]))} · <b>${st(x)}</b></div>`).join('') + '</details>' : '<div class="mu">Aún no tienes pagarés generados.</div>';
+  let h = S.me.admin ? `<div class="mu" style="margin-bottom:6px">Total de compromisos: ${todos.filter(x => x[3] === 'Cancelado').length} cumplidos · ${todos.filter(x => x[3] !== 'Cancelado').length} vigentes</div>` : '';
+  h += L.length ? `<details${op ? ' open' : ''}><summary>${c} acreditados · ${L.length - c} vigentes</summary>` + L.map(x => `<div class="q">${esc(x[0])} · Quincena ${x[2]} · $1,000 · Límite: ${fmtS(dueD(x[2]))} · <b>${st(x)}</b></div>`).join('') + '</details>' : '<div class="mu">No hay documentos de compromiso generados para este usuario.</div>';
   $('pg').innerHTML = h;
 }
 
@@ -943,10 +1078,21 @@ function adm() {
   const el = $('adm');
   el.hidden = !S.me.admin;
   if (!S.me.admin || el.contains(document.activeElement)) return;
-  el.innerHTML = '<h2>⚙️ Administración de la Tanda</h2><div class="mu">Entregas realizadas (toca para marcar/desmarcar turno entregado):</div><div class="row">' + N.map(n => `<button class="s" data-d="${n}">${S.ent.has(n) ? '↩' : '📦'} Turno ${n}</button>`).join('') + '</div>'
-    + '<div class="mu" style="margin-top:10px">Integrantes y celulares (10 dígitos):</div>'
-    + S.pers.map(p => `<div class="row"><b>${p.n}</b><input id="pn${p.n}" value="${esc(p.nombre)}" placeholder="Nombre"><input id="pt${p.n}" type="tel" value="${esc(p.tel || '')}" placeholder="Celular"><button class="s" data-s="${p.n}">Guardar</button>${ext(p)}${p.tel ? `<button class="s" style="background:#e11d48" data-r="${p.tel}">Liberar</button>` : ''}</div>`).join('')
-    + '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes:</div>' + ((S.pend || []).length ? S.pend.map(t => `<div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Liberar</button></div>`).join('') : '<div class="mu">Ninguna.</div>');
+  el.innerHTML = '<h2>⚙️ Panel Administrador</h2>'
+    + '<div class="row" style="background:var(--accent-indigo-subtle);padding:10px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(99,102,241,0.2)">'
+    + '<b style="color:var(--accent-indigo)">Acciones de Prueba / Demo:</b>'
+    + '<button class="s" id="test-reset-btn" style="background:#dc2626">⚠️ Limpiar Pagos de Prueba</button>'
+    + '</div>'
+    + '<div class="mu">Entregas realizadas (toca para marcar/desmarcar turno entregado):</div><div class="row">' + N.map(n => `<button class="s" data-d="${n}">${S.ent.has(n) ? '↩' : '📦'} Turno ${n}</button>`).join('') + '</div>'
+    + '<div class="mu" style="margin-top:10px">Integrantes y celulares (10 dígitos). El botón "Liberar" desvincula la sesión si cambiaron de teléfono:</div>'
+    + S.pers.map(p => `<div class="row"><b>${p.n}</b><input id="pn${p.n}" value="${esc(p.nombre)}" placeholder="Nombre"><input id="pt${p.n}" type="tel" value="${esc(p.tel || '')}" placeholder="Celular"><button class="s" data-s="${p.n}">Guardar</button>${ext(p)}${p.tel ? `<button class="s" style="background:#e11d48" data-r="${p.tel}">Liberar dispositivo</button>` : ''}</div>`).join('')
+    + '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes (nuevos dispositivos bloqueados):</div>' + ((S.pend || []).length ? S.pend.map(t => `<div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Permitir entrada</button></div>`).join('') : '<div class="mu">Ninguna.</div>');
+
+  $('test-reset-btn').onclick = async () => {
+    if (confirm('¿Deseas reiniciar las solicitudes, confirmaciones y pagos para volver a hacer pruebas desde cero?')) {
+      await act('test_reset', {});
+    }
+  };
 }
 
 $('adm').onclick = e => {
@@ -1060,7 +1206,7 @@ if ('serviceWorker' in navigator) {
 }
 
 setInterval(() => {
-  if (TOK && !document.hidden) load();
+  if ((TOK || TEST_AS) && !document.hidden) load();
 }, 10000);
 
 show();
