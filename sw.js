@@ -1,4 +1,4 @@
-const C = 'tanda-v1';
+const C = 'tanda-v2';
 const F = [
   './',
   './index.html',
