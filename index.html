@@ -74,7 +74,7 @@ const fmtS=d=>d.toLocaleDateString('es-MX',{day:'numeric',month:'long'});
 const dueD=q=>{const d=D[q-1];return new Date(d.getFullYear(),d.getMonth(),d.getDate()+1)};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 const N=[1,2,3,4,5,6,7,8,9,10,11];
-const CFG={nombre:'[SERGIO ARMANDO CADENA HUERTA]',domicilio:'[NICOLAS BRAVO 11, ZONA ENTRO, XALAPA, VERACRUZ]',correo:'[KDNA.ARSE@GMAIL.COM]',fecha:'30 de octubre de 2026',ver:'v2'};
+const CFG={nombre:'[SERGIO ARMANDO CADENA HUERTA]',domicilio:'[NICOLAS BRAVO 11, ZONA CENTRO, XALAPA, VERACRUZ]',correo:'[KDNA.ARSE@GMAIL.COM]',fecha:'30 de octubre de 2026',ver:'v2'};
 function legal(){const c=k=>`<b>${esc(CFG[k])}</b>`;return `
 <h2>AVISO DE PRIVACIDAD</h2><div class="mu">Vigente a partir del ${c('fecha')}</div>
 <h3>1. Responsable</h3><p>${c('nombre')}, con domicilio en ${c('domicilio')} y correo ${c('correo')} (“el Administrador”), es responsable del tratamiento de tus datos personales.</p>
