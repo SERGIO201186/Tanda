@@ -25,7 +25,6 @@
       --mu: #64748b;
       --ln: #e2e8f0;
       
-      /* Paleta vibrante y moderna */
       --primary: #10b981;
       --primary-hover: #059669;
       --primary-subtle: #ecfdf5;
@@ -102,7 +101,6 @@
       letter-spacing: -0.01em;
     }
 
-    /* Tarjetas estilizadas y suaves */
     .card {
       background: var(--card);
       border: 1px solid var(--ln);
@@ -110,15 +108,10 @@
       padding: 22px;
       margin-bottom: 18px;
       box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
       position: relative;
       overflow: hidden;
     }
-    .card:hover {
-      box-shadow: var(--shadow-md);
-    }
 
-    /* Tipografías y encabezados de tarjeta */
     h1 {
       margin: 0 0 6px 0;
       font-size: 12px;
@@ -138,12 +131,9 @@
     }
     
     .big {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
       margin: 6px 0;
-      background: linear-gradient(135deg, var(--tx) 30%, var(--mu));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       letter-spacing: -0.02em;
     }
     .mu {
@@ -152,7 +142,6 @@
       line-height: 1.45;
     }
 
-    /* Diferenciación visual por secciones */
     .card-cur {
       border-top: 6px solid var(--primary);
       background: linear-gradient(180deg, var(--primary-subtle) 0%, var(--card) 60px);
@@ -161,27 +150,16 @@
       border-top: 6px solid var(--accent-blue);
       background: linear-gradient(180deg, var(--accent-blue-subtle) 0%, var(--card) 60px);
     }
-    .card-grid {
-      border-top: 6px solid var(--accent-purple);
-    }
+    .card-grid { border-top: 6px solid var(--accent-purple); }
     .card-mypay {
       border-top: 6px solid var(--accent-rose);
       background: linear-gradient(180deg, var(--accent-rose-subtle) 0%, var(--card) 60px);
     }
-    .card-pg {
-      border-top: 6px solid #8b5cf6;
-    }
-    .card-pend {
-      border-top: 6px solid var(--accent-amber);
-    }
-    .card-chat {
-      border-top: 6px solid var(--accent-indigo);
-    }
-    .card-adm {
-      border-top: 6px solid #14b8a6;
-    }
+    .card-pg { border-top: 6px solid #8b5cf6; }
+    .card-pend { border-top: 6px solid var(--accent-amber); }
+    .card-chat { border-top: 6px solid var(--accent-indigo); }
+    .card-adm { border-top: 6px solid #14b8a6; }
 
-    /* Contador y alertas */
     #cd {
       border-radius: var(--radius-md);
       padding: 14px 18px;
@@ -200,14 +178,12 @@
       border: 2px solid var(--accent-rose);
       font-size: 17px;
       animation: p 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
     }
     @keyframes p {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.02); }
     }
 
-    /* Barra de progreso redondeada */
     .bar {
       height: 14px;
       background: var(--ln);
@@ -215,17 +191,15 @@
       overflow: hidden;
       margin-top: 14px;
       padding: 2px;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     .bar i {
       display: block;
       height: 100%;
       background: linear-gradient(90deg, #10b981, #06b6d4);
       border-radius: var(--radius-pill);
-      transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: width 0.6s ease;
     }
 
-    /* Caja de cuenta bancaria destacada */
     #acc {
       background: var(--accent-blue-subtle);
       border: 1.5px dashed var(--accent-blue);
@@ -233,11 +207,8 @@
       padding: 16px;
       margin: 10px 0;
       font-weight: 600;
-      color: var(--tx);
-      letter-spacing: 0.02em;
     }
 
-    /* Tabla de avance estilizada */
     .sc {
       overflow-x: auto;
       margin-top: 12px;
@@ -257,7 +228,6 @@
       padding: 8px 6px;
       text-align: center;
       min-width: 38px;
-      transition: background 0.15s ease;
     }
     th {
       background: var(--bg);
@@ -279,15 +249,12 @@
       border-color: rgba(245, 158, 11, 0.3);
       font-weight: 700;
     }
-    td.ad {
-      cursor: pointer;
-    }
+    td.ad { cursor: pointer; }
     td.ad:hover {
       background: var(--primary-subtle);
       border-color: var(--primary);
     }
 
-    /* Formularios y botones modernos */
     select, input, textarea, button {
       font: inherit;
       color: var(--tx);
@@ -296,7 +263,6 @@
       border-radius: var(--radius-md);
       padding: 10px 14px;
       outline: none;
-      transition: all 0.2s ease;
     }
     select:focus, input:focus, textarea:focus {
       border-color: var(--primary);
@@ -312,19 +278,14 @@
       padding: 10px 18px;
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
     }
-    button:active {
-      transform: translateY(1px);
-    }
+    button:active { transform: translateY(1px); }
     button.s {
       padding: 6px 12px;
       font-size: 13px;
       border-radius: var(--radius-sm);
       box-shadow: none;
     }
-    textarea {
-      width: 100%;
-      resize: vertical;
-    }
+    textarea { width: 100%; resize: vertical; }
     .row {
       display: flex;
       gap: 8px;
@@ -332,12 +293,8 @@
       align-items: center;
       margin: 8px 0;
     }
-    .row > input {
-      flex: 1;
-      min-width: 0;
-    }
+    .row > input { flex: 1; min-width: 0; }
 
-    /* Chat y comprobantes */
     #chat {
       max-height: 360px;
       overflow-y: auto;
@@ -371,10 +328,8 @@
       display: block;
       margin-top: 6px;
       cursor: zoom-in;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    /* Filas informativas y pagos */
     .q {
       border-top: 1px solid var(--ln);
       padding: 12px 0;
@@ -388,7 +343,6 @@
       margin-top: 8px;
     }
 
-    /* Visor de imágenes modal */
     #ov {
       position: fixed;
       inset: 0;
@@ -404,7 +358,6 @@
       max-width: 92%;
       max-height: 85%;
       border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
     }
     #ov b {
       position: absolute;
@@ -422,7 +375,6 @@
       border-radius: var(--radius-pill);
     }
 
-    /* Modal de Términos y Legal */
     #lg {
       position: fixed;
       inset: 0;
@@ -443,13 +395,7 @@
       flex-direction: column;
       max-width: 660px;
       width: 100%;
-      box-shadow: var(--shadow-lg);
       border: 1px solid var(--ln);
-      animation: modalIn 0.25s ease-out;
-    }
-    @keyframes modalIn {
-      from { transform: translateY(20px) scale(0.97); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
     }
     #lgt {
       overflow-y: auto;
@@ -489,29 +435,18 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
-    }
-
-    details summary {
-      cursor: pointer;
-      font-weight: 600;
-      padding: 6px 0;
-      color: var(--accent-purple);
     }
     a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
     }
-    a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
 
 <!-- Login -->
-<div id="login" class="card card-cur" hidden>
+<div id="login" class="card card-cur">
   <h2 style="font-size:22px;margin-bottom:6px">💰 Entrar a la tanda</h2>
   <div class="mu" style="margin-bottom:14px">Escribe tu número de celular (10 dígitos). Solo se pide la primera vez en este dispositivo.</div>
   <div class="row">
@@ -525,21 +460,22 @@
 <!-- Contenedor principal de la App -->
 <div id="app" hidden>
   
-  <!-- Banner de advertencia de INE pendiente (opcional pero persistente) -->
   <div id="ine-alert" class="card" hidden style="border-top: 5px solid var(--accent-rose); background: var(--accent-rose-subtle);">
     <div style="display:flex;align-items:flex-start;gap:12px">
       <div style="font-size:24px;line-height:1">⚠️</div>
       <div style="flex:1">
         <div style="font-weight:700;color:var(--accent-rose);font-size:15px;margin-bottom:4px">Falta subir tu identificación (INE)</div>
-        <div class="mu" style="color:var(--tx);font-size:13px;line-height:1.4">Para mayor seguridad y respaldo de los pagarés de la tanda, es necesario que adjuntes una foto legible de tu credencial INE (frente y reverso).</div>
+        <div class="mu" style="color:var(--tx);font-size:13px;line-height:1.4">Para mayor seguridad de la tanda, adjunta tu foto de la credencial INE (frente y reverso).</div>
         <button id="ine-upload-btn" class="s" style="margin-top:10px;background:linear-gradient(135deg,#f43f5e,#be123c)">📷 Subir fotos de mi INE</button>
       </div>
     </div>
   </div>
 
-  <!-- Turno actual -->
   <div class="card card-cur">
-    <h1>Tanda · Turno Actual</h1>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h1>Tanda · Turno Actual</h1>
+      <button id="lgo" class="s" style="background:transparent;color:var(--mu);box-shadow:none;padding:2px 8px;border:1px solid var(--ln)">Cerrar sesión</button>
+    </div>
     <div class="big" id="cur">Cargando…</div>
     <div class="mu" id="dt" style="font-weight: 500;"></div>
     <div id="cd"></div>
@@ -550,7 +486,6 @@
     </div>
   </div>
 
-  <!-- Cuenta bancaria -->
   <div class="card card-acc">
     <h2>💳 Cuenta para depositar al turno actual</h2>
     <div id="acc" style="white-space:pre-wrap">—</div>
@@ -562,34 +497,29 @@
     </div>
   </div>
 
-  <!-- Matriz de avance -->
   <div class="card card-grid">
     <h2>📊 Avance de pagos</h2>
     <div class="mu">Fila = número que paga · Columna = quincena. ✅ Pagado · ⏳ En revisión · ⚠️ Atrasado · 🎁 Su turno</div>
     <div class="sc"><table id="g"></table></div>
   </div>
 
-  <!-- Mi pago -->
   <div class="card card-mypay">
     <h2>💸 Mi pago</h2>
     <div id="mp"></div>
-    <div class="mu" style="margin-top: 8px;">Primero sube tu comprobante en el chat de abajo y luego solicita la revisión. El siguiente pago se habilita cuando este sea confirmado.</div>
+    <div class="mu" style="margin-top: 8px;">Primero sube tu comprobante en el chat de abajo y luego solicita la revisión.</div>
   </div>
 
-  <!-- Mis pagarés -->
   <div class="card card-pg">
     <h2>📄 Mis pagarés electrónicos</h2>
     <div id="pg"></div>
-    <div class="mu" style="margin-top: 6px;">Se cancelan automáticamente al confirmarse tu pago quincenal; los registros quedan archivados permanentemente.</div>
+    <div class="mu" style="margin-top: 6px;">Se cancelan automáticamente al confirmarse tu pago quincenal.</div>
   </div>
 
-  <!-- Pagos por revisar -->
   <div class="card card-pend">
     <h2>🔍 Pagos por revisar</h2>
     <div id="pend"></div>
   </div>
 
-  <!-- Chat y comprobantes -->
   <div class="card card-chat">
     <h2>💬 Chat y comprobantes</h2>
     <div id="chat"></div>
@@ -606,25 +536,21 @@
     </div>
   </div>
 
-  <!-- Panel Administrador -->
   <div class="card card-adm" id="adm" hidden></div>
 
-  <!-- Footer Legal -->
   <div class="mu" style="text-align:center;margin:16px 0 28px">
     <a href="#" id="lgl">📜 Aviso de privacidad y compromiso de pago</a>
   </div>
 </div>
 
-<!-- Visor de comprobantes a pantalla completa -->
 <div id="ov" hidden><b>✕</b><img alt=""></div>
 
-<!-- Modal de Términos / Subir INE -->
 <div id="lg" hidden>
   <div class="lgb">
     <div id="lgt"></div>
     <div id="lgf" style="padding:0 22px 14px">
       <input id="fn" placeholder="Nombre completo (como aparece en tu INE)" style="width:100%;margin-bottom:10px">
-      <div class="mu" style="margin-bottom:8px">Foto de tu INE (opcional por ahora, puedes subirla después):</div>
+      <div class="mu" style="margin-bottom:8px">Foto de tu INE (opcional por ahora):</div>
       <div class="row">
         <label class="fl">📷 Frente<input type="file" id="f1" accept="image/*" hidden></label>
         <label class="fl">📷 Reverso<input type="file" id="f2" accept="image/*" hidden></label>
@@ -633,7 +559,7 @@
     </div>
     <label class="lgc" id="lgk1">
       <input type="checkbox" id="lgk">
-      <span>He leído y acepto el Aviso de Privacidad, el uso de almacenamiento técnico (cookies) y el Compromiso de Pago, autorizo el tratamiento de mi nombre completo (y de mi INE cuando la proporcione), acepto la generación de mis pagarés electrónicos y me obligo a cubrir todos mis pagos hasta el número 11.</span>
+      <span>He leído y acepto el Aviso de Privacidad y el Compromiso de Pago, autorizo el uso de mi información, acepto mis pagarés electrónicos y me obligo a cubrir todos mis pagos hasta el número 11.</span>
     </label>
     <div class="lgc" id="lgk2" hidden style="justify-content: flex-end;">
       <button id="lgx">Cerrar</button>
@@ -642,7 +568,9 @@
 </div>
 
 <script>
-const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec'; // Termina en /exec
+// ¡IMPORTANTE! Asegúrate de que esta URL sea la de "Cualquier persona" (Anyone)
+const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec'; 
+
 const D = [
   [2026, 10, 1], [2026, 10, 16],
   [2026, 11, 1], [2026, 11, 16],
@@ -659,7 +587,7 @@ const dueD = q => { const d = D[q - 1]; return new Date(d.getFullYear(), d.getMo
 const esc = s => String(s).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
 const N = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const CFG = {
-  nombre: '[SERGIO ARMANDO CADENA HUERTA',
+  nombre: 'SERGIO ARMANDO CADENA HUERTA',
   domicilio: 'NICOLAS BRAVO 11,ZONA CENTRO, XALAPA, VERACRUZ',
   correo: 'KDNA.ARSE@GMAIL.COM',
   fecha: '30 de octubre de 2026',
@@ -670,23 +598,9 @@ function legal() {
   const c = k => `<b>${esc(CFG[k])}</b>`;
   return `
 <h2>AVISO DE PRIVACIDAD</h2><div class="mu">Vigente a partir del ${c('fecha')}</div>
-<h3>1. Responsable</h3><p>${c('nombre')}, con domicilio en ${c('domicilio')} y correo ${c('correo')} (“el Administrador”), es responsable del tratamiento de tus datos personales.</p>
-<h3>2. Datos que se recaban</h3><p>Nombre completo, número de celular, imagen de tu credencial INE (frente y reverso, de forma opcional), número(s) asignado(s) en la tanda, datos de cuenta bancaria o tarjeta que el receptor del turno decida compartir, comprobantes de pago (imágenes), mensajes del chat, registro de pagos y entregas, y fecha, hora y tipo de dispositivo de tu aceptación. Son datos de identificación, contacto y patrimoniales/financieros. No se recaban datos sensibles ni de menores de edad.</p>
-<h3>3. Finalidades</h3><p>Administrar la tanda; verificar tu identidad; generar tus pagarés electrónicos; identificarte y darte acceso; registrar pagos, comprobantes y entregas; informar el avance a los integrantes; acreditar tu aceptación del compromiso de pago; y, en caso de incumplimiento, exigir el cumplimiento ante las autoridades competentes. No se usan para publicidad ni se venden o comparten con fines comerciales.</p>
-<h3>4. Quién puede ver tus datos</h3><p>Tu nombre completo y las imágenes de tu INE solo las consulta el Administrador y se guardan en una carpeta privada de Drive. Los demás integrantes ven tu nombre, tu número, el estatus de tus pagos, tus mensajes y comprobantes en el chat, y los datos de cuenta del receptor del turno. La información se aloja en servicios de Google (Hojas de cálculo, Drive y Apps Script) y en GitHub Pages, cuyos servidores pueden estar fuera de México. También podrá entregarse a autoridades cuando la ley lo exija o para reclamar adeudos. Al aceptar, consientes estas transferencias.</p>
-<h3>5. Cookies y almacenamiento</h3><p>La app solo usa almacenamiento técnico necesario en tu dispositivo (clave de acceso ligada a tu celular, caché de la app instalada). No usa cookies de publicidad, rastreo ni análisis. Al aceptar, autorizas este almacenamiento.</p>
-<h3>6. Derechos ARCO y revocación</h3><p>Puedes solicitar acceso, rectificación, cancelación u oposición, o revocar tu consentimiento, escribiendo a ${c('correo')}. La cancelación o revocación no te libera de las obligaciones de pago ya asumidas ni impide conservar los datos necesarios para acreditarlas. Si consideras que se vulneraron tus derechos, puedes acudir a la Secretaría Anticorrupción y Buen Gobierno, autoridad en la materia.</p>
-<h3>7. Conservación y cambios</h3><p>Los datos se conservan durante la tanda y hasta 12 meses después de concluida, o más tiempo si existe una controversia. Cualquier cambio a este aviso se informará en la app y se solicitará nueva aceptación.</p>
-<h2>COMPROMISO DE PAGO Y CLÁUSULAS</h2>
-<h3>1. Naturaleza</h3><p>Es un ahorro voluntario entre particulares (tanda) de 11 números y 11 quincenas. Cada número aporta $1,000 por quincena; en su turno recibe $10,000 y ese día no aporta. Turnos: ${D.map((d, i) => 'N.º ' + (i + 1) + ': ' + fmt(d)).join('; ')}.</p>
-<h3>2. Voluntariedad y sin costo</h3><p>Ingreso por mi propia voluntad y de buena fe. El Administrador no cobra comisión, interés ni cantidad alguna por el manejo y control administrativo; no obtiene ganancia ni capta recursos del público. El dinero pertenece a los integrantes y solo circula entre ellos.</p>
-<h3>3. Compromiso de pago</h3><p>Me obligo a pagar puntualmente todas mis aportaciones, de cada número que tenga asignado, <b>desde el número 1 hasta el número 11</b>, incluso después de haber recibido mi turno. Los pagos deben hacerse <b>a más tardar los días 2 y 17 de cada mes</b>; se permiten pagos anticipados. El receptor entrega el dinero una vez confirmados los pagos.</p>
-<h3>4. Forma de pago</h3><p>Por transferencia a la cuenta del receptor del turno, enviando el comprobante en el chat y solicitando la revisión en la app. El pago se marca como realizado cuando el receptor y el Administrador lo confirman. El pago en efectivo se coordina con el Administrador, que no está obligado a acudir a domicilios.</p>
-<h3>5. Incumplimiento</h3><p>Si dejo de pagar, reconozco deber el total de las aportaciones pendientes hasta completar los 11 números; si ya recibí mi turno, reconozco haber recibido $10,000 y me obligo a cubrir lo que falte. Acepto que el Administrador y los demás integrantes podrán exigirlo por las vías legales y ante las autoridades competentes, y que serán a mi cargo los gastos administrativos y de cobranza que resulten (incluidos costos legales comprobables) y los intereses moratorios que la ley permita. Acepto las consecuencias legales de no pagar la totalidad de mis 11 aportaciones.</p>
-<h3>6. Pagarés electrónicos</h3><p>Por cada número que tengo y por cada quincena en que debo aportar se genera automáticamente un pagaré electrónico (folio P-número-quincena) por $1,000 a favor del receptor de esa quincena, con vencimiento los días 2 o 17. Lo reconozco como compromiso de pago y reconocimiento de adeudo. Al confirmarse el pago, el pagaré se cancela automáticamente; los pagarés no se eliminan, solo cambia su estado (Vigente, Vencido o Cancelado). Son registros electrónicos y su fuerza legal depende de la ley aplicable; el Administrador podrá pedirme además mi firma autógrafa en documento impreso. Declaro que mis datos (y mi INE, si la proporciono) son auténticos y vigentes.</p>
-<h3>7. Aceptación electrónica y pruebas</h3><p>Marcar la casilla equivale a mi consentimiento y firma electrónica. Convengo en que el registro de mi aceptación (celular, fecha, hora y dispositivo), los pagos registrados, los comprobantes y los mensajes del chat podrán usarse como medios de prueba.</p>
-<h3>8. Aspectos fiscales y legalidad</h3><p>Declaro que los recursos que aporto son de procedencia lícita. Las partes manifestamos que esta tanda es un ahorro entre particulares, sin fines de lucro ni actividad empresarial; el Administrador no presta servicios financieros ni emite comprobantes fiscales, y los montos que se reciben son aportaciones de los propios integrantes. Cada integrante es responsable de sus propias obligaciones fiscales. Por transparencia, los pagos se harán de preferencia por transferencia, con concepto “ahorro tanda”.</p>
-<h3>9. Ley y jurisdicción</h3><p>Se rige por las leyes de México. Para su interpretación y cumplimiento me someto a los tribunales competentes del domicilio del Administrador, renunciando a cualquier otro fuero.</p>`;
+<h3>1. Responsable</h3><p>${c('nombre')}, con correo ${c('correo')}, es responsable del tratamiento de datos personales.</p>
+<h3>2. Compromiso de pago</h3><p>Ahorro voluntario entre particulares de 11 números. Cada número aporta $1,000 por quincena. Turnos: ${D.map((d, i) => 'N.º ' + (i + 1) + ': ' + fmt(d)).join('; ')}.</p>
+<h3>3. Pagarés</h3><p>Se generan pagarés electrónicos automáticos por cada quincena a cubrir, los cuales se cancelan al registrarse el pago.</p>`;
 }
 
 function openLegal(ro) {
@@ -708,11 +622,17 @@ let TOK = null, S = {}, lastChat = 0;
 try { TOK = localStorage.getItem('tk'); } catch (e) {}
 
 async function api(a, d) {
+  if (!API || API.includes('PEGA_AQUI')) {
+    throw new Error('Debes configurar la URL de tu Apps Script en la variable API.');
+  }
   const r = await fetch(API, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(Object.assign({ a: a, t: TOK }, d))
   });
+  if (!r.ok) {
+    throw new Error(`Error de conexión con el servidor (${r.status})`);
+  }
   const j = await r.json();
   if (j.error) {
     if (j.error === 'NOAUTH') {
@@ -720,7 +640,7 @@ async function api(a, d) {
       try { localStorage.removeItem('tk'); } catch (e) {}
       show();
     }
-    throw new Error(j.error === 'NOAUTH' ? 'Tu acceso ya no es válido. Vuelve a entrar.' : j.error);
+    throw new Error(j.error === 'NOAUTH' ? 'Tu sesión expiró. Vuelve a ingresar.' : j.error);
   }
   return j;
 }
@@ -737,11 +657,15 @@ const act = async (a, d) => {
 function show() {
   $('login').hidden = !!TOK;
   $('app').hidden = !TOK;
-  if (TOK) load();
+  if (TOK) {
+    load();
+  }
 }
 
 $('lb').onclick = async () => {
   $('le').textContent = '';
+  $('lb').disabled = true;
+  $('lb').textContent = 'Comprobando…';
   try {
     const j = await api('login', { phone: $('lp').value, pin: $('lpin').value });
     TOK = j.t;
@@ -755,6 +679,17 @@ $('lb').onclick = async () => {
     } else {
       $('le').textContent = e.message;
     }
+  } finally {
+    $('lb').disabled = false;
+    $('lb').textContent = 'Entrar';
+  }
+};
+
+$('lgo').onclick = () => {
+  if (confirm('¿Deseas cerrar tu sesión?')) {
+    TOK = null;
+    try { localStorage.removeItem('tk'); } catch (e) {}
+    show();
   }
 };
 
@@ -772,14 +707,18 @@ async function load() {
     S.con = new Set(j.con);
     S.ent = new Set(j.ent);
     S.cta = {};
-    j.cta.forEach(x => S.cta[x[0]] = x[1]);
+    (j.cta || []).forEach(x => S.cta[x[0]] = x[1]);
     S.nm = {};
-    j.pers.forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
+    (j.pers || []).forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
     all();
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error al cargar datos:', e);
+    $('cur').textContent = "Error al conectar";
+    $('dt').textContent = e.message;
+  }
 }
 
-const mine = n => S.me.nums.includes(n);
+const mine = n => (S.me && S.me.nums) ? S.me.nums.includes(n) : false;
 
 function cur() {
   for (const n of N) {
@@ -797,22 +736,22 @@ function head() {
     $('cd').className = '';
   } else {
     const d = D[c - 1];
-    $('cur').textContent = `Número ${c} · ${S.nm[c]}`;
+    $('cur').textContent = `Número ${c} · ${S.nm[c] || 'Asignando'}`;
     $('dt').textContent = "Recibe $10,000 el " + fmt(d) + " · Pagos a más tardar el " + fmtS(dueD(c));
     const t = new Date();
     t.setHours(0, 0, 0, 0);
     const n = Math.round((d - t) / 864e5), el = $('cd');
     el.className = n <= 3 ? 'alert' : '';
-    el.textContent = n > 1 ? (n <= 3 ? `¡Solo faltan ${n} días! ` : `Faltan ${n} días `) + "para la entrega" : n === 1 ? "¡Falta 1 día! Mañana se entrega" : n === 0 ? "¡Hoy es la entrega! Recuerda enviar tu pago" : "Entrega pendiente de confirmar";
+    el.textContent = n > 1 ? (n <= 3 ? `¡Solo faltan ${n} días! ` : `Faltan ${n} días `) + "para la entrega" : n === 1 ? "¡Falta 1 día! Mañana se entrega" : n === 0 ? "¡Hoy es la entrega! Recuerda enviar tu pago" : "Entrega en curso";
     const a = S.cta[c];
     $('acc').textContent = a || "Aún no ha compartido sus datos bancarios.";
     const m = mine(c);
     $('accE').hidden = !m;
     if (m && document.activeElement !== $('accT')) $('accT').value = a || "";
   }
-  $('pb').style.width = (S.pay.size / 110 * 100) + '%';
-  $('pt').textContent = `${S.pay.size} de 110 abonos pagados · ${S.ent.size} de 11 entregados`;
-  const nm = S.me.nums.map(n => S.nm[n]);
+  $('pb').style.width = ((S.pay.size || 0) / 110 * 100) + '%';
+  $('pt').textContent = `${S.pay.size || 0} de 110 abonos pagados · ${S.ent.size || 0} de 11 entregados`;
+  const nm = (S.me.nums || []).map(n => S.nm[n]);
   $('hi').textContent = (S.me.admin ? 'Administrador · ' : '') + (nm.length ? 'Hola, ' + nm[0] : '');
 }
 
@@ -826,7 +765,7 @@ function grid() {
   h += '</tr>';
   const c = cur();
   for (const n of N) {
-    h += `<tr class="${n === c ? 'cur' : ''}"><th class="n">${n} · ${esc(S.nm[n])}${S.ent.has(n) ? ' 📦' : ''}</th>`;
+    h += `<tr class="${n === c ? 'cur' : ''}"><th class="n">${n} · ${esc(S.nm[n] || '')}${S.ent.has(n) ? ' 📦' : ''}</th>`;
     for (const q of N) {
       const k = n + '_' + q;
       h += `<td class="${S.me.admin && q !== n ? 'ad' : ''}" data-k="${k}">${q === n ? '🎁' : S.pay.has(k) ? '✅' : S.req.has(k) ? '⏳' : dueD(q) < T0 ? '⚠️' : ''}</td>`;
@@ -897,7 +836,7 @@ $('accB').onclick = () => {
 };
 
 function chat() {
-  if (!S.chat.length) return;
+  if (!S.chat || !S.chat.length) return;
   const l = S.chat[S.chat.length - 1].ts + ':' + S.chat.length;
   if (l === lastChat) return;
   lastChat = l;
@@ -1000,7 +939,7 @@ function adm() {
   el.innerHTML = '<h2>⚙️ Administración de la Tanda</h2><div class="mu">Entregas realizadas (toca para marcar/desmarcar turno entregado):</div><div class="row">' + N.map(n => `<button class="s" data-d="${n}">${S.ent.has(n) ? '↩' : '📦'} Turno ${n}</button>`).join('') + '</div>'
     + '<div class="mu" style="margin-top:10px">Integrantes y celulares (10 dígitos):</div>'
     + S.pers.map(p => `<div class="row"><b>${p.n}</b><input id="pn${p.n}" value="${esc(p.nombre)}" placeholder="Nombre"><input id="pt${p.n}" type="tel" value="${esc(p.tel || '')}" placeholder="Celular"><button class="s" data-s="${p.n}">Guardar</button>${ext(p)}${p.tel ? `<button class="s" style="background:#e11d48" data-r="${p.tel}">Liberar</button>` : ''}</div>`).join('')
-    + '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes (cambio de dispositivo):</div>' + ((S.pend || []).length ? S.pend.map(t => `<div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Liberar</button></div>`).join('') : '<div class="mu">Ninguna.</div>');
+    + '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes:</div>' + ((S.pend || []).length ? S.pend.map(t => `<div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Liberar</button></div>`).join('') : '<div class="mu">Ninguna.</div>');
 }
 
 $('adm').onclick = e => {
@@ -1022,7 +961,7 @@ function checkIneStatus() {
 }
 
 $('ine-upload-btn').onclick = () => {
-  $('lgt').innerHTML = '<h2>Subir Identificación Oficial (INE)</h2><div class="mu">Adjunta las fotos de tu INE para respaldar tu participación y pagarés en la tanda.</div>';
+  $('lgt').innerHTML = '<h2>Subir Identificación Oficial (INE)</h2><div class="mu">Adjunta las fotos de tu INE para respaldar tu participación.</div>';
   $('lgf').hidden = false;
   $('fn').value = S.me && S.me.nombre ? S.me.nombre : '';
   $('lgk1').hidden = true;
