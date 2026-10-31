@@ -682,8 +682,12 @@
     .badge-warn { background: #fee2e2; color: #b91c1c; }
     .badge-info { background: #e0f2fe; color: #0369a1; }
 
+    .nc-item { border-top:1px solid var(--ln); padding:10px 0 10px 8px; font-size:14px; }
+    .nc-item.unread { border-left:4px solid var(--primary); background:rgba(59,130,246,.07); }
+    #bell-n { position:absolute; top:-6px; right:-6px; background:#dc2626; color:#fff; border-radius:999px; font-size:11px; padding:1px 6px; font-weight:700; }
+
     /* MODALES */
-    #lg, #ine-modal, #help-modal, #install-guide-modal, #ov {
+    #lg, #ine-modal, #help-modal, #nc-modal, #install-guide-modal, #ov {
       position: fixed;
       inset: 0;
       z-index: 120;
@@ -779,6 +783,9 @@
     <button id="btn-top-install" class="btn-header-action" style="color:var(--primary);border-color:var(--primary)">
       <span>📲</span> Instalar
     </button>
+    <button id="btn-top-bell" class="btn-header-action" style="position:relative" aria-label="Notificaciones">
+      <span>🔔</span><span id="bell-n" hidden>0</span>
+    </button>
     <button id="btn-top-help" class="btn-header-action">
       <span>❓</span> Ayuda
     </button>
@@ -827,6 +834,10 @@
 
     <div class="drawer-divider"></div>
 
+    <button class="drawer-item" id="drawer-btn-nc">
+      <span class="d-icon">🔔</span>
+      <span>Notificaciones y mensajes</span>
+    </button>
     <button class="drawer-item" id="drawer-btn-help">
       <span class="d-icon">❓</span>
       <span>Instrucciones y Guía</span>
@@ -1124,6 +1135,25 @@
 </div>
 
 <!-- MODAL DE AYUDA E INSTRUCCIONES -->
+<div id="nc-modal" hidden>
+  <div class="lgb" style="max-width:620px">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;font-size:18px">🔔 Notificaciones y mensajes</h3>
+      <button id="nc-close-x" style="background:transparent;color:var(--mu);border:0;font-size:22px;cursor:pointer">✕</button>
+    </div>
+    <div style="padding:14px 20px;overflow-y:auto">
+      <div id="nc-push" style="margin-bottom:12px"></div>
+      <div id="nc-adm" hidden style="margin-bottom:12px;padding:10px;border:1px dashed var(--ln);border-radius:12px">
+        <b>📢 Enviar aviso a todos</b>
+        <input id="ncT" maxlength="80" placeholder="Título" style="width:100%;margin:6px 0">
+        <textarea id="ncM" rows="2" maxlength="300" placeholder="Mensaje" style="width:100%"></textarea>
+        <div style="margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button id="ncSend">Enviar a todos</button><span class="mu" id="ncMsg"></span></div>
+      </div>
+      <div id="nc-list"></div>
+    </div>
+  </div>
+</div>
+
 <div id="help-modal" hidden>
   <div class="lgb" style="max-width:620px">
     <div style="padding:16px 20px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center">
@@ -1185,6 +1215,8 @@
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
 <script>
 // URL pública de Apps Script
 const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec'; 
@@ -2045,9 +2077,91 @@ $('adm').onclick = e => {
   if (d.s) act('person', { n: +d.s, nombre: $('pn' + d.s).value, phone: $('pt' + d.s).value });
 };
 
+// ---- Notificaciones: centro de mensajes + push (Firebase Cloud Messaging) ----
+const FB = { apiKey: 'AIzaSyCzuYcWactYj8ziRCKuw1P2Mmyv8p6hyAk', authDomain: 'tanda-d6b14.firebaseapp.com', projectId: 'tanda-d6b14', messagingSenderId: '303044914553', appId: '1:303044914553:web:ea4e213efcf2b548ead3a8' }; // pega aquí la configuración web de tu proyecto Firebase
+const VAPID = 'BHNJV1xDX8AxR8mOKI0uP6BiDCXhe-rqZUwuGp3_GZIS44vDZznHqS_O2_wYyj0Mq7SEM4Q2gml8_nTwQscgIDY'; // clave pública de "Certificados push web" de Firebase
+const pushOK = () => 'Notification' in window && 'serviceWorker' in navigator && typeof firebase !== 'undefined' && !!FB.apiKey && !!VAPID;
+const ncIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const ncStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+let ncSeen = 0, lastNotifMax = null, pushTried = false;
+const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; };
+
+function beep() {
+  try {
+    const a = new (window.AudioContext || window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain();
+    o.connect(g); g.connect(a.destination); o.frequency.value = 880; g.gain.value = 0.15; o.start();
+    setTimeout(() => { o.stop(); a.close(); }, 180);
+  } catch (e) {}
+}
+async function regPush() {
+  try {
+    if (!firebase.messaging.isSupported()) return;
+    if (!firebase.apps.length) firebase.initializeApp(FB);
+    const reg = await navigator.serviceWorker.ready;
+    const t = await firebase.messaging().getToken({ vapidKey: VAPID, serviceWorkerRegistration: reg });
+    if (t) await api('push_reg', { token: t, ua: navigator.userAgent });
+  } catch (e) { console.error('push', e); }
+}
+async function enablePush() {
+  const p = await Notification.requestPermission();
+  if (p === 'granted') await regPush();
+  ncPushStatus();
+}
+function ncPushStatus() {
+  const el = $('nc-push');
+  if (!('Notification' in window)) { el.innerHTML = '<span class="mu">Tu navegador no admite notificaciones.</span>'; return; }
+  if (ncIOS && !ncStandalone) { el.innerHTML = '<span class="mu">En iPhone, primero instala la app (Compartir → Añadir a pantalla de inicio), ábrela desde ahí y activa las notificaciones.</span>'; return; }
+  if (!pushOK()) { el.innerHTML = '<span class="mu">Las notificaciones al celular aún no están configuradas. Aquí verás todos tus mensajes.</span>'; return; }
+  if (Notification.permission === 'granted') el.innerHTML = '<span class="mu">✅ Notificaciones activadas en este dispositivo.</span>';
+  else if (Notification.permission === 'denied') el.innerHTML = '<span class="mu">Bloqueaste las notificaciones. Actívalas en la configuración del navegador o de la app.</span>';
+  else { el.innerHTML = '<button id="ncEnable">🔔 Activar notificaciones</button>'; $('ncEnable').onclick = enablePush; }
+}
+function renderNotif() {
+  if (!S.me || !S.notif) return;
+  const L = S.notif.slice().reverse(), mx = L.length ? L[0].id : 0;
+  if (ls('nseen') === null) ls('nseen', String(mx));
+  const sn = !$('nc-modal').hidden ? ncSeen : (+ls('nseen') || 0);
+  if (lastNotifMax === null) lastNotifMax = mx;
+  else if (mx > lastNotifMax) { lastNotifMax = mx; if (!document.hidden) { beep(); if (navigator.vibrate) navigator.vibrate(150); } }
+  const n = L.filter(x => x.id > sn).length;
+  $('bell-n').textContent = n > 9 ? '9+' : n; $('bell-n').hidden = !n;
+  $('nc-adm').hidden = !S.me.admin;
+  $('nc-list').innerHTML = L.length ? L.map(x => `<div class="nc-item${x.id > sn ? ' unread' : ''}"><b>${esc(x.t)}</b><br>${esc(x.m)}<div class="mu">${new Date(x.ts).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div></div>`).join('') : '<div class="mu">Aún no tienes notificaciones.</div>';
+}
+function openNC() {
+  closeDrawer();
+  ncSeen = +ls('nseen') || 0;
+  $('nc-modal').hidden = false;
+  renderNotif(); ncPushStatus();
+}
+function closeNC() {
+  const L = S.notif || [];
+  if (L.length) ls('nseen', String(Math.max.apply(null, L.map(x => x.id))));
+  $('nc-modal').hidden = true;
+  renderNotif();
+}
+function maybeRegPush() {
+  if (pushTried || !pushOK()) return;
+  pushTried = true;
+  if (Notification.permission === 'granted') regPush();
+  else if (Notification.permission === 'default' && !ls('ncAsked') && !(ncIOS && !ncStandalone)) { ls('ncAsked', '1'); setTimeout(openNC, 1200); }
+}
+$('btn-top-bell').onclick = openNC;
+$('drawer-btn-nc').onclick = openNC;
+$('nc-close-x').onclick = closeNC;
+$('ncSend').onclick = async () => {
+  const t = $('ncT').value.trim(), m = $('ncM').value.trim();
+  if (t.length < 2 || m.length < 2) { $('ncMsg').textContent = 'Escribe título y mensaje.'; return; }
+  $('ncSend').disabled = true; $('ncMsg').textContent = 'Enviando…';
+  try { await api('announce', { titulo: t, mensaje: m }); $('ncT').value = ''; $('ncM').value = ''; $('ncMsg').textContent = '✅ Enviado a todos.'; await load(); }
+  catch (e) { $('ncMsg').textContent = e.message; }
+  $('ncSend').disabled = false;
+};
+if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', e => { if (e.data && e.data.type === 'push') load(); });
+
 function all() {
   // Cada parte se dibuja por separado: si una falla, las demás (por ejemplo el chat) siguen funcionando.
-  [updateIneBanner, head, grid, pend, mypay, pgr, chat, adm].forEach(fn => {
+  [updateIneBanner, head, grid, pend, mypay, pgr, chat, adm, renderNotif, maybeRegPush].forEach(fn => {
     try { fn(); } catch (e) { console.error('Error en ' + fn.name + ':', e); }
   });
 }
