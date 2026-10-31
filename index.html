@@ -1,1215 +1,1599 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Tanda 2026–2027</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#10b981">
-  <link rel="icon" href="icon-192.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Tanda">
-
-  <!-- Fuente: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --tx: #0f172a;
-      --mu: #64748b;
-      --ln: #e2e8f0;
-      
-      --primary: #10b981;
-      --primary-hover: #059669;
-      --primary-subtle: #ecfdf5;
-      
-      --accent-blue: #0284c7;
-      --accent-blue-subtle: #f0f9ff;
-      
-      --accent-purple: #8b5cf6;
-      --accent-purple-subtle: #f5f3ff;
-      
-      --accent-rose: #f43f5e;
-      --accent-rose-subtle: #fff1f2;
-
-      --accent-amber: #f59e0b;
-      --accent-amber-subtle: #fefce8;
-
-      --accent-indigo: #6366f1;
-      --accent-indigo-subtle: #eef2ff;
-      
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --radius-pill: 9999px;
-      
-      --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
-      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-      --shadow-lg: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
-
-      color-scheme: light;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0b1120;
-        --card: #1e293b;
-        --tx: #f8fafc;
-        --mu: #94a3b8;
-        --ln: #334155;
-        
-        --primary: #34d399;
-        --primary-hover: #10b981;
-        --primary-subtle: rgba(16, 185, 129, 0.12);
-        
-        --accent-blue: #38bdf8;
-        --accent-blue-subtle: rgba(56, 189, 248, 0.12);
-        
-        --accent-purple: #a78bfa;
-        --accent-purple-subtle: rgba(167, 139, 250, 0.12);
-        
-        --accent-rose: #fb7185;
-        --accent-rose-subtle: rgba(251, 113, 133, 0.12);
-
-        --accent-amber: #fbbf24;
-        --accent-amber-subtle: rgba(251, 191, 36, 0.12);
-
-        --accent-indigo: #818cf8;
-        --accent-indigo-subtle: rgba(129, 140, 248, 0.12);
-
-        color-scheme: dark;
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; }
-    body {
-      background: var(--bg);
-      color: var(--tx);
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      font-size: 15px;
-      line-height: 1.5;
-      padding: max(16px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
-      max-width: 860px;
-      margin: 0 auto;
-      letter-spacing: -0.01em;
-    }
-
-    /* Barra de herramientas para modo de prueba */
-    #test-bar {
-      background: linear-gradient(135deg, #1e1b4b, #312e81);
-      color: #fff;
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-md);
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    #test-bar .tb-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-      font-size: 13px;
-      color: #a5b4fc;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-    }
-    #test-bar select {
-      background: #0f172a;
-      color: #fff;
-      border: 1px solid #4338ca;
-      font-size: 13px;
-      padding: 6px 10px;
-      border-radius: 8px;
-      flex: 1;
-    }
-    .badge-test {
-      background: #ef4444;
-      color: #fff;
-      padding: 2px 8px;
-      border-radius: var(--radius-pill);
-      font-size: 11px;
-      font-weight: 800;
-      display: inline-block;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--ln);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      margin-bottom: 18px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-
-    h1 {
-      margin: 0 0 6px 0;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-    h2 {
-      margin: 0 0 12px;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--tx);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .big {
-      font-size: 26px;
-      font-weight: 800;
-      margin: 6px 0;
-      letter-spacing: -0.02em;
-    }
-    .mu {
-      color: var(--mu);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .card-cur {
-      border-top: 6px solid var(--primary);
-      background: linear-gradient(180deg, var(--primary-subtle) 0%, var(--card) 60px);
-    }
-    .card-acc {
-      border-top: 6px solid var(--accent-blue);
-      background: linear-gradient(180deg, var(--accent-blue-subtle) 0%, var(--card) 60px);
-    }
-    .card-grid { border-top: 6px solid var(--accent-purple); }
-    .card-mypay {
-      border-top: 6px solid var(--accent-rose);
-      background: linear-gradient(180deg, var(--accent-rose-subtle) 0%, var(--card) 60px);
-    }
-    .card-pg { border-top: 6px solid #8b5cf6; }
-    .card-pend { border-top: 6px solid var(--accent-amber); }
-    .card-chat { border-top: 6px solid var(--accent-indigo); }
-    .card-adm { border-top: 6px solid #14b8a6; }
-
-    #cd {
-      border-radius: var(--radius-md);
-      padding: 14px 18px;
-      margin-top: 14px;
-      background: var(--bg);
-      font-weight: 700;
-      font-size: 15px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--ln);
-    }
-    #cd.alert {
-      background: var(--accent-rose-subtle);
-      color: var(--accent-rose);
-      border: 2px solid var(--accent-rose);
-      font-size: 17px;
-      animation: p 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    @keyframes p {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-
-    .bar {
-      height: 14px;
-      background: var(--ln);
-      border-radius: var(--radius-pill);
-      overflow: hidden;
-      margin-top: 14px;
-      padding: 2px;
-    }
-    .bar i {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, #10b981, #06b6d4);
-      border-radius: var(--radius-pill);
-      transition: width 0.6s ease;
-    }
-
-    #acc {
-      background: var(--accent-blue-subtle);
-      border: 1.5px dashed var(--accent-blue);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      margin: 10px 0;
-      font-weight: 600;
-    }
-
-    .sc {
-      overflow-x: auto;
-      margin-top: 12px;
-      padding-bottom: 6px;
-      -webkit-overflow-scrolling: touch;
-      border-radius: var(--radius-md);
-    }
-    table {
-      border-collapse: separate;
-      border-spacing: 4px;
-      font-size: 13px;
-      min-width: 620px;
-      width: 100%;
-    }
-    th, td {
-      border-radius: 8px;
-      padding: 8px 6px;
-      text-align: center;
-      min-width: 38px;
-    }
-    th {
-      background: var(--bg);
-      font-weight: 700;
-      border: 1px solid var(--ln);
-    }
-    th.n {
-      text-align: left;
-      min-width: 150px;
-      padding-left: 12px;
-    }
-    td {
-      background: var(--bg);
-      border: 1px solid transparent;
-      font-size: 14px;
-    }
-    tr.cur td, tr.cur th {
-      background: var(--accent-amber-subtle);
-      border-color: rgba(245, 158, 11, 0.3);
-      font-weight: 700;
-    }
-    td.ad { cursor: pointer; }
-    td.ad:hover {
-      background: var(--primary-subtle);
-      border-color: var(--primary);
-    }
-
-    select, input, textarea, button {
-      font: inherit;
-      color: var(--tx);
-      background: var(--card);
-      border: 1.5px solid var(--ln);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      outline: none;
-    }
-    select:focus, input:focus, textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-subtle);
-    }
-    button {
-      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-      color: #ffffff;
-      font-weight: 600;
-      border: 0;
-      cursor: pointer;
-      border-radius: var(--radius-md);
-      padding: 10px 18px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-    }
-    button:active { transform: translateY(1px); }
-    button.s {
-      padding: 6px 12px;
-      font-size: 13px;
-      border-radius: var(--radius-sm);
-      box-shadow: none;
-    }
-    textarea { width: 100%; resize: vertical; }
-    .row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin: 8px 0;
-    }
-    .row > input { flex: 1; min-width: 0; }
-
-    #chat {
-      max-height: 360px;
-      overflow-y: auto;
-      border: 1px solid var(--ln);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .m {
-      background: var(--card);
-      padding: 10px 14px;
-      border-radius: 16px;
-      border-top-left-radius: 4px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--ln);
-      max-width: 85%;
-      align-self: flex-start;
-    }
-    .m b {
-      font-size: 12px;
-      color: var(--accent-indigo);
-      display: block;
-      margin-bottom: 3px;
-    }
-    .m img {
-      max-width: 220px;
-      border-radius: 10px;
-      display: block;
-      margin-top: 6px;
-      cursor: zoom-in;
-    }
-
-    .q {
-      border-top: 1px solid var(--ln);
-      padding: 12px 0;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .er {
-      color: var(--accent-rose);
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 8px;
-    }
-
-    #ov {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-    }
-    #ov[hidden] { display: none; }
-    #ov img {
-      max-width: 92%;
-      max-height: 85%;
-      border-radius: var(--radius-md);
-    }
-    #ov b {
-      position: absolute;
-      top: max(16px, env(safe-area-inset-top));
-      right: 20px;
-      color: #fff;
-      font-size: 32px;
-      cursor: pointer;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-pill);
-    }
-
-    #lg {
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    #lg[hidden] { display: none; }
-    .lgb {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      max-width: 660px;
-      width: 100%;
-      border: 1px solid var(--ln);
-    }
-    #lgt {
-      overflow-y: auto;
-      padding: 22px;
-      font-size: 14px;
-    }
-    #lgt h2 { font-size: 19px; margin: 16px 0 6px; }
-    #lgt h3 { margin: 14px 0 4px; font-size: 15px; color: var(--accent-blue); }
-    #lgt p { margin: 6px 0; color: var(--mu); }
-    
-    .lgc {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 16px 22px;
-      border-top: 1px solid var(--ln);
-      font-size: 13px;
-      background: var(--bg);
-      border-bottom-left-radius: var(--radius-lg);
-      border-bottom-right-radius: var(--radius-lg);
-    }
-    .lgc input[type="checkbox"] {
-      width: 22px;
-      height: 22px;
-      flex: none;
-      accent-color: var(--primary);
-      margin-top: 2px;
-    }
-    .fl {
-      background: linear-gradient(135deg, var(--accent-blue), #0284c7);
-      color: #fff;
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tanda 2026–2027</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#10b981">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tanda">
+​<!-- Fuente: Plus Jakarta Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+​<style>
+:root {
+--bg: #f8fafc;
+--card: #ffffff;
+--tx: #0f172a;
+--mu: #64748b;
+--ln: #e2e8f0;
+​--primary: #10b981;
+--primary-hover: #059669;
+--primary-subtle: #ecfdf5;
+​--accent-blue: #0284c7;
+--accent-blue-subtle: #f0f9ff;
+​--accent-purple: #8b5cf6;
+--accent-purple-subtle: #f5f3ff;
+​--accent-rose: #f43f5e;
+--accent-rose-subtle: #fff1f2;
+​--accent-amber: #f59e0b;
+--accent-amber-subtle: #fefce8;
+​--accent-indigo: #6366f1;
+--accent-indigo-subtle: #eef2ff;
+​--radius-sm: 10px;
+--radius-md: 16px;
+--radius-lg: 24px;
+--radius-pill: 9999px;
+​--shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+--shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+--shadow-lg: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+​color-scheme: light;
+}
+​@media (prefers-color-scheme: dark) {
+:root {
+--bg: #0b1120;
+--card: #1e293b;
+--tx: #f8fafc;
+--mu: #94a3b8;
+--ln: #334155;
+​--primary: #34d399;
+--primary-hover: #10b981;
+--primary-subtle: rgba(16, 185, 129, 0.12);
+​--accent-blue: #38bdf8;
+--accent-blue-subtle: rgba(56, 189, 248, 0.12);
+​--accent-purple: #a78bfa;
+--accent-purple-subtle: rgba(167, 139, 250, 0.12);
+​--accent-rose: #fb7185;
+--accent-rose-subtle: rgba(251, 113, 133, 0.12);
+​--accent-amber: #fbbf24;
+--accent-amber-subtle: rgba(251, 191, 36, 0.12);
+​--accent-indigo: #818cf8;
+--accent-indigo-subtle: rgba(129, 140, 248, 0.12);
+​color-scheme: dark;
+}
+}
+​* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+background: var(--bg);
+color: var(--tx);
+font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+font-size: 15px;
+line-height: 1.5;
+padding: max(16px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+max-width: 860px;
+margin: 0 auto;
+letter-spacing: -0.01em;
+}
+​/* Banner superior para instalación */
+#install-top-banner {
+background: linear-gradient(135deg, #065f46, #047857);
+color: #ffffff;
+border-radius: var(--radius-lg);
+padding: 14px 18px;
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+box-shadow: 0 10px 25px -5px rgba(6, 95, 70, 0.4);
+border: 1px solid rgba(255, 255, 255, 0.2);
+animation: bannerSlide 0.5s ease;
+}
+@keyframes bannerSlide {
+from { opacity: 0; transform: translateY(-12px); }
+to { opacity: 1; transform: translateY(0); }
+}
+#install-top-banner .ib-info {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+#install-top-banner .ib-icon {
+font-size: 28px;
+background: rgba(255, 255, 255, 0.15);
+border-radius: var(--radius-md);
+width: 46px;
+height: 46px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+#install-top-banner .ib-text {
+font-size: 13px;
+line-height: 1.35;
+}
+#install-top-banner .ib-text b {
+font-size: 15px;
+display: block;
+margin-bottom: 2px;
+}
+#install-top-banner .ib-actions {
+display: flex;
+align-items: center;
+gap: 8px;
+flex-shrink: 0;
+}
+#install-top-banner button.btn-banner-install {
+background: #ffffff;
+color: #065f46;
+font-weight: 800;
+padding: 8px 14px;
+border-radius: var(--radius-md);
+border: 0;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+cursor: pointer;
+font-size: 13px;
+}
+#install-top-banner button.btn-banner-close {
+background: transparent;
+color: rgba(255, 255, 255, 0.8);
+border: 0;
+font-size: 18px;
+padding: 6px;
+cursor: pointer;
+}
+​/* Barra de herramientas para modo de prueba */
+#test-bar {
+background: linear-gradient(135deg, #1e1b4b, #312e81);
+color: #fff;
+border-radius: var(--radius-md);
+padding: 12px 16px;
+margin-bottom: 16px;
+box-shadow: var(--shadow-md);
+border: 1px solid rgba(255,255,255,0.15);
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+#test-bar .tb-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-weight: 700;
+font-size: 13px;
+color: #a5b4fc;
+text-transform: uppercase;
+letter-spacing: .05em;
+}
+#test-bar select {
+background: #0f172a;
+color: #fff;
+border: 1px solid #4338ca;
+font-size: 13px;
+padding: 6px 10px;
+border-radius: 8px;
+flex: 1;
+}
+.badge-test {
+background: #ef4444;
+color: #fff;
+padding: 2px 8px;
+border-radius: var(--radius-pill);
+font-size: 11px;
+font-weight: 800;
+display: inline-block;
+}
+​.card {
+background: var(--card);
+border: 1px solid var(--ln);
+border-radius: var(--radius-lg);
+padding: 22px;
+margin-bottom: 18px;
+box-shadow: var(--shadow-sm);
+position: relative;
+overflow: hidden;
+}
+​h1 {
+margin: 0 0 6px 0;
+font-size: 12px;
+font-weight: 800;
+color: var(--primary);
+text-transform: uppercase;
+letter-spacing: .08em;
+}
+h2 {
+margin: 0 0 12px;
+font-size: 17px;
+font-weight: 700;
+color: var(--tx);
+display: flex;
+align-items: center;
+gap: 8px;
+}
+​.big {
+font-size: 26px;
+font-weight: 800;
+margin: 6px 0;
+letter-spacing: -0.02em;
+}
+.mu {
+color: var(--mu);
+font-size: 13px;
+line-height: 1.45;
+}
+​.card-cur {
+border-top: 6px solid var(--primary);
+background: linear-gradient(180deg, var(--primary-subtle) 0%, var(--card) 60px);
+}
+.card-acc {
+border-top: 6px solid var(--accent-blue);
+background: linear-gradient(180deg, var(--accent-blue-subtle) 0%, var(--card) 60px);
+}
+.card-grid { border-top: 6px solid var(--accent-purple); }
+.card-mypay {
+border-top: 6px solid var(--accent-rose);
+background: linear-gradient(180deg, var(--accent-rose-subtle) 0%, var(--card) 60px);
+}
+.card-pg { border-top: 6px solid #8b5cf6; }
+.card-pend { border-top: 6px solid var(--accent-amber); }
+.card-chat { border-top: 6px solid var(--accent-indigo); }
+.card-adm { border-top: 6px solid #14b8a6; }
+​#cd {
+border-radius: var(--radius-md);
+padding: 14px 18px;
+margin-top: 14px;
+background: var(--bg);
+font-weight: 700;
+font-size: 15px;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+border: 1px solid var(--ln);
+}
+#cd.alert {
+background: var(--accent-rose-subtle);
+color: var(--accent-rose);
+border: 2px solid var(--accent-rose);
+font-size: 17px;
+animation: p 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes p {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.02); }
+}
+​.bar {
+height: 14px;
+background: var(--ln);
+border-radius: var(--radius-pill);
+overflow: hidden;
+margin-top: 14px;
+padding: 2px;
+}
+.bar i {
+display: block;
+height: 100%;
+background: linear-gradient(90deg, #10b981, #06b6d4);
+border-radius: var(--radius-pill);
+transition: width 0.6s ease;
+}
+​#acc {
+background: var(--accent-blue-subtle);
+border: 1.5px dashed var(--accent-blue);
+border-radius: var(--radius-md);
+padding: 16px;
+margin: 10px 0;
+font-weight: 600;
+}
+​.sc {
+overflow-x: auto;
+margin-top: 12px;
+padding-bottom: 6px;
+-webkit-overflow-scrolling: touch;
+border-radius: var(--radius-md);
+}
+table {
+border-collapse: separate;
+border-spacing: 4px;
+font-size: 13px;
+min-width: 620px;
+width: 100%;
+}
+th, td {
+border-radius: 8px;
+padding: 8px 6px;
+text-align: center;
+min-width: 38px;
+}
+th {
+background: var(--bg);
+font-weight: 700;
+border: 1px solid var(--ln);
+}
+th.n {
+text-align: left;
+min-width: 150px;
+padding-left: 12px;
+}
+td {
+background: var(--bg);
+border: 1px solid transparent;
+font-size: 14px;
+}
+tr.cur td, tr.cur th {
+background: var(--accent-amber-subtle);
+border-color: rgba(245, 158, 11, 0.3);
+font-weight: 700;
+}
+td.ad { cursor: pointer; }
+td.ad:hover {
+background: var(--primary-subtle);
+border-color: var(--primary);
+}
+​select, input, textarea, button {
+font: inherit;
+color: var(--tx);
+background: var(--card);
+border: 1.5px solid var(--ln);
+border-radius: var(--radius-md);
+padding: 10px 14px;
+outline: none;
+}
+select:focus, input:focus, textarea:focus {
+border-color: var(--primary);
+box-shadow: 0 0 0 3px var(--primary-subtle);
+}
+button {
+background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+color: #ffffff;
+font-weight: 600;
+border: 0;
+cursor: pointer;
+border-radius: var(--radius-md);
+padding: 10px 18px;
+box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+button:active { transform: translateY(1px); }
+button.s {
+padding: 6px 12px;
+font-size: 13px;
+border-radius: var(--radius-sm);
+box-shadow: none;
+}
+textarea { width: 100%; resize: vertical; }
+.row {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+align-items: center;
+margin: 8px 0;
+}
+.row > input { flex: 1; min-width: 0; }
+​#chat {
+max-height: 360px;
+overflow-y: auto;
+border: 1px solid var(--ln);
+border-radius: var(--radius-md);
+padding: 14px;
+background: var(--bg);
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.m {
+background: var(--card);
+padding: 10px 14px;
+border-radius: 16px;
+border-top-left-radius: 4px;
+box-shadow: var(--shadow-sm);
+border: 1px solid var(--ln);
+max-width: 85%;
+align-self: flex-start;
+}
+.m b {
+font-size: 12px;
+color: var(--accent-indigo);
+display: block;
+margin-bottom: 3px;
+}
+.m img {
+max-width: 220px;
+border-radius: 10px;
+display: block;
+margin-top: 6px;
+cursor: zoom-in;
+}
+​.q {
+border-top: 1px solid var(--ln);
+padding: 12px 0;
+font-size: 14px;
+line-height: 1.5;
+}
+.er {
+color: var(--accent-rose);
+font-size: 13px;
+font-weight: 600;
+margin-top: 8px;
+}
+​#ov {
+position: fixed;
+inset: 0;
+background: rgba(15, 23, 42, 0.95);
+backdrop-filter: blur(8px);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 100;
+}
+#ov[hidden] { display: none; }
+#ov img {
+max-width: 92%;
+max-height: 85%;
+border-radius: var(--radius-md);
+}
+#ov b {
+position: absolute;
+top: max(16px, env(safe-area-inset-top));
+right: 20px;
+color: #fff;
+font-size: 32px;
+cursor: pointer;
+width: 44px;
+height: 44px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.1);
+border-radius: var(--radius-pill);
+}
+​#lg, #help-modal, #install-guide-modal {
+position: fixed;
+inset: 0;
+z-index: 90;
+background: rgba(15, 23, 42, 0.7);
+backdrop-filter: blur(6px);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+#lg[hidden], #help-modal[hidden], #install-guide-modal[hidden] { display: none; }
+​.lgb {
+background: var(--card);
+border-radius: var(--radius-lg);
+max-height: 90vh;
+display: flex;
+flex-direction: column;
+max-width: 660px;
+width: 100%;
+border: 1px solid var(--ln);
+box-shadow: var(--shadow-lg);
+}
+#lgt, #help-content, #install-guide-content {
+overflow-y: auto;
+padding: 22px;
+font-size: 14px;
+}
+#lgt h2, #help-content h2, #install-guide-content h2 { font-size: 19px; margin: 16px 0 6px; }
+#lgt h3, #help-content h3 { margin: 14px 0 4px; font-size: 15px; color: var(--accent-blue); }
+#lgt p, #help-content p { margin: 6px 0; color: var(--mu); }
+​.lgc {
+display: flex;
+gap: 12px;
+align-items: flex-start;
+padding: 16px 22px;
+border-top: 1px solid var(--ln);
+font-size: 13px;
+background: var(--bg);
+border-bottom-left-radius: var(--radius-lg);
+border-bottom-right-radius: var(--radius-lg);
+}
+.lgc input[type="checkbox"] {
+width: 22px;
+height: 22px;
+flex: none;
+accent-color: var(--primary);
+margin-top: 2px;
+}
+.fl {
+background: linear-gradient(135deg, var(--accent-blue), #0284c7);
+color: #fff;
+border-radius: var(--radius-md);
+padding: 10px 14px;
+cursor: pointer;
+font-size: 13px;
+font-weight: 600;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+}
+a {
+color: var(--primary);
+text-decoration: none;
+font-weight: 600;
+}
+​/* Botón flotante de ayuda */
+#fab-help {
+position: fixed;
+bottom: 22px;
+right: 22px;
+z-index: 85;
+background: linear-gradient(135deg, var(--accent-blue), #0284c7);
+color: #ffffff;
+width: 52px;
+height: 52px;
+border-radius: var(--radius-pill);
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+border: 2px solid #ffffff;
+font-size: 22px;
+cursor: pointer;
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#fab-help:hover {
+transform: scale(1.08);
+box-shadow: 0 12px 30px rgba(2, 132, 199, 0.45);
+}
+#fab-help:active {
+transform: scale(0.95);
+}
+​.help-step-box {
+background: var(--bg);
+border: 1px solid var(--ln);
+border-radius: var(--radius-md);
+padding: 14px 16px;
+margin-bottom: 12px;
+}
+.help-step-title {
+font-weight: 700;
+font-size: 14px;
+color: var(--tx);
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 4px;
+}
+.help-step-desc {
+font-size: 13px;
+color: var(--mu);
+line-height: 1.45;
+}
+</style>
 </head>
 <body>
-
-<!-- Barra Flotante de Modo de Prueba -->
+​<!-- Banner superior de instalación automática / sugerida -->
+<div id="install-top-banner" hidden>
+<div class="ib-info">
+<div class="ib-icon">📲</div>
+<div class="ib-text">
+<b>Instala la App de la Tanda</b>
+<span>Úsala con acceso directo desde tu pantalla sin abrir el navegador.</span>
+</div>
+</div>
+<div class="ib-actions">
+<button id="btn-banner-install" class="btn-banner-install">Instalar</button>
+<button id="btn-banner-dismiss" class="btn-banner-close" title="Cerrar aviso">✕</button>
+</div>
+</div>
+​<!-- Barra Flotante de Modo de Prueba -->
 <div id="test-bar">
-  <div class="tb-header">
-    <div>🧪 MODO PRUEBA ACTIVO <span class="badge-test">SANDBOX</span></div>
-    <div style="font-size:11px;color:#c7d2fe">Simulador en tiempo real</div>
-  </div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-    <label style="font-size:12px;color:#e0e7ff;font-weight:600">Simular que soy:</label>
-    <select id="test-impersonate">
-      <option value="">-- Modo Normal (Mi cuenta) --</option>
-      <option value="admin">👑 Administrador</option>
-      <option value="1">👤 Turno 1 (Sergio)</option>
-      <option value="2">👤 Turno 2 (Rosa)</option>
-      <option value="3">👤 Turno 3 (Alejandro)</option>
-      <option value="4">👤 Turno 4 (David Lirus)</option>
-      <option value="5">👤 Turno 5 (Reyna Villa)</option>
-      <option value="6">👤 Turno 6 (Ivana)</option>
-      <option value="7">👤 Turno 7 (Gaby Viveros)</option>
-      <option value="8">👤 Turno 8 (David Viveros)</option>
-      <option value="9">👤 Turno 9 (David Viveros)</option>
-      <option value="10">👤 Turno 10 (Cesar Ceballos)</option>
-      <option value="11">👤 Turno 11</option>
-    </select>
-    <button id="test-btn-refresh" class="s" style="background:#4338ca;font-size:12px;padding:6px 10px">🔄 Recargar</button>
-  </div>
+<div class="tb-header">
+<div>🧪 MODO PRUEBA ACTIVO <span class="badge-test">SANDBOX</span></div>
+<div style="font-size:11px;color:#c7d2fe">Simulador en tiempo real</div>
 </div>
-
-<!-- Login -->
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+<label style="font-size:12px;color:#e0e7ff;font-weight:600">Simular que soy:</label>
+<select id="test-impersonate">
+<option value="">-- Modo Normal (Mi cuenta) --</option>
+<option value="admin">👑 Administrador</option>
+<option value="1">👤 Turno 1 (Sergio)</option>
+<option value="2">👤 Turno 2 (Rosa)</option>
+<option value="3">👤 Turno 3 (Alejandro)</option>
+<option value="4">👤 Turno 4 (David Lirus)</option>
+<option value="5">👤 Turno 5 (Reyna Villa)</option>
+<option value="6">👤 Turno 6 (Ivana)</option>
+<option value="7">👤 Turno 7 (Gaby Viveros)</option>
+<option value="8">👤 Turno 8 (David Viveros)</option>
+<option value="9">👤 Turno 9 (David Viveros)</option>
+<option value="10">👤 Turno 10 (Cesar Ceballos)</option>
+<option value="11">👤 Turno 11</option>
+</select>
+<button id="test-btn-refresh" class="s" style="background:#4338ca;font-size:12px;padding:6px 10px">🔄 Recargar</button>
+</div>
+</div>
+​<!-- Login -->
 <div id="login" class="card card-cur">
-  <h2 style="font-size:22px;margin-bottom:6px">💰 Entrar a la tanda</h2>
-  <div class="mu" style="margin-bottom:14px">Escribe tu número de celular (10 dígitos). Solo se pide la primera vez en este dispositivo.</div>
-  <div class="row">
-    <input id="lp" type="tel" inputmode="numeric" placeholder="Tu celular (ej. 5512345678)">
-    <input id="lpin" type="password" inputmode="numeric" placeholder="PIN de administrador" hidden>
-    <button id="lb">Entrar</button>
-  </div>
-  <div class="er" id="le"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+<h2 style="font-size:22px;margin:0">💰 Entrar a la tanda</h2>
+<!-- Botón directo de instalación en login -->
+<button id="btn-login-install" class="s" style="background:linear-gradient(135deg,var(--primary),var(--primary-hover));display:inline-flex;align-items:center;gap:6px" hidden>
+<span>📲</span> Instalar App
+</button>
 </div>
-
-<!-- Contenedor principal de la App -->
+​<div class="mu" style="margin-bottom:14px">Escribe tu número de celular (10 dígitos). Solo se pide la primera vez en este dispositivo.</div>
+<div class="row">
+<input id="lp" type="tel" inputmode="numeric" placeholder="Tu celular (ej. 5512345678)">
+<input id="lpin" type="password" inputmode="numeric" placeholder="PIN de administrador" hidden>
+<button id="lb">Entrar</button>
+</div>
+<div class="er" id="le"></div>
+​<!-- Instrucciones de uso breves y esenciales en el Login -->
+<div style="margin-top:20px;padding-top:16px;border-top:1.5px dashed var(--ln);">
+<div style="font-weight:800;font-size:12px;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:6px">
+<span>💡</span> ¿CÓMO FUNCIONA LA TANDA? (LO MÁS IMPORTANTE)
+</div>
+​<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+<div style="display:flex;align-items:flex-start;gap:10px;background:var(--bg);padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--ln);">
+<span style="font-size:16px;line-height:1">📱</span>
+<div><b>Acceso automático:</b> Solo necesitas tu número de celular registrado. Sin contraseñas ni registros difíciles.</div>
+</div>
+​<div style="display:flex;align-items:flex-start;gap:10px;background:var(--bg);padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--ln);">
+<span style="font-size:16px;line-height:1">💳</span>
+<div><b>Aportaciones quincenales:</b> Cada quincena se aportan <b>$1,000</b> directos a la cuenta de quien tiene el turno actual. En su turno, esa persona recibe <b>$10,000</b>.</div>
+</div>
+​<div style="display:flex;align-items:flex-start;gap:10px;background:var(--bg);padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--ln);">
+<span style="font-size:16px;line-height:1">📸</span>
+<div><b>Reportar tu pago:</b> Transfiere, envía la captura en el <b>Chat</b> y presiona el botón <b>"Solicitar revisión"</b> en tu sección de pago.</div>
+</div>
+​<div style="display:flex;align-items:flex-start;gap:10px;background:var(--bg);padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--ln);">
+<span style="font-size:16px;line-height:1">🛡️</span>
+<div><b>Compromiso seguro:</b> Al confirmarse tu pago, tu comprobante se libera y se acredita de forma automática en la tabla.</div>
+</div>
+</div>
+</div>
+</div>
+​<!-- Contenedor principal de la App -->
 <div id="app" hidden>
-  
-  <div id="ine-alert" class="card" hidden style="border-top: 5px solid var(--accent-rose); background: var(--accent-rose-subtle);">
-    <div style="display:flex;align-items:flex-start;gap:12px">
-      <div style="font-size:24px;line-height:1">⚠️</div>
-      <div style="flex:1">
-        <div style="font-weight:700;color:var(--accent-rose);font-size:15px;margin-bottom:4px">Falta subir tu identificación (INE)</div>
-        <div class="mu" style="color:var(--tx);font-size:13px;line-height:1.4">Para mayor seguridad y respaldo del ahorro, adjunta tu foto de la credencial INE (frente y reverso).</div>
-        <button id="ine-upload-btn" class="s" style="margin-top:10px;background:linear-gradient(135deg,#f43f5e,#be123c)">📷 Subir fotos de mi INE</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card card-cur">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h1>Tanda · Turno Actual</h1>
-      <button id="lgo" class="s" style="background:transparent;color:var(--mu);box-shadow:none;padding:2px 8px;border:1px solid var(--ln)">Cerrar sesión</button>
-    </div>
-    <div class="big" id="cur">Cargando…</div>
-    <div class="mu" id="dt" style="font-weight: 500;"></div>
-    <div id="cd"></div>
-    <div class="bar"><i id="pb" style="width:0"></i></div>
-    <div class="row" style="justify-content: space-between; margin-top: 10px;">
-      <div class="mu" id="pt" style="font-weight: 600;"></div>
-      <div class="mu" id="hi" style="font-weight: 700; color: var(--tx);"></div>
-    </div>
-  </div>
-
-  <div class="card card-acc">
-    <h2>💳 Cuenta para depositar al turno actual</h2>
-    <div id="acc" style="white-space:pre-wrap">—</div>
-    <div id="accE" hidden>
-      <textarea id="accT" rows="3" placeholder="Banco, CLABE interbancaria, número de tarjeta y titular"></textarea>
-      <div style="text-align: right; margin-top: 8px;">
-        <button id="accB" class="s" style="background:var(--accent-blue)">Guardar mis datos de cuenta</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card card-grid">
-    <h2>📊 Avance de pagos</h2>
-    <div class="mu">Fila = número que paga · Columna = quincena. ✅ Pagado · ⏳ En revisión · ⚠️ Atrasado · 🎁 Su turno</div>
-    <div class="sc"><table id="g"></table></div>
-  </div>
-
-  <div class="card card-mypay">
-    <h2>💸 Mi pago</h2>
-    <div id="mp"></div>
-    <div class="mu" style="margin-top: 8px;">Primero sube tu comprobante en el chat de abajo y luego solicita la revisión.</div>
-  </div>
-
-  <div class="card card-pg">
-    <h2>📋 Comprobantes de Compromiso de Ahorro</h2>
-    <div id="pg"></div>
-    <div class="mu" style="margin-top: 6px;">Se acreditan y cancelan de forma automática en cuanto se confirma tu aportación quincenal.</div>
-  </div>
-
-  <div class="card card-pend">
-    <h2>🔍 Pagos por revisar</h2>
-    <div id="pend"></div>
-  </div>
-
-  <div class="card card-chat">
-    <h2>💬 Chat y comprobantes</h2>
-    <div id="chat"></div>
-    <div class="row" style="margin-top: 12px;">
-      <input id="ct" placeholder="Escribe un mensaje aquí…">
-      <button id="cs">Enviar</button>
-    </div>
-    <div class="row">
-      <label class="fl">
-        📷 Adjuntar comprobante de la galería
-        <input type="file" id="cf" accept="image/*" hidden>
-      </label>
-      <span class="mu" id="cn" style="font-weight: 600; color: var(--primary);"></span>
-    </div>
-  </div>
-
-  <div class="card card-adm" id="adm" hidden></div>
-
-  <div class="mu" style="text-align:center;margin:16px 0 28px">
-    <a href="#" id="lgl">📜 Aviso de privacidad y compromiso de pago</a>
-  </div>
+​<div id="ine-alert" class="card" hidden style="border-top: 5px solid var(--accent-rose); background: var(--accent-rose-subtle);">
+<div style="display:flex;align-items:flex-start;gap:12px">
+<div style="font-size:24px;line-height:1">📋</div>
+<div style="flex:1">
+<div style="font-weight:700;color:var(--accent-rose);font-size:15px;margin-bottom:4px">Fotos de tu identificación (INE) pendientes</div>
+<div class="mu" style="color:var(--tx);font-size:13px;line-height:1.4">Tu registro como participante está listo. Puedes adjuntar las fotos de tu INE (frente y reverso) como respaldo formal del ahorro cuando lo desees.</div>
+<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+<button id="ine-upload-btn" class="s" style="background:linear-gradient(135deg,#f43f5e,#be123c)">📷 Subir fotos de mi INE</button>
+<button id="ine-dismiss-btn" class="s" style="background:transparent;color:var(--mu);border:1px solid var(--ln);box-shadow:none">Recordar más tarde</button>
 </div>
-
-<div id="ov" hidden><b>✕</b><img alt=""></div>
-
-<div id="lg" hidden>
-  <div class="lgb">
-    <div id="lgt"></div>
-    <div id="lgf" style="padding:0 22px 14px">
-      <input id="fn" placeholder="Nombre completo (como aparece en tu INE)" style="width:100%;margin-bottom:10px">
-      <div class="mu" style="margin-bottom:8px">Foto de tu INE (opcional por ahora):</div>
-      <div class="row">
-        <label class="fl">📷 Frente<input type="file" id="f1" accept="image/*" hidden></label>
-        <label class="fl">📷 Reverso<input type="file" id="f2" accept="image/*" hidden></label>
-        <span class="mu" id="fs" style="font-weight: 600; color: var(--primary);"></span>
-      </div>
-    </div>
-    <label class="lgc" id="lgk1">
-      <input type="checkbox" id="lgk">
-      <span>He leído y acepto el Aviso de Privacidad y el Compromiso de Ahorro, autorizo el uso técnico de mis datos, acepto los comprobantes electrónicos de aportación y me comprometo a cubrir puntualmente todas mis aportaciones hasta el número 11.</span>
-    </label>
-    <div class="lgc" id="lgk2" hidden style="justify-content: flex-end;">
-      <button id="lgx">Cerrar</button>
-    </div>
-  </div>
 </div>
+</div>
+</div>
+​<div class="card card-cur">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+<h1>Tanda · Turno Actual</h1>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<!-- Botón de instalación en la cabecera -->
+<button id="btn-top-install" class="s" style="background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-weight:700;display:inline-flex;align-items:center;gap:4px" hidden>
+<span>📲</span> Instalar App
+</button>
+<!-- Botón de ayuda en la cabecera -->
+<button id="top-help-btn" class="s" style="background:var(--accent-blue-subtle);color:var(--accent-blue);border:1px solid var(--accent-blue);box-shadow:none;display:inline-flex;align-items:center;gap:4px;font-weight:700">
+<span>❓</span> Instrucciones
+</button>
+<button id="lgo" class="s" style="background:transparent;color:var(--mu);box-shadow:none;padding:4px 8px;border:1px solid var(--ln)">Cerrar sesión</button>
+</div>
+</div>
+<div class="big" id="cur">Cargando…</div>
+<div class="mu" id="dt" style="font-weight: 500;"></div>
+<div id="cd"></div>
+<div class="bar"><i id="pb" style="width:0"></i></div>
+<div class="row" style="justify-content: space-between; margin-top: 10px;">
+<div class="mu" id="pt" style="font-weight: 600;"></div>
+<div class="mu" id="hi" style="font-weight: 700; color: var(--tx);"></div>
+</div>
+</div>
+​<div class="card card-acc">
+<h2>💳 Cuenta para depositar al turno actual</h2>
+<div id="acc-owner-lbl" class="mu" style="font-weight:600;margin-bottom:6px"></div>
+<div id="acc" style="white-space:pre-wrap">—</div>
+​<!-- Mensaje de estado para el dueño del turno -->
+<div id="acc-status-box" style="margin-top:10px" hidden>
+<div id="acc-status-msg" style="font-size:13px;font-weight:600;margin-bottom:8px"></div>
+<button id="acc-toggle-btn" class="s" style="background:transparent;color:var(--accent-blue);border:1px solid var(--accent-blue);box-shadow:none">✏️ Modificar mis datos</button>
+</div>
+​<div id="accE" hidden style="margin-top:10px">
+<textarea id="accT" rows="3" placeholder="Banco, CLABE interbancaria (18 dígitos), número de tarjeta y titular"></textarea>
+<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px">
+<button id="acc-cancel-btn" class="s" style="background:transparent;color:var(--mu);border:1px solid var(--ln);box-shadow:none" hidden>Cancelar</button>
+<button id="accB" class="s" style="background:var(--accent-blue)">Guardar datos de cuenta</button>
+</div>
+</div>
+​<!-- Sección para configurar cuenta anticipadamente -->
+<div id="my-acc-section" style="margin-top:16px;border-top:1px dashed var(--ln);padding-top:12px" hidden>
+<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" id="my-acc-toggle">
+<div style="font-size:13px;font-weight:700;color:var(--accent-blue)">💼 Configurar mi cuenta para cuando sea mi turno</div>
+<span style="font-size:12px;color:var(--mu)" id="my-acc-arrow">▼</span>
+</div>
+<div id="my-acc-body" hidden style="margin-top:10px">
+<div class="mu" style="font-size:12px;margin-bottom:8px">Guarda tus datos bancarios con anticipación. Cuando llegue la fecha de tu entrega, se mostrarán aquí de forma automática:</div>
+<div class="row">
+<select id="my-acc-num" style="flex:1"></select>
+</div>
+<textarea id="my-acc-text" rows="3" placeholder="Banco, CLABE interbancaria, tarjeta y nombre del titular" style="margin-top:6px"></textarea>
+<div style="text-align:right;margin-top:8px">
+<button id="my-acc-btn" class="s" style="background:var(--accent-blue)">Guardar mi cuenta</button>
+</div>
+</div>
+</div>
+</div>
+​<div class="card card-grid">
+<h2>📊 Avance de pagos</h2>
+<div class="mu">Fila = número que paga · Columna = quincena. ✅ Pagado · ⏳ En revisión · ⚠️ Atrasado · 🎁 Su turno</div>
+<div class="sc"><table id="g"></table></div>
+</div>
+​<div class="card card-mypay">
+<h2>💸 Mi pago</h2>
+<div id="mp"></div>
+<div class="mu" style="margin-top: 8px;">Primero sube tu comprobante en el chat de abajo y luego solicita la revisión.</div>
+</div>
+​<div class="card card-pg">
+<h2>📋 Comprobantes de Compromiso de Ahorro</h2>
+<div id="pg"></div>
+<div class="mu" style="margin-top: 6px;">Se acreditan y cancelan de forma automática en cuanto se confirma tu aportación quincenal.</div>
+</div>
+​<div class="card card-pend">
+<h2>🔍 Pagos por revisar</h2>
+<div id="pend"></div>
+</div>
+​<div class="card card-chat">
+<h2>💬 Chat y comprobantes</h2>
+<div id="chat"></div>
+<div class="row" style="margin-top: 12px;">
+<input id="ct" placeholder="Escribe un mensaje aquí…">
+<button id="cs">Enviar</button>
+</div>
+<div class="row">
+<label class="fl">
+📷 Adjuntar comprobante de la galería
+<input type="file" id="cf" accept="image/*" hidden>
+</label>
+<span class="mu" id="cn" style="font-weight: 600; color: var(--primary);"></span>
+</div>
+</div>
+​<div class="card card-adm" id="adm" hidden></div>
+​<div class="mu" style="text-align:center;margin:16px 0 28px">
+<a href="#" id="lgl">📜 Aviso de privacidad y compromiso de pago</a>
+</div>
+</div>
+​<!-- Botón flotante accesible de ayuda en la interfaz -->
+<button id="fab-help" title="Ayuda y Guía de Uso">❓</button>
+​<!-- Modal con Instrucciones Detalladas -->
+<div id="help-modal" hidden>
+<div class="lgb">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--ln);">
+<h2 style="margin:0;font-size:18px;display:flex;align-items:center;gap:8px">
+<span>📘</span> Guía de Uso e Instrucciones
+</h2>
+<button id="help-close-x" style="background:transparent;border:0;color:var(--mu);font-size:20px;padding:4px 8px;cursor:pointer">✕</button>
+</div>
+​<div id="help-content">
+<div class="help-step-box">
+<div class="help-step-title"><span>1️⃣</span> ¿Cómo pagar mi aportación quincenal?</div>
+<div class="help-step-desc">
+• Revisa la tarjeta <b>"Cuenta para depositar al turno actual"</b> para ver la CLABE o tarjeta del beneficiario.
 
-<script>
+• Haz tu transferencia bancaria por <b>$1,000</b> (o $2,000 si tienes dos números). En concepto pon: <i>Ahorro tanda</i>.
+
+• Guarda la captura de pantalla o recibo de tu banco.
+</div>
+</div>
+​<div class="help-step-box">
+<div class="help-step-title"><span>2️⃣</span> ¿Cómo reportar y enviar el comprobante?</div>
+<div class="help-step-desc">
+• Ve a la tarjeta <b>"Chat y comprobantes"</b> y presiona el botón azul <b>"📷 Adjuntar comprobante"</b>.
+
+• Elige la foto de tu comprobante y presiona <b>Enviar</b>.
+
+• Inmediatamente sube a la sección <b>"Mi pago"</b> y presiona el botón <b>"Ya envié mi comprobante · Solicitar revisión"</b>. Tu estado cambiará a ⏳ <i>Pendiente de revisión</i>.
+</div>
+</div>
+​<div class="help-step-box">
+<div class="help-step-title"><span>3️⃣</span> ¿Cómo se confirma mi pago?</div>
+<div class="help-step-desc">
+• La persona que recibe el turno verificará su cuenta bancaria y presionará <i>"Confirmo que lo recibí"</i>.
+
+• En cuanto se confirme, tu casilla en la tabla de avance cambiará automáticamente a ✅ <b>Pagado</b> y tu comprobante de compromiso quedará saldado.
+</div>
+</div>
+​<div class="help-step-box">
+<div class="help-step-title"><span>4️⃣</span> ¿Qué hacer cuando sea mi turno de recibir?</div>
+<div class="help-step-desc">
+• En la tarjeta de cuenta bancaria o en <b>"Configurar mi cuenta por adelantado"</b>, escribe tu Banco, CLABE y nombre de titular.
+
+• Todos los integrantes verán tus datos y te transferirán.
+
+• En la sección <b>"Pagos por revisar"</b>, confirma conforme vayas recibiendo los depósitos en tu cuenta. En tu turno recibes <b>$10,000</b> completos (ese día no aportas).
+</div>
+</div>
+​<div class="help-step-box">
+<div class="help-step-title"><span>📅</span> Fechas límites y entregas</div>
+<div class="help-step-desc">
+• Las entregas son los días <b>1 y 16 de cada mes</b>.
+
+• Tienes como fecha límite máxima para transferir hasta los días <b>2 y 17</b>.
+
+• Al vencer o entregarse el turno actual, la app abrirá automáticamente el siguiente pago.
+</div>
+</div>
+​<div class="help-step-box">
+<div class="help-step-title"><span>🔒</span> Seguridad y cambio de teléfono</div>
+<div class="help-step-desc">
+• Por seguridad de los fondos, tu cuenta está vinculada a un solo dispositivo.
+
+• Si borras tus datos o cambias de celular y la app te indica que ya está activado en otro equipo, avisa al Administrador para que presione <b>"Liberar"</b> y puedas ingresar nuevamente sin problema.
+</div>
+</div>
+</div>
+​<div class="lgc" style="justify-content: flex-end;">
+<button id="help-close-btn" style="background:linear-gradient(135deg,var(--accent-blue),#0284c7)">¡Entendido!</button>
+</div>
+</div>
+</div>
+​<!-- Modal Guía de Instalación para iPhone / Navegadores manuales -->
+<div id="install-guide-modal" hidden>
+<div class="lgb">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--ln);">
+<h2 style="margin:0;font-size:18px;display:flex;align-items:center;gap:8px">
+<span>📲</span> Cómo instalar la App
+</h2>
+<button id="guide-close-x" style="background:transparent;border:0;color:var(--mu);font-size:20px;padding:4px 8px;cursor:pointer">✕</button>
+</div>
+​<div id="install-guide-content">
+<div id="guide-ios-box">
+<div style="font-weight:700;color:var(--accent-blue);margin-bottom:12px;font-size:15px">
+🍎 Instrucciones para iPhone y iPad (Safari):
+</div>
+<div class="help-step-box">
+<div class="help-step-title"><span>1️⃣</span> Toca el botón "Compartir"</div>
+<div class="help-step-desc">En la barra inferior de Safari, toca el ícono de compartir <b>(el cuadro con una flecha hacia arriba ⎋)</b>.</div>
+</div>
+<div class="help-step-box">
+<div class="help-step-title"><span>2️⃣</span> Selecciona "Agregar a inicio"</div>
+<div class="help-step-desc">Baja en las opciones del menú y presiona en <b>"Agregar a la pantalla de inicio" (➕)</b>.</div>
+</div>
+<div class="help-step-box">
+<div class="help-step-title"><span>3️⃣</span> Presiona "Agregar"</div>
+<div class="help-step-desc">En la esquina superior derecha toca <b>"Agregar"</b>. ¡Listo! Ya tendrás el ícono de la Tanda en tu pantalla como cualquier app.</div>
+</div>
+</div>
+​<div id="guide-android-box">
+<div style="font-weight:700;color:var(--primary);margin-bottom:12px;font-size:15px">
+🤖 Instrucciones para Android / Chrome:
+</div>
+<div class="help-step-box">
+<div class="help-step-title"><span>1️⃣</span> Toca el menú de opciones</div>
+<div class="help-step-desc">Presiona los tres puntos <b>(⋮)</b> arriba a la derecha de Google Chrome.</div>
+</div>
+<div class="help-step-box">
+<div class="help-step-title"><span>2️⃣</span> Presiona "Instalar aplicación"</div>
+<div class="help-step-desc">Elige <b>"Instalar aplicación"</b> o <b>"Agregar a la pantalla principal"</b>.</div>
+</div>
+</div>
+</div>
+​<div class="lgc" style="justify-content: flex-end;">
+<button id="guide-close-btn" style="background:linear-gradient(135deg,var(--primary),var(--primary-hover))">Aceptar</button>
+</div>
+</div>
+</div>
+​<div id="ov" hidden><b>✕</b><img alt=""></div>
+​<div id="lg" hidden>
+<div class="lgb">
+<div id="lgt"></div>
+<div id="lgf" style="padding:0 22px 14px">
+<input id="fn" placeholder="Nombre completo (como aparece en tu INE)" style="width:100%;margin-bottom:10px">
+<div class="mu" style="margin-bottom:8px">Foto de tu INE (opcional por ahora):</div>
+<div class="row">
+<label class="fl">📷 Frente<input type="file" id="f1" accept="image/*" hidden></label>
+<label class="fl">📷 Reverso<input type="file" id="f2" accept="image/*" hidden></label>
+<span class="mu" id="fs" style="font-weight: 600; color: var(--primary);"></span>
+</div>
+</div>
+<label class="lgc" id="lgk1">
+<input type="checkbox" id="lgk">
+<span>He leído y acepto el Aviso de Privacidad y el Compromiso de Ahorro, autorizo el uso técnico de mis datos, acepto los comprobantes electrónicos de aportación y me comprometo a cubrir puntualmente todas mis aportaciones hasta el número 11.</span>
+</label>
+<div class="lgc" id="lgk2" hidden style="justify-content: flex-end;">
+<button id="lgx">Cerrar</button>
+</div>
+</div>
+</div>
+​<script>
 // Pega aquí la URL de tu Web App de Apps Script terminada en /exec
-const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec' ; 
-
-// Variable para el simulador de prueba
+const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec';
+​// Variable para el simulador de prueba
 let TEST_AS = localStorage.getItem('test_as') || '';
-
-const D = [
-  [2026, 10, 1], [2026, 10, 16],
-  [2026, 11, 1], [2026, 11, 16],
-  [2027, 0, 1],  [2027, 0, 16],
-  [2027, 1, 1],  [2027, 1, 16],
-  [2027, 2, 1],  [2027, 2, 16],
-  [2027, 3, 1]
+​// --- LÓGICA DE INSTALACIÓN PWA AUTOMÁTICA Y MANUAL ---
+let deferredPrompt = null;
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+​function updateInstallUI() {
+// Si ya está ejecutándose como app instalada (standalone), ocultamos todo rastro de instalación
+if (isStandalone) {
+if ($('install-top-banner')) ('install-top-banner').hidden = true;
+if (('btn-top-install')) ('btn-top-install').hidden = true;
+if (('btn-login-install')) $('btn-login-install').hidden = true;
+return;
+}
+​// Si el usuario ya cerró el banner en esta sesión, respetamos su decisión para el banner superior
+const dismissed = sessionStorage.getItem('pwa_banner_dismissed') === '1';
+if ($('install-top-banner') && !dismissed) {
+$('install-top-banner').hidden = false;
+}
+​// Los botones de instalación permanecen disponibles y accesibles
+if ($('btn-top-install')) ('btn-top-install').hidden = false;
+if (('btn-login-install')) $('btn-login-install').hidden = false;
+}
+​// Escuchar el evento nativo del navegador antes de la instalación
+window.addEventListener('beforeinstallprompt', (e) => {
+e.preventDefault();
+deferredPrompt = e;
+updateInstallUI();
+​// Intento de aviso automático amigable: si el navegador lo permite, mostramos el banner de inmediato
+if (!isStandalone && sessionStorage.getItem('pwa_banner_dismissed') !== '1') {
+if ($('install-top-banner')) $('install-top-banner').hidden = false;
+}
+});
+​window.addEventListener('appinstalled', () => {
+deferredPrompt = null;
+if ($('install-top-banner')) ('install-top-banner').hidden = true;
+if (('btn-top-install')) ('btn-top-install').hidden = true;
+if (('btn-login-install')) $('btn-login-install').hidden = true;
+console.log('Aplicación instalada exitosamente');
+});
+​// Función central para detonar la instalación
+async function triggerPWAInstall() {
+if (deferredPrompt) {
+// Si es Android o Chrome con soporte directo nativo
+deferredPrompt.prompt();
+const { outcome } = await deferredPrompt.userChoice;
+if (outcome === 'accepted') {
+if ($('install-top-banner')) $('install-top-banner').hidden = true;
+}
+deferredPrompt = null;
+} else if (isIOS) {
+// En iPhone/iPad abrimos la guía visual ilustrada
+$('install-guide-modal').hidden = false;
+$('guide-ios-box').hidden = false;
+$('guide-android-box').hidden = true;
+} else {
+// Si el navegador no disparó el evento (o ya se usó), mostramos instrucciones de Chrome/Android
+$('install-guide-modal').hidden = false;
+$('guide-ios-box').hidden = !isIOS;
+$('guide-android-box').hidden = isIOS;
+}
+}
+​// Asignar listeners a los botones de instalación
+if ($('btn-banner-install')) ('btn-banner-install').onclick = triggerPWAInstall;
+if (('btn-top-install')) ('btn-top-install').onclick = triggerPWAInstall;
+if (('btn-login-install')) $('btn-login-install').onclick = triggerPWAInstall;
+​if ($('btn-banner-dismiss')) {
+$('btn-banner-dismiss').onclick = () => {
+$('install-top-banner').hidden = true;
+sessionStorage.setItem('pwa_banner_dismissed', '1');
+};
+}
+​const closeGuide = () => { ('install-guide-modal').hidden = true; };
+if (('guide-close-x')) ('guide-close-x').onclick = closeGuide;
+if (('guide-close-btn')) $('guide-close-btn').onclick = closeGuide;
+​// Inicializar visibilidad de instalación según el dispositivo al cargar
+document.addEventListener('DOMContentLoaded', updateInstallUI);
+// --- FIN LÓGICA DE INSTALACIÓN ---
+​const D = [
+[2026, 10, 1], [2026, 10, 16],
+[2026, 11, 1], [2026, 11, 16],
+[2027, 0, 1],  [2027, 0, 16],
+[2027, 1, 1],  [2027, 1, 16],
+[2027, 2, 1],  [2027, 2, 16],
+[2027, 3, 1]
 ].map(a => new Date(a[0], a[1], a[2]));
-
-const fmt = d => d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+​const fmt = d => d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
 const $ = id => document.getElementById(id);
 const fmtS = d => d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
 const dueD = q => { const d = D[q - 1]; return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1); };
 const esc = s => String(s).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
 const N = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const CFG = {
-  nombre: 'SERGIO ARMANDO CADENA HUERTA',
-  domicilio: 'NICOLAS BRAVO 11, ZONA CENTRO, XALAPA, VERACRUZ',
-  correo: 'KDNA.ARSE@GMAIL.COM',
-  fecha: '30 de octubre de 2026',
-  ver: 'v2'
+nombre: 'SERGIO ARMANDO CADENA HUERTA',
+domicilio: 'NICOLAS BRAVO 11, ZONA CENTRO, XALAPA, VERACRUZ',
+correo: 'KDNA.ARSE@GMAIL.COM',
+fecha: '30 de octubre de 2026',
+ver: 'v2'
 };
-
-function legal() {
-  const c = k => `<b>${esc(CFG[k])}</b>`;
-  return `
-<h2>AVISO DE PRIVACIDAD</h2><div class="mu">Vigente a partir del ${c('fecha')}</div>
-<h3>1. Responsable</h3><p>${c('nombre')}, con correo ${c('correo')}, es responsable de la administración técnica de este ejercicio de ahorro colaborativo.</p>
-<h3>2. Compromiso de Aportación</h3><p>Ahorro solidario y voluntario entre particulares de 11 números. Cada número aporta puntualmente $1,000 por quincena. Turnos: ${D.map((d, i) => 'N.º ' + (i + 1) + ': ' + fmt(d)).join('; ')}.</p>
-<h3>3. Comprobantes de Compromiso</h3><p>Se generan folios electrónicos de compromiso de aportación mutua por cada quincena a cubrir, los cuales quedan formalmente liberados y acreditados en cuanto se registra tu aportación.</p>`;
+​function legal() {
+const c = k => <b>${esc(CFG[k])}</b>;
+return  <h2>AVISO DE PRIVACIDAD</h2><div class="mu">Vigente a partir del ${c('fecha')}</div> <h3>1. Responsable</h3><p>${c('nombre')}, con correo ${c('correo')}, es responsable de la administración técnica de este ejercicio de ahorro colaborativo.</p> <h3>2. Compromiso de Aportación</h3><p>Ahorro solidario y voluntario entre particulares de 11 números. Cada número aporta puntualmente $1,000 por quincena. Turnos: ${D.map((d, i) => 'N.º ' + (i + 1) + ': ' + fmt(d)).join('; ')}.</p> <h3>3. Comprobantes de Compromiso</h3><p>Se generan folios electrónicos de compromiso de aportación mutua por cada quincena a cubrir, los cuales quedan formalmente liberados y acreditados en cuanto se registra tu aportación.</p>;
 }
-
-function openLegal(ro) {
-  if (!ro && !$('lg').hidden) return;
-  $('lgt').innerHTML = legal();
-  $('lgk1').hidden = ro;
-  $('lgk2').hidden = !ro;
-  $('lgk').checked = false;
-  $('lgf').hidden = ro || !!(S.me && S.me.datos && S.me.hasIne);
-  $('fn').value = S.me && S.me.nombre ? S.me.nombre : '';
-  $('f1').value = '';
-  $('f2').value = '';
-  $('fs').textContent = '';
-  $('lgt').scrollTop = 0;
-  $('lg').hidden = false;
+​function openLegal(ro) {
+if (!ro && !$('lg').hidden) return;
+$('lgt').innerHTML = legal();
+$('lgk1').hidden = ro;
+$('lgk2').hidden = !ro;
+$('lgk').checked = false;
+$('lgf').hidden = ro || !!(S.me && S.me.datos && S.me.hasIne);
+$('fn').value = S.me && S.me.nombre ? S.me.nombre : '';
+$('f1').value = '';
+$('f2').value = '';
+$('fs').textContent = '';
+$('lgt').scrollTop = 0;
+$('lg').hidden = false;
 }
-
-let TOK = null, S = {}, lastChat = 0;
+​let TOK = null, S = {}, lastChat = 0;
 try { TOK = localStorage.getItem('tk'); } catch (e) {}
-
-async function api(a, d) {
-  if (!API || API.includes('PEGA_AQUI')) {
-    throw new Error('Debes configurar la URL de tu Apps Script en la variable API.');
-  }
-  const payload = Object.assign({ a: a, t: TOK, test_as: TEST_AS }, d);
-  const r = await fetch(API, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload)
-  });
-  if (!r.ok) {
-    throw new Error(`Error de conexión con el servidor (${r.status})`);
-  }
-  const j = await r.json();
-  if (j.error) {
-    if (j.error === 'NOAUTH') {
-      TOK = null;
-      try { localStorage.removeItem('tk'); } catch (e) {}
-      show();
-    }
-    throw new Error(j.error === 'NOAUTH' ? 'Tu sesión expiró. Vuelve a ingresar.' : j.error);
-  }
-  return j;
+​async function api(a, d) {
+if (!API || API.includes('PEGA_AQUI')) {
+throw new Error('Debes configurar la URL de tu Apps Script en la variable API.');
 }
-
-const act = async (a, d) => {
-  try {
-    await api(a, d);
-    await load();
-  } catch (e) {
-    alert(e.message);
-  }
+const payload = Object.assign({ a: a, t: TOK, test_as: TEST_AS }, d);
+const r = await fetch(API, {
+method: 'POST',
+headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+body: JSON.stringify(payload)
+});
+if (!r.ok) {
+throw new Error(Error de conexión con el servidor (${r.status}));
+}
+const j = await r.json();
+if (j.error) {
+if (j.error === 'NOAUTH') {
+TOK = null;
+try { localStorage.removeItem('tk'); } catch (e) {}
+show();
+}
+throw new Error(j.error === 'NOAUTH' ? 'Tu sesión expiró. Vuelve a ingresar.' : j.error);
+}
+return j;
+}
+​const act = async (a, d) => {
+try {
+await api(a, d);
+await load();
+} catch (e) {
+alert(e.message);
+}
 };
-
-function show() {
-  const hasAccess = !!TOK || !!TEST_AS;
-  $('login').hidden = hasAccess;
-  $('app').hidden = !hasAccess;
-  if (hasAccess) {
-    load();
-  }
+​function show() {
+const hasAccess = !!TOK || !!TEST_AS;
+$('login').hidden = hasAccess;
+('app').hidden = !hasAccess;
+if (('fab-help')) $('fab-help').hidden = !hasAccess;
+updateInstallUI();
+if (hasAccess) {
+load();
 }
-
-// Selector de simulación para pruebas
+}
+​// Control del Modal de Ayuda
+function openHelp() {
+$('help-modal').hidden = false;
+$('help-content').scrollTop = 0;
+}
+function closeHelp() {
+$('help-modal').hidden = true;
+}
+$('fab-help').onclick = openHelp;
+$('top-help-btn').onclick = openHelp;
+$('help-close-x').onclick = closeHelp;
+$('help-close-btn').onclick = closeHelp;
+​// Selector de simulación para pruebas
 $('test-impersonate').value = TEST_AS;
 $('test-impersonate').onchange = () => {
-  TEST_AS = $('test-impersonate').value;
-  localStorage.setItem('test_as', TEST_AS);
-  load();
+TEST_AS = $('test-impersonate').value;
+localStorage.setItem('test_as', TEST_AS);
+load();
 };
 $('test-btn-refresh').onclick = () => load();
-
-$('lb').onclick = async () => {
-  $('le').textContent = '';
-  $('lb').disabled = true;
-  $('lb').textContent = 'Comprobando…';
-  try {
-    const j = await api('login', { phone: $('lp').value, pin: $('lpin').value });
-    TOK = j.t;
-    try { localStorage.setItem('tk', TOK); } catch (e) {}
-    show();
-  } catch (e) {
-    if (e.message === 'NEED_PIN') {
-      $('lpin').hidden = false;
-      $('lpin').focus();
-      $('le').textContent = 'Eres administrador: escribe tu PIN.';
-    } else {
-      $('le').textContent = e.message;
-    }
-  } finally {
-    $('lb').disabled = false;
-    $('lb').textContent = 'Entrar';
-  }
-};
-
-$('lgo').onclick = () => {
-  if (confirm('¿Deseas cerrar tu sesión?')) {
-    TOK = null;
-    TEST_AS = '';
-    localStorage.removeItem('test_as');
-    try { localStorage.removeItem('tk'); } catch (e) {}
-    show();
-  }
-};
-
-async function load() {
-  try {
-    const j = await api('state');
-    if (!j.me.acc && !TEST_AS) {
-      S = { me: j.me };
-      openLegal(false);
-      return;
-    }
-    S = j;
-    S.pay = new Set(j.pay);
-    S.req = new Set(j.req);
-    S.con = new Set(j.con);
-    S.ent = new Set(j.ent);
-    
-    // Lectura protegida de cuentas
-    S.cta = {};
-    if (Array.isArray(j.cta)) {
-      j.cta.forEach(x => { if (x && x[0] != null) S.cta[x[0]] = x[1]; });
-    } else if (j.cta && typeof j.cta === 'object') {
-      Object.entries(j.cta).forEach(([k, v]) => { S.cta[k] = v; });
-    }
-    
-    S.nm = {};
-    (j.pers || []).forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
-
-    (j.pers || []).forEach(p => {
-      const opt = $('test-impersonate').querySelector(`option[value="${p.n}"]`);
-      if (opt) opt.textContent = `👤 Turno ${p.n} (${p.nombre || 'Sin nombre'})`;
-    });
-
-    all();
-  } catch (e) {
-    console.error('Error al cargar datos:', e);
-    $('cur').textContent = "Error al conectar";
-    $('dt').textContent = e.message;
-  }
-}
-
-const mine = n => (S.me && S.me.nums) ? S.me.nums.includes(n) : false;
-
-function cur() {
-  const T0 = new Date();
-  T0.setHours(0, 0, 0, 0);
-  for (const n of N) {
-    if (!S.ent.has(n)) return n;
-  }
-  return 0;
-}
-
-function head() {
-  const c = cur();
-  if (!c) {
-    $('cur').textContent = "Tanda completada 🎉";
-    $('dt').textContent = "";
-    $('cd').textContent = "";
-    $('cd').className = '';
-  } else {
-    const d = D[c - 1];
-    $('cur').textContent = `Número ${c} · ${S.nm[c] || 'Asignando'}`;
-    $('dt').textContent = "Recibe $10,000 el " + fmt(d) + " · Aportaciones a más tardar el " + fmtS(dueD(c));
-    const t = new Date();
-    t.setHours(0, 0, 0, 0);
-    const n = Math.round((d - t) / 864e5), el = $('cd');
-    el.className = n <= 3 ? 'alert' : '';
-    el.textContent = n > 1 ? (n <= 3 ? `¡Solo faltan ${n} días! ` : `Faltan ${n} días `) + "para la entrega" : n === 1 ? "¡Falta 1 día! Mañana se entrega" : n === 0 ? "¡Hoy es la entrega! Recuerda enviar tu aportación" : "Entrega en curso";
-    const a = S.cta[c];
-    $('acc').textContent = a || "Aún no ha compartido sus datos bancarios.";
-    const m = mine(c);
-    $('accE').hidden = !m;
-    if (m && document.activeElement !== $('accT')) $('accT').value = a || "";
-  }
-  $('pb').style.width = ((S.pay.size || 0) / 110 * 100) + '%';
-  $('pt').textContent = `${S.pay.size || 0} de 110 aportaciones cubiertas · ${S.ent.size || 0} de 11 entregados`;
-  
-  const nm = (S.me.nums || []).map(n => S.nm[n]);
-  const rolTxt = S.me.admin ? '👑 Administrador' : (nm.length ? '👤 ' + nm[0] + ` (Núm. ${S.me.nums.join(',')})` : '👤 Sin número asignado');
-  $('hi').innerHTML = (TEST_AS ? `<span class="badge-test" style="margin-right:6px">SIMULANDO</span>` : '') + rolTxt;
-}
-
-function grid() {
-  const T0 = new Date();
-  T0.setHours(0, 0, 0, 0);
-  let h = '<tr><th class="n">Número</th>';
-  for (const q of N) {
-    h += `<th>${q}<br><span class="mu" style="font-size:11px">${D[q - 1].getDate()}/${D[q - 1].getMonth() + 1}</span></th>`;
-  }
-  h += '</tr>';
-  const c = cur();
-  for (const n of N) {
-    h += `<tr class="${n === c ? 'cur' : ''}"><th class="n">${n} · ${esc(S.nm[n] || '')}${S.ent.has(n) ? ' 📦' : ''}</th>`;
-    for (const q of N) {
-      const k = n + '_' + q;
-      h += `<td class="${S.me.admin && q !== n ? 'ad' : ''}" data-k="${k}">${q === n ? '🎁' : S.pay.has(k) ? '✅' : S.req.has(k) ? '⏳' : dueD(q) < T0 ? '⚠️' : ''}</td>`;
-    }
-    h += '</tr>';
-  }
-  $('g').innerHTML = h;
-}
-
-$('g').onclick = e => {
-  const k = e.target.dataset && e.target.dataset.k;
-  if (k && S.me.admin && k.split('_')[0] !== k.split('_')[1]) act('pay', { k: k });
-};
-
-function pend() {
-  const G = {};
-  [...S.req].filter(k => !S.pay.has(k)).forEach(k => {
-    const [n, q] = k.split('_').map(Number);
-    const g = S.nm[n] + '|' + q;
-    (G[g] = G[g] || { name: S.nm[n], q: q, ns: [], ks: [] });
-    G[g].ns.push(n);
-    G[g].ks.push(k);
-  });
-  const L = Object.values(G);
-  $('pend').innerHTML = L.length ? L.map(g => {
-    const ok = g.ks.every(k => S.con.has(k)), ks = g.ks.join(',');
-    let b = '';
-    if (mine(g.q) && !ok) b += `<button class="s" data-c="${ks}">Confirmo que lo recibí ($${g.ks.length * 1000})</button> `;
-    if (S.me.admin) {
-      b += `<button class="s" data-ps="${ks}">Marcar acreditado${g.ks.length > 1 ? ' (todo)' : ''}</button> `;
-      if (g.ks.length > 1) g.ks.forEach((k, i) => b += `<button class="s" data-ps="${k}">Solo núm. ${g.ns[i]}</button> `);
-    }
-    return `<div class="q">${esc(g.name)} (núm. ${g.ns.join(' y ')}) → quincena ${g.q} · recibe ${esc(S.nm[g.q])} · $${g.ks.length * 1000}<br>${ok ? '✔ Receptor confirmó' : 'Esperando confirmación del receptor'}<br>${b}</div>`;
-  }).join('') : '<div class="mu">No hay solicitudes pendientes de revisión.</div>';
-}
-
-$('pend').onclick = e => {
-  const d = e.target.dataset;
-  if (d.c) act('con', { ks: d.c.split(',') });
-  if (d.ps) act('payset', { ks: d.ps.split(',') });
-};
-
-function mypay() {
-  const M = N.filter(mine);
-  if (!M.length) {
-    $('mp').innerHTML = '<div class="mu">El perfil seleccionado no tiene número asignado en la tanda (puedes elegir otro turno en la barra de prueba arriba).</div>';
-    return;
-  }
-
-  const currentTurn = cur();
-  if (!currentTurn) {
-    $('mp').innerHTML = '<div class="q">✅ ¡Felicidades! Todos los turnos de la tanda se han completado.</div>';
-    return;
-  }
-
-  let targetQ = null;
-  let isAtrasado = false;
-
-  for (let q = 1; q < currentTurn; q++) {
-    const hasUnpaid = M.some(n => n !== q && !S.pay.has(n + '_' + q));
-    if (hasUnpaid) {
-      targetQ = q;
-      isAtrasado = true;
-      break;
-    }
-  }
-
-  if (!targetQ) {
-    const hasUnpaidCurrent = M.some(n => n !== currentTurn && !S.pay.has(n + '_' + currentTurn));
-    if (hasUnpaidCurrent) {
-      targetQ = currentTurn;
-    }
-  }
-
-  if (!targetQ) {
-    $('mp').innerHTML = `<div class="q">
-      ✅ <b>Estás al corriente con tus aportaciones.</b><br>
-      <span class="mu">La siguiente quincena (Turno ${currentTurn + 1}) se habilitará automáticamente al completarse la entrega del Turno ${currentTurn}.</span>
-    </div>`;
-    return;
-  }
-
-  const due = M.filter(n => n !== targetQ && !S.pay.has(n + '_' + targetQ));
-  const todo = due.filter(n => !S.req.has(n + '_' + targetQ));
-
-  const avisoAtrasado = isAtrasado 
-    ? `<div style="display:inline-block;background:var(--accent-rose-subtle);color:var(--accent-rose);padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;margin-bottom:6px">⚠️ APORTACIÓN PENDIENTE ANTERIOR</div><br>` 
-    : `<div style="display:inline-block;background:var(--primary-subtle);color:var(--primary);padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;margin-bottom:6px">APORTACIÓN DEL TURNO ACTUAL</div><br>`;
-
-  $('mp').innerHTML = `<div class="q">
-    ${avisoAtrasado}
-    <b>Quincena ${targetQ}</b> (${D[targetQ - 1].getDate()}/${D[targetQ - 1].getMonth() + 1})<br>
-    Depositar <b>$${due.length * 1000}</b> a <b>${esc(S.nm[targetQ])}</b><br>
-    Fecha límite: <b>${fmtS(dueD(targetQ))}</b>
-    ${due.length > 1 ? `<br>Cubre tus números ${due.join(' y ')} en una sola transferencia` : `<br>Número asignado: ${due[0]}`}<br>
-    ${todo.length ? `<button class="s" data-q="${targetQ}" style="margin-top:8px">Ya envié mi comprobante · Solicitar revisión</button>` : '⏳ Pendiente de revisión'}
-  </div>`;
-}
-
-$('mp').onclick = e => {
-  const q = e.target.dataset && e.target.dataset.q;
-  if (q) act('req', { q: +q });
-};
-
-$('accB').onclick = () => {
-  const c = cur();
-  if (c) act('cta', { n: c, text: $('accT').value });
-};
-
-function chat() {
-  if (!S.chat || !S.chat.length) return;
-  const l = S.chat[S.chat.length - 1].ts + ':' + S.chat.length;
-  if (l === lastChat) return;
-  lastChat = l;
-  const el = $('chat'), bot = el.scrollTop + el.clientHeight >= el.scrollHeight - 40;
-  el.innerHTML = '';
-  S.chat.forEach(m => {
-    const d = document.createElement('div');
-    d.className = 'm';
-    const b = document.createElement('b');
-    b.textContent = m.name + ' · ' + new Date(m.ts).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
-    d.append(b);
-    if (m.text) {
-      const p = document.createElement('div');
-      p.textContent = m.text;
-      d.append(p);
-    }
-    if (m.img && /^[\w-]+$/.test(m.img)) {
-      const i = document.createElement('img');
-      i.src = 'https://drive.google.com/thumbnail?id=' + m.img + '&sz=w400';
-      i.dataset.id = m.img;
-      d.append(i);
-    }
-    el.append(d);
-  });
-  if (bot) el.scrollTop = el.scrollHeight;
-}
-
-const shrink = (f, mx = 800, ql = .5) => new Promise((ok, no) => {
-  const i = new Image();
-  i.onload = () => {
-    const k = Math.min(1, mx / Math.max(i.width, i.height));
-    const c = document.createElement('canvas');
-    c.width = i.width * k;
-    c.height = i.height * k;
-    c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
-    ok(c.toDataURL('image/jpeg', ql));
-  };
-  i.onerror = no;
-  i.src = URL.createObjectURL(f);
-});
-
-$('cs').onclick = async () => {
-  const t = $('ct').value.trim(), f = $('cf').files[0];
-  if (!t && !f) return;
-  $('cs').disabled = true;
-  try {
-    const img = f ? await shrink(f) : '';
-    await api('chat', { text: t, img: img });
-    $('ct').value = "";
-    $('cf').value = "";
-    $('cn').textContent = "";
-    await load();
-  } catch (e) {
-    alert(e.message);
-  }
-  $('cs').disabled = false;
-};
-
-$('cf').onchange = () => {
-  $('cn').textContent = $('cf').files[0] ? 'Foto lista ✔' : '';
-};
-
-$('chat').onclick = e => {
-  const id = e.target.dataset && e.target.dataset.id;
-  if (id) {
-    $('ov').querySelector('img').src = 'https://drive.google.com/thumbnail?id=' + id + '&sz=w1200';
-    $('ov').hidden = false;
-  }
-};
-
-$('ov').onclick = () => {
-  $('ov').hidden = true;
-  $('ov').querySelector('img').removeAttribute('src');
-};
-
-function pgr() {
-  const T0 = new Date();
-  T0.setHours(0, 0, 0, 0);
-  const todos = S.pgr || [], L = todos.filter(x => mine(x[1])), o = $('pg').querySelector('details'), op = o && o.open;
-  const st = x => x[3] === 'Cancelado' ? '✅ Acreditado / Cumplido' : dueD(x[2]) < T0 ? '⚠️ Fuera de plazo' : 'Compromiso Vigente';
-  const c = L.filter(x => x[3] === 'Cancelado').length;
-  let h = S.me.admin ? `<div class="mu" style="margin-bottom:6px">Total de compromisos: ${todos.filter(x => x[3] === 'Cancelado').length} cumplidos · ${todos.filter(x => x[3] !== 'Cancelado').length} vigentes</div>` : '';
-  h += L.length ? `<details${op ? ' open' : ''}><summary>${c} acreditados · ${L.length - c} vigentes</summary>` + L.map(x => `<div class="q">${esc(x[0])} · Quincena ${x[2]} · $1,000 · Límite: ${fmtS(dueD(x[2]))} · <b>${st(x)}</b></div>`).join('') + '</details>' : '<div class="mu">No hay documentos de compromiso generados para este usuario.</div>';
-  $('pg').innerHTML = h;
-}
-
-const gid = s => /^[\w-]+$/.test(s || '') ? s : '';
-const ext = p => {
-  if (!p.tel) return '';
-  const a = (S.acept || []).includes(p.tel);
-  const d = (S.dat || []).find(x => x.tel === p.tel);
-  const L = (id, t) => gid(id) ? ` · <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/${gid(id)}/view">${t}</a>` : '';
-  return (a ? ' ✔ Aceptó' : '') + (d ? ` · ${esc(d.nombre)}${L(d.f, 'INE frente')}${L(d.r, 'reverso')}` : '');
-};
-
-function adm() {
-  const el = $('adm');
-  el.hidden = !S.me.admin;
-  if (!S.me.admin || el.contains(document.activeElement)) return;
-  el.innerHTML = '<h2>⚙️ Panel Administrador</h2>'
-    + '<div class="row" style="background:var(--accent-indigo-subtle);padding:10px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(99,102,241,0.2)">'
-    + '<b style="color:var(--accent-indigo)">Acciones de Prueba / Demo:</b>'
-    + '<button class="s" id="test-reset-btn" style="background:#dc2626">⚠️ Limpiar Pagos de Prueba</button>'
-    + '</div>'
-    + '<div class="mu">Entregas realizadas (toca para marcar/desmarcar turno entregado):</div><div class="row">' + N.map(n => `<button class="s" data-d="${n}">${S.ent.has(n) ? '↩' : '📦'} Turno ${n}</button>`).join('') + '</div>'
-    + '<div class="mu" style="margin-top:10px">Integrantes y celulares (10 dígitos). El botón "Liberar" desvincula la sesión si cambiaron de teléfono:</div>'
-    + S.pers.map(p => `<div class="row"><b>${p.n}</b><input id="pn${p.n}" value="${esc(p.nombre)}" placeholder="Nombre"><input id="pt${p.n}" type="tel" value="${esc(p.tel || '')}" placeholder="Celular"><button class="s" data-s="${p.n}">Guardar</button>${ext(p)}${p.tel ? `<button class="s" style="background:#e11d48" data-r="${p.tel}">Liberar dispositivo</button>` : ''}</div>`).join('')
-    + '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes (nuevos dispositivos bloqueados):</div>' + ((S.pend || []).length ? S.pend.map(t => `<div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Permitir entrada</button></div>`).join('') : '<div class="mu">Ninguna.</div>');
-
-  $('test-reset-btn').onclick = async () => {
-    if (confirm('¿Deseas reiniciar las solicitudes, confirmaciones y pagos para volver a hacer pruebas desde cero?')) {
-      await act('test_reset', {});
-    }
-  };
-}
-
-$('adm').onclick = e => {
-  const d = e.target.dataset;
-  if (d.d) act('ent', { n: +d.d });
-  if (d.r) act('reset', { phone: d.r });
-  if (d.s) act('person', { n: +d.s, nombre: $('pn' + d.s).value, phone: $('pt' + d.s).value });
-};
-
-function checkIneStatus() {
-  const w = $('ine-alert');
-  if (!w) return;
-  if (S.me && S.me.acc && !S.me.hasIne && !S.me.admin) {
-    w.hidden = false;
-    $('app').insertBefore(w, $('app').children[1]);
-  } else {
-    w.hidden = true;
-  }
-}
-
-$('ine-upload-btn').onclick = () => {
-  $('lgt').innerHTML = '<h2>Subir Identificación Oficial (INE)</h2><div class="mu">Adjunta las fotos de tu INE para respaldar tu participación.</div>';
-  $('lgf').hidden = false;
-  $('fn').value = S.me && S.me.nombre ? S.me.nombre : '';
-  $('lgk1').hidden = true;
-  let saveRow = $('lg-save-row');
-  if (!saveRow) {
-    saveRow = document.createElement('div');
-    saveRow.id = 'lg-save-row';
-    saveRow.className = 'lgc';
-    saveRow.style.justifyContent = 'space-between';
-    saveRow.innerHTML = '<button id="lg-cancel-btn" style="background:#64748b">Cancelar</button><button id="lg-save-btn">Guardar INE</button>';
-    $('lg').querySelector('.lgb').appendChild(saveRow);
-    $('lg-cancel-btn').onclick = () => {
-      $('lg').hidden = true;
-      saveRow.remove();
-    };
-    $('lg-save-btn').onclick = async () => {
-      const a = $('f1').files[0], b = $('f2').files[0], fn = $('fn').value.trim();
-      if (!a && !b) {
-        alert('Por favor selecciona al menos una foto (frente o reverso).');
-        return;
-      }
-      $('lg-save-btn').disabled = true;
-      $('lg-save-btn').textContent = 'Subiendo…';
-      try {
-        const payload = { nombre: fn };
-        if (a) payload.f1 = await shrink(a, 1400, .7);
-        if (b) payload.f2 = await shrink(b, 1400, .7);
-        await api('upload_ine', payload);
-        $('lg').hidden = true;
-        saveRow.remove();
-        await load();
-      } catch (err) {
-        alert(err.message);
-      }
-      $('lg-save-btn').disabled = false;
-      $('lg-save-btn').textContent = 'Guardar INE';
-    };
-  }
-  $('lgk2').hidden = true;
-  $('lg').hidden = false;
-};
-
-$('lgk').onchange = async () => {
-  if (!$('lgk').checked) return;
-  try {
-    const d = { ver: CFG.ver, ua: navigator.userAgent };
-    if (!$('lgf').hidden) {
-      const n = $('fn').value.trim(), a = $('f1').files[0], b = $('f2').files[0];
-      if (n.split(/\s+/).length < 2) throw new Error('Escribe tu nombre completo.');
-      d.nombre = n;
-      if (a) d.f1 = await shrink(a, 1400, .7);
-      if (b) d.f2 = await shrink(b, 1400, .7);
-    }
-    await api('accept', d);
-    $('lg').hidden = true;
-    await load();
-  } catch (e) {
-    $('lgk').checked = false;
-    alert(e.message);
-  }
-};
-
-$('f1').onchange = $('f2').onchange = () => {
-  $('fs').textContent = ($('f1').files[0] ? 'Frente ✔ ' : '') + ($('f2').files[0] ? 'Reverso ✔' : '');
-};
-
-$('lgl').onclick = e => {
-  e.preventDefault();
-  openLegal(true);
-};
-
-$('lgx').onclick = () => {
-  $('lg').hidden = true;
-};
-
-function all() {
-  head();
-  grid();
-  pend();
-  mypay();
-  pgr();
-  chat();
-  adm();
-  checkIneStatus();
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
-}
-
-setInterval(() => {
-  if ((TOK || TEST_AS) && !document.hidden) load();
-}, 10000);
-
+​$('lb').onclick = async () => {
+$('le').textContent = '';
+$('lb').disabled = true;
+$('lb').textContent = 'Comprobando…';
+try {
+const j = await api('login', { phone: $('lp').value, pin: $('lpin').value });
+TOK = j.t;
+try { localStorage.setItem('tk', TOK); } catch (e) {}
 show();
+} catch (e) {
+if (e.message === 'NEED_PIN') {
+$('lpin').hidden = false;
+$('lpin').focus();
+$('le').textContent = 'Eres administrador: escribe tu PIN.';
+} else {
+$('le').textContent = e.message;
+}
+} finally {
+$('lb').disabled = false;
+$('lb').textContent = 'Entrar';
+}
+};
+​$('lgo').onclick = () => {
+if (confirm('¿Deseas cerrar tu sesión?')) {
+TOK = null;
+TEST_AS = '';
+localStorage.removeItem('test_as');
+try { localStorage.removeItem('tk'); } catch (e) {}
+show();
+}
+};
+​async function load() {
+try {
+const j = await api('state');
+if (!j.me.acc && !TEST_AS) {
+S = { me: j.me };
+openLegal(false);
+return;
+}
+S = j;
+S.pay = new Set(j.pay);
+S.req = new Set(j.req);
+S.con = new Set(j.con);
+S.ent = new Set(j.ent);
+​// Lectura protegida de cuentas
+S.cta = {};
+if (Array.isArray(j.cta)) {
+j.cta.forEach(x => { if (x && x[0] != null) S.cta[String(x[0])] = String(x[1] || ''); });
+} else if (j.cta && typeof j.cta === 'object') {
+Object.entries(j.cta).forEach(([k, v]) => { S.cta[String(k)] = String(v || ''); });
+}
+​S.nm = {};
+(j.pers || []).forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
+​(j.pers || []).forEach(p => {
+const opt = $('test-impersonate').querySelector(option[value="${p.n}"]);
+if (opt) opt.textContent = 👤 Turno ${p.n} (${p.nombre || 'Sin nombre'});
+});
+​all();
+} catch (e) {
+console.error('Error al cargar datos:', e);
+$('cur').textContent = "Error al conectar";
+$('dt').textContent = e.message;
+}
+}
+​const mine = n => (S.me && S.me.nums) ? S.me.nums.includes(n) : false;
+​function cur() {
+for (const n of N) {
+if (!S.ent.has(n)) return n;
+}
+return 0;
+}
+​function head() {
+const c = cur();
+if (!c) {
+$('cur').textContent = "Tanda completada 🎉";
+$('dt').textContent = "";
+$('cd').textContent = "";
+$('cd').className = '';
+$('acc-owner-lbl').textContent = "";
+$('acc').textContent = "Todos los turnos han sido completados con éxito.";
+$('acc-status-box').hidden = true;
+$('accE').hidden = true;
+$('my-acc-section').hidden = true;
+} else {
+const d = D[c - 1];
+$('cur').textContent = Número ${c} · ${S.nm[c] || 'Asignando'};
+$('dt').textContent = "Recibe $10,000 el " + fmt(d) + " · Aportaciones a más tardar el " + fmtS(dueD(c));
+const t = new Date();
+t.setHours(0, 0, 0, 0);
+const n = Math.round((d - t) / 864e5), el = $('cd');
+el.className = n <= 3 ? 'alert' : '';
+el.textContent = n > 1 ? (n <= 3 ? ¡Solo faltan ${n} días!  : Faltan ${n} días ) + "para la entrega" : n === 1 ? "¡Falta 1 día! Mañana se entrega" : n === 0 ? "¡Hoy es la entrega! Recuerda enviar tu aportación" : "Entrega en curso";
+​// Configuración de la cuenta bancaria del turno actual
+$('acc-owner-lbl').textContent = Beneficiario del turno: ${esc(S.nm[c] || 'Turno ' + c)};
+const a = S.cta[String(c)] || S.cta[c];
+const isReceiver = mine(c) || S.me.admin;
+​if (a) {
+$('acc').textContent = a;
+$('acc').style.color = "var(--tx)";
+$('acc').style.fontStyle = "normal";
+​if (isReceiver) {
+$('acc-status-box').hidden = false;
+$('acc-status-msg').innerHTML = <span style="color:var(--primary)">✅ Cuenta bancaria registrada y visible para todos los integrantes.</span>;
+$('acc-toggle-btn').hidden = false;
+$('accE').hidden = true;
+if (document.activeElement !== $('accT')) $('accT').value = a;
+} else {
+$('acc-status-box').hidden = true;
+$('accE').hidden = true;
+}
+} else {
+$('acc').textContent = "Aún no ha compartido sus datos bancarios.";
+$('acc').style.color = "var(--mu)";
+$('acc').style.fontStyle = "italic";
+​if (isReceiver) {
+$('acc-status-box').hidden = false;
+$('acc-status-msg').innerHTML = <span style="color:var(--accent-rose)">⚠️ Eres el receptor de este turno. Por favor agrega tu cuenta para que los demás puedan depositarte:</span>;
+$('acc-toggle-btn').hidden = true;
+$('accE').hidden = false;
+$('acc-cancel-btn').hidden = true;
+if (document.activeElement !== $('accT')) $('accT').value = "";
+} else {
+$('acc-status-box').hidden = true;
+$('accE').hidden = true;
+}
+}
+​// Sección para que cualquier participante guarde su cuenta por adelantado
+const myNums = S.me.nums || [];
+if (myNums.length > 0) {
+$('my-acc-section').hidden = false;
+const sel = $('my-acc-num');
+sel.innerHTML = myNums.map(num => <option value="${num}">Mi Turno ${num} (${S.nm[num] || 'Yo'})</option>).join('');
+updateMyAccText();
+} else {
+$('my-acc-section').hidden = true;
+}
+}
+​$('pb').style.width = ((S.pay.size || 0) / 110 * 100) + '%';
+$('pt').textContent = ${S.pay.size || 0} de 110 aportaciones cubiertas · ${S.ent.size || 0} de 11 entregados;
+​const nm = (S.me.nums || []).map(n => S.nm[n]);
+const rolTxt = S.me.admin ? '👑 Administrador' : (nm.length ? '👤 ' + nm[0] +  (Núm. ${S.me.nums.join(',')}) : '👤 Sin número asignado');
+$('hi').innerHTML = (TEST_AS ? <span class="badge-test" style="margin-right:6px">SIMULANDO</span> : '') + rolTxt;
+}
+​function updateMyAccText() {
+const selNum = $('my-acc-num').value;
+if (selNum) {
+const existing = S.cta[String(selNum)] || S.cta[selNum] || '';
+$('my-acc-text').value = existing;
+}
+}
+$('my-acc-num').onchange = updateMyAccText;
+​$('my-acc-toggle').onclick = () => {
+const b = $('my-acc-body');
+b.hidden = !b.hidden;
+$('my-acc-arrow').textContent = b.hidden ? '▼' : '▲';
+};
+​('my-acc-btn').onclick = async () => {
+const n = +('my-acc-num').value;
+const txt = $('my-acc-text').value.trim();
+if (!txt) {
+alert('Por favor escribe los datos de tu cuenta (banco, CLABE o tarjeta).');
+return;
+}
+$('my-acc-btn').disabled = true;
+$('my-acc-btn').textContent = 'Guardando…';
+await act('cta', { n: n, text: txt });
+$('my-acc-btn').disabled = false;
+$('my-acc-btn').textContent = 'Guardar mi cuenta';
+alert('✅ Tus datos bancarios quedaron guardados correctamente.');
+};
+​$('acc-toggle-btn').onclick = () => {
+('accE').hidden = !('accE').hidden;
+$('acc-cancel-btn').hidden = false;
+('acc-toggle-btn').hidden = !('accE').hidden;
+};
+​$('acc-cancel-btn').onclick = () => {
+$('accE').hidden = true;
+$('acc-toggle-btn').hidden = false;
+};
+​$('accB').onclick = async () => {
+const c = cur();
+const txt = $('accT').value.trim();
+if (!txt) {
+alert('Escribe los datos bancarios para recibir los depósitos.');
+return;
+}
+$('accB').disabled = true;
+$('accB').textContent = 'Guardando…';
+if (c) await act('cta', { n: c, text: txt });
+$('accB').disabled = false;
+$('accB').textContent = 'Guardar datos de cuenta';
+};
+​function grid() {
+const T0 = new Date();
+T0.setHours(0, 0, 0, 0);
+let h = '<tr><th class="n">Número</th>';
+for (const q of N) {
+h += <th>${q}<br><span class="mu" style="font-size:11px">${D[q - 1].getDate()}/${D[q - 1].getMonth() + 1}</span></th>;
+}
+h += '</tr>';
+const c = cur();
+for (const n of N) {
+h += <tr class="${n === c ? 'cur' : ''}"><th class="n">${n} · ${esc(S.nm[n] || '')}${S.ent.has(n) ? ' 📦' : ''}</th>;
+for (const q of N) {
+const k = n + '_' + q;
+h += <td class="${S.me.admin && q !== n ? 'ad' : ''}" data-k="${k}">${q === n ? '🎁' : S.pay.has(k) ? '✅' : S.req.has(k) ? '⏳' : dueD(q) < T0 ? '⚠️' : ''}</td>;
+}
+h += '</tr>';
+}
+$('g').innerHTML = h;
+}
+​$('g').onclick = e => {
+const k = e.target.dataset && e.target.dataset.k;
+if (k && S.me.admin && k.split('')[0] !== k.split('')[1]) act('pay', { k: k });
+};
+​function pend() {
+const G = {};
+[...S.req].filter(k => !S.pay.has(k)).forEach(k => {
+const [n, q] = k.split('_').map(Number);
+const g = S.nm[n] + '|' + q;
+(G[g] = G[g] || { name: S.nm[n], q: q, ns: [], ks: [] });
+G[g].ns.push(n);
+G[g].ks.push(k);
+});
+const L = Object.values(G);
+$('pend').innerHTML = L.length ? L.map(g => {
+const ok = g.ks.every(k => S.con.has(k)), ks = g.ks.join(',');
+let b = '';
+if (mine(g.q) && !ok) b += <button class="s" data-c="${ks}">Confirmo que lo recibí ($${g.ks.length * 1000})</button> ;
+if (S.me.admin) {
+b += <button class="s" data-ps="${ks}">Marcar acreditado${g.ks.length > 1 ? ' (todo)' : ''}</button> ;
+if (g.ks.length > 1) g.ks.forEach((k, i) => b += <button class="s" data-ps="${k}">Solo núm. ${g.ns[i]}</button> );
+}
+return <div class="q">${esc(g.name)} (núm. ${g.ns.join(' y ')}) → quincena ${g.q} · recibe ${esc(S.nm[g.q])} · $${g.ks.length * 1000}<br>${ok ? '✔ Receptor confirmó' : 'Esperando confirmación del receptor'}<br>${b}</div>;
+}).join('') : '<div class="mu">No hay solicitudes pendientes de revisión.</div>';
+}
+​$('pend').onclick = e => {
+const d = e.target.dataset;
+if (d.c) act('con', { ks: d.c.split(',') });
+if (d.ps) act('payset', { ks: d.ps.split(',') });
+};
+​function mypay() {
+const M = N.filter(mine);
+if (!M.length) {
+$('mp').innerHTML = '<div class="mu">El perfil seleccionado no tiene número asignado en la tanda (puedes elegir otro turno en la barra de prueba arriba).</div>';
+return;
+}
+​const currentTurn = cur();
+if (!currentTurn) {
+$('mp').innerHTML = '<div class="q">✅ ¡Felicidades! Todos los turnos de la tanda se han completado.</div>';
+return;
+}
+​let targetQ = null;
+let isAtrasado = false;
+​for (let q = 1; q < currentTurn; q++) {
+const hasUnpaid = M.some(n => n !== q && !S.pay.has(n + '_' + q));
+if (hasUnpaid) {
+targetQ = q;
+isAtrasado = true;
+break;
+}
+}
+​if (!targetQ) {
+const hasUnpaidCurrent = M.some(n => n !== currentTurn && !S.pay.has(n + '_' + currentTurn));
+if (hasUnpaidCurrent) {
+targetQ = currentTurn;
+}
+}
+​if (!targetQ) {
+$('mp').innerHTML = <div class="q"> ✅ <b>Estás al corriente con tus aportaciones.</b><br> <span class="mu">La siguiente quincena (Turno ${currentTurn + 1}) se habilitará automáticamente al completarse la entrega del Turno ${currentTurn}.</span> </div>;
+return;
+}
+​const due = M.filter(n => n !== targetQ && !S.pay.has(n + '' + targetQ));
+const todo = due.filter(n => !S.req.has(n + '' + targetQ));
+​const avisoAtrasado = isAtrasado
+? <div style="display:inline-block;background:var(--accent-rose-subtle);color:var(--accent-rose);padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;margin-bottom:6px">⚠️ APORTACIÓN PENDIENTE ANTERIOR</div><br>
+: <div style="display:inline-block;background:var(--primary-subtle);color:var(--primary);padding:3px 8px;border-radius:6px;font-weight:700;font-size:12px;margin-bottom:6px">APORTACIÓN DEL TURNO ACTUAL</div><br>;
+​$('mp').innerHTML = <div class="q"> ${avisoAtrasado} <b>Quincena ${targetQ}</b> (${D[targetQ - 1].getDate()}/${D[targetQ - 1].getMonth() + 1})<br> Depositar <b>$${due.length * 1000}</b> a <b>${esc(S.nm[targetQ])}</b><br> Fecha límite: <b>${fmtS(dueD(targetQ))}</b> ${due.length > 1 ? 
+Cubre tus números ${due.join(' y ')} en una sola transferencia:
+Número asignado: ${due[0]}}<br> ${todo.length ? <button class="s" data-q="${targetQ}" style="margin-top:8px">Ya envié mi comprobante · Solicitar revisión</button> : '⏳ Pendiente de revisión'} </div>;
+}
+​$('mp').onclick = e => {
+const q = e.target.dataset && e.target.dataset.q;
+if (q) act('req', { q: +q });
+};
+​function chat() {
+if (!S.chat || !S.chat.length) return;
+const l = S.chat[S.chat.length - 1].ts + ':' + S.chat.length;
+if (l === lastChat) return;
+lastChat = l;
+const el = ('chat'), bot = el.scrollTop + el.clientHeight >= el.scrollHeight - 40;
+el.innerHTML = '';
+S.chat.forEach(m => {
+const d = document.createElement('div');
+d.className = 'm';
+const b = document.createElement('b');
+b.textContent = m.name + ' · ' + new Date(m.ts).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+d.append(b);
+if (m.text) {
+const p = document.createElement('div');
+p.textContent = m.text;
+d.append(p);
+}
+if (m.img && /^[\w-]+/.test(m.img)) {
+const i = document.createElement('img');
+i.src = 'https://drive.google.com/thumbnail?id=' + m.img + '&sz=w400';
+i.dataset.id = m.img;
+d.append(i);
+}
+el.append(d);
+});
+if (bot) el.scrollTop = el.scrollHeight;
+}
+​const shrink = (f, mx = 800, ql = .5) => new Promise((ok, no) => {
+const i = new Image();
+i.onload = () => {
+const k = Math.min(1, mx / Math.max(i.width, i.height));
+const c = document.createElement('canvas');
+c.width = i.width * k;
+c.height = i.height * k;
+c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+ok(c.toDataURL('image/jpeg', ql));
+};
+i.onerror = no;
+i.src = URL.createObjectURL(f);
+});
+​$('cs').onclick = async () => {
+const t = $('ct').value.trim(), f = $('cf').files[0];
+if (!t && !f) return;
+$('cs').disabled = true;
+try {
+const img = f ? await shrink(f) : '';
+await api('chat', { text: t, img: img });
+$('ct').value = "";
+$('cf').value = "";
+$('cn').textContent = "";
+await load();
+} catch (e) {
+alert(e.message);
+}
+$('cs').disabled = false;
+};
+​$('cf').onchange = () => {
+$('cn').textContent = $('cf').files[0] ? 'Foto lista ✔' : '';
+};
+​$('chat').onclick = e => {
+const id = e.target.dataset && e.target.dataset.id;
+if (id) {
+$('ov').querySelector('img').src = 'https://drive.google.com/thumbnail?id=' + id + '&sz=w1200';
+$('ov').hidden = false;
+}
+};
+​$('ov').onclick = () => {
+$('ov').hidden = true;
+$('ov').querySelector('img').removeAttribute('src');
+};
+​function pgr() {
+const T0 = new Date();
+T0.setHours(0, 0, 0, 0);
+const todos = S.pgr || [], L = todos.filter(x => mine(x[1])), o = $('pg').querySelector('details'), op = o && o.open;
+const st = x => x[3] === 'Cancelado' ? '✅ Acreditado / Cumplido' : dueD(x[2]) < T0 ? '⚠️ Fuera de plazo' : 'Compromiso Vigente';
+const c = L.filter(x => x[3] === 'Cancelado').length;
+let h = S.me.admin ? <div class="mu" style="margin-bottom:6px">Total de compromisos: ${todos.filter(x => x[3] === 'Cancelado').length} cumplidos · ${todos.filter(x => x[3] !== 'Cancelado').length} vigentes</div> : '';
+h += L.length ? <details${op ? ' open':''}><summary>${c} acreditados · ${L.length - c} vigentes</summary> + L.map(x => <div class="q">${esc(x[0])} · Quincena ${x[2]} · $1,000 · Límite: ${fmtS(dueD(x[2]))} · <b>${st(x)}</b></div>).join('') + '</details>' : '<div class="mu">No hay documentos de compromiso generados para este usuario.</div>';
+$('pg').innerHTML = h;
+}
+​const gid = s => /^[\w-]+$/.test(s || '') ? s : '';
+const ext = p => {
+if (!p.tel) return '';
+const a = (S.acept || []).includes(p.tel);
+const d = (S.dat || []).find(x => x.tel === p.tel);
+const L = (id, t) => gid(id) ?  · <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/${gid(id)}/view">${t}</a> : '';
+return (a ? ' ✔ Aceptó' : '') + (d ?  · ${esc(d.nombre)}${L(d.f, 'INE frente')}${L(d.r, 'reverso')} : '');
+};
+​function adm() {
+const el = $('adm');
+el.hidden = !S.me.admin;
+if (!S.me.admin || el.contains(document.activeElement)) return;
+el.innerHTML = '<h2>⚙️ Panel Administrador</h2>'
++ '<div class="row" style="background:var(--accent-indigo-subtle);padding:10px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(99,102,241,0.2)">'
++ '<b style="color:var(--accent-indigo)">Acciones de Prueba / Demo:</b>'
++ '<button class="s" id="test-reset-btn" style="background:#dc2626">⚠️ Limpiar Pagos de Prueba</button>'
++ '</div>'
++ '<div class="mu">Entregas realizadas (toca para marcar/desmarcar turno entregado):</div><div class="row">' + N.map(n => <button class="s" data-d="${n}">${S.ent.has(n) ? '↩' : '📦'} Turno ${n}</button>).join('') + '</div>'
++ '<div class="mu" style="margin-top:10px">Integrantes y celulares (10 dígitos). El botón "Liberar" desvincula la sesión si cambiaron de teléfono:</div>'
++ S.pers.map(p => <div class="row"><b>${p.n}</b><input id="pn${p.n}" value="${esc(p.nombre)}" placeholder="Nombre"><input id="pt${p.n}" type="tel" value="${esc(p.tel || '')}" placeholder="Celular"><button class="s" data-s="${p.n}">Guardar</button>${ext(p)}${p.tel ? <button class="s" style="background:#e11d48" data-r="${p.tel}">Liberar dispositivo</button> : ''}</div>).join('')
++ '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes (nuevos dispositivos bloqueados):</div>' + ((S.pend || []).length ? S.pend.map(t => <div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Permitir entrada</button></div>).join('') : '<div class="mu">Ninguna.</div>');
+​$('test-reset-btn').onclick = async () => {
+if (confirm('¿Deseas reiniciar las solicitudes, confirmaciones y pagos para volver a hacer pruebas desde cero?')) {
+await act('test_reset', {});
+}
+};
+}
+​$('adm').onclick = e => {
+const d = e.target.dataset;
+if (d.d) act('ent', { n: +d.d });
+if (d.r) act('reset', { phone: d.r });
+if (d.s) act('person', { n: +d.s, nombre: $('pn' + d.s).value, phone: $('pt' + d.s).value });
+};
+​function checkIneStatus() {
+const w = $('ine-alert');
+if (!w) return;
+if (sessionStorage.getItem('dismiss_ine') === '1') {
+w.hidden = true;
+return;
+}
+if (S.me && S.me.acc && !S.me.hasIne && !S.me.admin) {
+w.hidden = false;
+$('app').insertBefore(w, $('app').children[1]);
+} else {
+w.hidden = true;
+}
+}
+​$('ine-dismiss-btn').onclick = () => {
+sessionStorage.setItem('dismiss_ine', '1');
+$('ine-alert').hidden = true;
+};
+​$('ine-upload-btn').onclick = () => {
+$('lgt').innerHTML = '<h2>Subir Identificación Oficial (INE)</h2><div class="mu">Adjunta las fotos de tu INE para respaldar tu participación.</div>';
+$('lgf').hidden = false;
+$('fn').value = S.me && S.me.nombre ? S.me.nombre : '';
+$('lgk1').hidden = true;
+let saveRow = $('lg-save-row');
+if (!saveRow) {
+saveRow = document.createElement('div');
+saveRow.id = 'lg-save-row';
+saveRow.className = 'lgc';
+saveRow.style.justifyContent = 'space-between';
+saveRow.innerHTML = '<button id="lg-cancel-btn" style="background:#64748b">Cancelar</button><button id="lg-save-btn">Guardar INE</button>';
+$('lg').querySelector('.lgb').appendChild(saveRow);
+$('lg-cancel-btn').onclick = () => {
+$('lg').hidden = true;
+saveRow.remove();
+};
+$('lg-save-btn').onclick = async () => {
+const a = $('f1').files[0], b = $('f2').files[0], fn = $('fn').value.trim();
+if (!a && !b) {
+alert('Por favor selecciona al menos una foto (frente o reverso).');
+return;
+}
+$('lg-save-btn').disabled = true;
+$('lg-save-btn').textContent = 'Subiendo…';
+try {
+const payload = { nombre: fn };
+if (a) payload.f1 = await shrink(a, 1400, .7);
+if (b) payload.f2 = await shrink(b, 1400, .7);
+await api('upload_ine', payload);
+$('lg').hidden = true;
+saveRow.remove();
+await load();
+} catch (err) {
+alert(err.message);
+}
+$('lg-save-btn').disabled = false;
+$('lg-save-btn').textContent = 'Guardar INE';
+};
+}
+$('lgk2').hidden = true;
+$('lg').hidden = false;
+};
+​('lgk').onchange = async () => {
+if (!('lgk').checked) return;
+try {
+const d = { ver: CFG.ver, ua: navigator.userAgent };
+if (!$('lgf').hidden) {
+const n = $('fn').value.trim(), a = $('f1').files[0], b = $('f2').files[0];
+if (n.split(/\s+/).length < 2) throw new Error('Escribe tu nombre completo.');
+d.nombre = n;
+if (a) d.f1 = await shrink(a, 1400, .7);
+if (b) d.f2 = await shrink(b, 1400, .7);
+}
+await api('accept', d);
+$('lg').hidden = true;
+await load();
+} catch (e) {
+$('lgk').checked = false;
+alert(e.message);
+}
+};
+​$('f1').onchange = ('f2').onchange = () => {
+$('fs').textContent = ($('f1').files[0] ? 'Frente ✔ ' : '') + (('f2').files[0] ? 'Reverso ✔' : '');
+};
+​$('lgl').onclick = e => {
+e.preventDefault();
+openLegal(true);
+};
+​$('lgx').onclick = () => {
+$('lg').hidden = true;
+};
+​function all() {
+head();
+grid();
+pend();
+mypay();
+pgr();
+chat();
+adm();
+checkIneStatus();
+}
+​if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+​setInterval(() => {
+if ((TOK || TEST_AS) && !document.hidden) load();
+}, 10000);
+​show();
 </script>
 </body>
 </html>
