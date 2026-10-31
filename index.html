@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tanda 2026–2027</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Tanda">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --tx: #0f172a;
+      --mu: #64748b;
+      --ln: #e2e8f0;
+      
+      /* Paleta colorida por módulos */
+      --primary: #059669;
+      --primary-hover: #047857;
+      --primary-subtle: #ecfdf5;
+      
+      --accent-blue: #0284c7;
+      --accent-blue-subtle: #f0f9ff;
+      --accent-blue-border: #bae6fd;
+      
+      --accent-purple: #7c3aed;
+      --accent-purple-subtle: #f5f3ff;
+      --accent-purple-border: #ddd6fe;
+
+      --accent-pink: #db2777;
+      --accent-pink-subtle: #fdf2f8;
+      
+      --accent-indigo: #4f46e5;
+      --accent-indigo-subtle: #eef2ff;
+      
+      --wa: #ea580c;
+      --wb: #fff7ed;
+      
+      --danger: #dc2626;
+      --danger-subtle: #fef2f2;
+      
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1315;
+        --card: #141e21;
+        --tx: #f1f5f9;
+        --mu: #94a3b8;
+        --ln: #243438;
+        
+        --primary: #10b981;
+        --primary-hover: #34d399;
+        --primary-subtle: #062d23;
+        
+        --accent-blue: #38bdf8;
+        --accent-blue-subtle: #082f49;
+        --accent-blue-border: #0369a1;
+        
+        --accent-purple: #a78bfa;
+        --accent-purple-subtle: #2e1065;
+        --accent-purple-border: #5b21b6;
+
+        --accent-pink: #f472b6;
+        --accent-pink-subtle: #500724;
+        
+        --accent-indigo: #818cf8;
+        --accent-indigo-subtle: #1e1b4b;
+
+        --wa: #fb923c;
+        --wb: #431407;
+        
+        --danger: #f87171;
+        --danger-subtle: #450a0a;
+        --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--tx);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 14.5px;
+      line-height: 1.5;
+      padding: max(14px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom));
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Banner Superior de Instalación */
+    #install-top-banner {
+      background: linear-gradient(135deg, #059669, #0284c7);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: fadeIn .4s ease-out;
+    }
+    #install-top-banner[hidden] { display: none !important; }
+    #install-top-banner .ib-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #install-top-banner .ib-icon {
+      font-size: 26px;
+      background: rgba(255, 255, 255, 0.2);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #install-top-banner .ib-text b {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    #install-top-banner .ib-text span {
+      font-size: 12px;
+      opacity: 0.92;
+    }
+    #install-top-banner .ib-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    #install-top-banner button.btn-banner-install {
+      background: #ffffff;
+      color: #059669;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 0;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    #install-top-banner button.btn-banner-close {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      border: 0;
+      font-size: 18px;
+      padding: 6px;
+      cursor: pointer;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--ln);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    /* Colores por módulo */
+    .card-cur {
+      border-top: 5px solid var(--primary);
+      background: linear-gradient(180deg, var(--primary-subtle) 0%, var(--card) 40%);
+    }
+    .card-acc {
+      border-top: 5px solid var(--accent-blue);
+      background: linear-gradient(180deg, var(--accent-blue-subtle) 0%, var(--card) 35%);
+    }
+    .card-grid {
+      border-top: 5px solid var(--accent-purple);
+    }
+    .card-mypay {
+      border-top: 5px solid var(--accent-pink);
+      background: linear-gradient(180deg, var(--accent-pink-subtle) 0%, var(--card) 35%);
+    }
+    .card-docs {
+      border-top: 5px solid #8b5cf6;
+    }
+    .card-pend {
+      border-top: 5px solid var(--wa);
+    }
+    .card-chat {
+      border-top: 5px solid var(--accent-indigo);
+    }
+    .card-adm {
+      border-top: 5px solid #0d9488;
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08) 0%, var(--card) 30%);
+    }
+
+    /* Banner INE opcional pendiente */
+    #ine-alert {
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px -4px rgba(225, 29, 72, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeIn .3s ease-in;
+    }
+    #ine-alert[hidden] { display: none !important; }
+    #ine-alert h3 { margin: 0; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    #ine-alert p { margin: 0; font-size: 13px; opacity: 0.95; }
+    #ine-alert .ine-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    #ine-alert button {
+      background: #fff;
+      color: #e11d48;
+      border: 0;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    #ine-alert button.btn-later {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .big {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 6px 0;
+      letter-spacing: -0.02em;
+    }
+    .mu {
+      color: var(--mu);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    #cd {
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-top: 10px;
+      background: var(--bg);
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid var(--ln);
+    }
+    #cd.alert {
+      background: var(--wb);
+      color: var(--wa);
+      border: 2px solid var(--wa);
+      font-size: 16px;
+      font-weight: 700;
+      animation: pulse 1.4s infinite alternate;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.015); box-shadow: 0 0 16px rgba(234, 88, 12, 0.2); }
+    }
+
+    .bar {
+      height: 12px;
+      background: var(--ln);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 6px;
+    }
+    .bar i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      border-radius: 999px;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .sc { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-md); border: 1px solid var(--ln); margin-top: 10px; }
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 12.5px;
+      min-width: 600px;
+      width: 100%;
+      background: var(--card);
+    }
+    th, td {
+      border-bottom: 1px solid var(--ln);
+      border-right: 1px solid var(--ln);
+      padding: 7px 6px;
+      text-align: center;
+      min-width: 38px;
+    }
+    th {
+      background: var(--bg);
+      font-weight: 600;
+      color: var(--tx);
+    }
+    th.n {
+      text-align: left;
+      min-width: 150px;
+      position: sticky;
+      left: 0;
+      background: var(--bg);
+      z-index: 1;
+      font-weight: 700;
+    }
+    tr:last-child th, tr:last-child td { border-bottom: none; }
+    th:last-child, td:last-child { border-right: none; }
+    tr.cur td, tr.cur th { background: var(--wb); }
+    td.ad { cursor: pointer; transition: background .15s; }
+    td.ad:hover { background: rgba(5, 150, 105, 0.15); }
+
+    select, input, textarea, button {
+      font: inherit;
+      color: var(--tx);
+      background: var(--card);
+      border: 1.5px solid var(--ln);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    }
+    button:active { transform: scale(0.97); }
+    button.s {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+    }
+
+    textarea { width: 100%; resize: vertical; }
+    .row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 8px 0;
+    }
+    .row > input { flex: 1; min-width: 0; }
+
+    #chat {
+      max-height: 340px;
+      overflow-y: auto;
+      border: 1px solid var(--ln);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .m {
+      background: var(--card);
+      border: 1px solid var(--ln);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .m b {
+      font-size: 11.5px;
+      color: var(--accent-indigo);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .m img {
+      max-width: 220px;
+      border-radius: var(--radius-sm);
+      display: block;
+      margin-top: 6px;
+      cursor: zoom-in;
+      border: 1px solid var(--ln);
+    }
+
+    .q {
+      border-top: 1px solid var(--ln);
+      padding: 10px 0;
+      font-size: 13.5px;
+    }
+    .er {
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 16px;
+    }
+    #ov[hidden] { display: none !important; }
+    #ov img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+    }
+    #ov b {
+      position: absolute;
+      top: max(16px, env(safe-area-inset-top));
+      right: 20px;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* Modales */
+    #lg, #ine-modal, #help-modal, #install-guide-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+    #lg[hidden], #ine-modal[hidden], #help-modal[hidden], #install-guide-modal[hidden] { display: none !important; }
+    
+    .lgb {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      max-width: 660px;
+      width: 100%;
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+      overflow: hidden;
+      animation: modalPop .25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    #lgt, #help-content, #guide-content {
+      overflow-y: auto;
+      padding: 20px 24px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    #lgt h2, #help-content h2, #guide-content h2 { font-size: 19px; margin: 18px 0 6px; }
+    #lgt h3, #help-content h3, #guide-content h3 { font-size: 15px; margin: 14px 0 4px; color: var(--primary); }
+    #lgt p, #help-content p, #guide-content p { margin: 6px 0; }
+
+    .lgc {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px 24px;
+      border-top: 1px solid var(--ln);
+      background: var(--bg);
+      font-size: 13.5px;
+    }
+    .lgc input {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .fl {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Caja de Cuenta Bancaria */
+    .acc-box {
+      background: var(--bg);
+      border: 1.5px dashed var(--accent-blue-border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-top: 10px;
+      font-family: inherit;
+    }
+
+    /* Botón flotante de ayuda */
+    #fab-help {
+      position: fixed;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+      cursor: pointer;
+      z-index: 80;
+      border: 2px solid #fff;
+      transition: transform 0.2s;
+    }
+    #fab-help:hover { transform: scale(1.08); }
+    #fab-help[hidden] { display: none !important; }
+
+    /* Indicadores de estatus en Compromisos de ahorro */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .badge-ok { background: #dcfce7; color: #15803d; }
+    .badge-warn { background: #fee2e2; color: #b91c1c; }
+    .badge-info { background: #e0f2fe; color: #0369a1; }
+  </style>
+</head>
+<body>
+
+<!-- Banner superior de instalación sugerida -->
+<div id="install-top-banner">
+  <div class="ib-info">
+    <div class="ib-icon">📲</div>
+    <div class="ib-text">
+      <b>Instala la App de la Tanda</b>
+      <span>Úsala con acceso directo desde tu pantalla sin abrir el navegador.</span>
+    </div>
+  </div>
+  <div class="ib-actions">
+    <button id="btn-banner-install" class="btn-banner-install">Instalar</button>
+    <button id="btn-banner-dismiss" class="btn-banner-close" title="Cerrar aviso">✕</button>
+  </div>
+</div>
+
+<!-- Login -->
+<div id="login" class="card card-cur">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+    <h2 style="font-size:22px;margin:0">💰 Entrar a la tanda</h2>
+    <!-- Botón directo de instalación en login -->
+    <button id="btn-login-install" class="s" style="background:linear-gradient(135deg,var(--primary),var(--primary-hover));display:inline-flex;align-items:center;gap:6px">
+      <span>📲</span> Instalar App
+    </button>
+  </div>
+  
+  <div class="mu" style="margin-bottom:14px">Escribe tu número de celular (10 dígitos). Solo se pide la primera vez en este dispositivo.</div>
+  <div class="row">
+    <input id="lp" type="tel" inputmode="numeric" placeholder="Tu celular (ej. 2281234567)">
+    <input id="lpin" type="password" inputmode="numeric" placeholder="PIN de administrador" hidden>
+    <button id="lb">Entrar</button>
+  </div>
+  <div class="er" id="le"></div>
+
+  <!-- Instrucciones breves y esenciales en el login -->
+  <div style="margin-top:18px;background:var(--primary-subtle);border:1px solid rgba(16,185,129,0.3);border-radius:var(--radius-md);padding:14px;">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:6px;font-size:13.5px">📌 ¿Cómo funciona la app?</div>
+    <ul style="margin:0;padding-left:18px;font-size:12.5px;color:var(--tx);display:flex;flex-direction:column;gap:5px;">
+      <li><b>Acceso fácil:</b> Solo necesitas tu número de 10 dígitos registrado, sin contraseñas complicadas.</li>
+      <li><b>Aportación quincenal:</b> Cada turno aporta <b>$1,000</b> a más tardar los días <b>2 y 17</b> de cada mes.</li>
+      <li><b>Comprobantes rápidos:</b> Realiza tu transferencia a la cuenta activa, sube la foto en el chat y presiona "Solicitar revisión".</li>
+      <li><b>Seguridad:</b> Todos los pagos se respaldan de mutuo acuerdo y se confirman electrónicamente.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Aplicación Principal -->
+<div id="app" hidden>
+  
+  <!-- Banner de advertencia si no ha subido su INE -->
+  <div id="ine-alert" hidden>
+    <div>
+      <h3>⚠️ Respaldo de Identificación (INE) pendiente</h3>
+      <p>Tu registro y aceptación están completos, pero se requiere subir una fotografía clara de tu credencial INE (frente y reverso) como respaldo formal del grupo.</p>
+    </div>
+    <div class="ine-actions">
+      <button id="btn-open-ine">📷 Subir fotos de mi INE</button>
+      <button id="btn-later-ine" class="btn-later">Recordar más tarde</button>
+    </div>
+  </div>
+
+  <!-- Tarjeta 1: Turno Actual -->
+  <div class="card card-cur">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <h1>Tanda · Turno Actual</h1>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <!-- Botón de instalación en la cabecera -->
+        <button id="btn-top-install" class="s" style="background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-weight:700;display:inline-flex;align-items:center;gap:4px">
+          <span>📲</span> Instalar App
+        </button>
+        <!-- Botón de ayuda en la cabecera -->
+        <button id="top-help-btn" class="s" style="background:var(--accent-blue-subtle);color:var(--accent-blue);border:1px solid var(--accent-blue);box-shadow:none;display:inline-flex;align-items:center;gap:4px;font-weight:700">
+          <span>❓</span> Instrucciones
+        </button>
+        <button class="s" id="lgo" style="background:transparent;color:var(--mu);border:1px solid var(--ln);box-shadow:none">Cerrar sesión</button>
+      </div>
+    </div>
+    
+    <div class="big" id="cur">Cargando…</div>
+    <div class="mu" id="dt"></div>
+    <div id="cd"></div>
+    
+    <div class="bar"><i id="pb" style="width:0"></i></div>
+    <div class="mu" id="pt" style="font-weight:600"></div>
+    <div class="mu" id="hi" style="margin-top:4px"></div>
+  </div>
+
+  <!-- Tarjeta 2: Cuenta bancaria -->
+  <div class="card card-acc">
+    <h2>💳 Cuenta para depositar al turno actual</h2>
+    <div class="acc-box" id="acc" style="white-space:pre-wrap">—</div>
+    
+    <div id="accE" style="margin-top:12px" hidden>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span class="mu" style="font-weight:600" id="accStatus">Configura o actualiza tu cuenta bancaria:</span>
+        <button id="btn-toggle-acc-edit" class="s" style="background:transparent;color:var(--accent-blue);border:1px solid var(--accent-blue-border);box-shadow:none" hidden>Modificar</button>
+      </div>
+      <div id="accFields">
+        <textarea id="accT" rows="3" placeholder="Banco, CLABE / Número de tarjeta, Titular de la cuenta"></textarea>
+        <div style="margin-top:8px">
+          <button id="accB">Guardar datos bancarios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjeta 3: Avance de pagos -->
+  <div class="card card-grid">
+    <h2>📊 Avance general de pagos</h2>
+    <div class="mu">Fila = número que aporta · Columna = quincena. <br>✅ Pagado · ⏳ En revisión · ⚠️ Fuera de plazo · 🎁 Recibe el turno</div>
+    <div class="sc"><table id="g"></table></div>
+  </div>
+
+  <!-- Tarjeta 4: Mi pago -->
+  <div class="card card-mypay">
+    <h2>💸 Mi aportación correspondiente</h2>
+    <div id="mp"></div>
+    <div class="mu" style="margin-top:8px">Primero realiza tu transferencia y sube el comprobante en el chat; después presiona <b>Solicitar revisión</b>. Solo se habilita la quincena del turno actual o aportaciones que tengas atrasadas.</div>
+  </div>
+
+  <!-- Tarjeta 5: Comprobantes de Compromiso de Ahorro -->
+  <div class="card card-docs">
+    <h2>📋 Comprobantes de Compromiso de Ahorro</h2>
+    <div id="pg"></div>
+    <div class="mu" style="margin-top:8px">Acreditaciones electrónicas que avalan la aportación voluntaria. Se validan automáticamente al confirmarse la recepción.</div>
+  </div>
+
+  <!-- Tarjeta 6: Pagos por revisar -->
+  <div class="card card-pend">
+    <h2>⏳ Aportaciones por confirmar</h2>
+    <div id="pend"></div>
+  </div>
+
+  <!-- Tarjeta 7: Chat y comprobantes -->
+  <div class="card card-chat">
+    <h2>💬 Chat y comprobantes de depósito</h2>
+    <div id="chat"></div>
+    <div class="row">
+      <input id="ct" placeholder="Escribe un mensaje aquí…">
+      <button id="cs">Enviar</button>
+    </div>
+    <div class="row">
+      <label class="fl" style="background:var(--accent-indigo)">
+        📷 Adjuntar comprobante de la galería
+        <input type="file" id="cf" accept="image/*" hidden>
+      </label>
+      <span class="mu" id="cn"></span>
+    </div>
+  </div>
+
+  <!-- Tarjeta 8: Administrador -->
+  <div class="card card-adm" id="adm" hidden></div>
+
+  <div class="mu" style="text-align:center;margin:14px 0 24px">
+    <a href="#" id="lgl" style="color:var(--primary);text-decoration:underline">Aviso de privacidad y compromiso de ahorro</a>
+  </div>
+</div>
+
+<!-- Botón Flotante de Ayuda -->
+<div id="fab-help" title="Ayuda e Instrucciones" hidden>❓</div>
+
+<!-- Visualizador de fotos en grande -->
+<div id="ov" hidden>
+  <b>✕</b>
+  <img alt="Comprobante en grande">
+</div>
+
+<!-- Modal de Términos Legales (Obligatorio la 1ra vez) -->
+<div id="lg" hidden>
+  <div class="lgb">
+    <div id="lgt"></div>
+    <div id="lgf" style="padding:0 24px 12px">
+      <div style="font-weight:700;margin-bottom:6px">Tus datos para el compromiso:</div>
+      <input id="fn" placeholder="Nombre completo (como aparece en tu INE)" style="width:100%;margin-bottom:10px">
+      <div class="mu" style="margin-bottom:8px">Fotografía de tu INE (opcional en este paso, puedes subirla después):</div>
+      <div class="row">
+        <label class="fl">📷 Frente<input type="file" id="f1" accept="image/*" hidden></label>
+        <label class="fl">📷 Reverso<input type="file" id="f2" accept="image/*" hidden></label>
+        <span class="mu" id="fs"></span>
+      </div>
+    </div>
+    <label class="lgc" id="lgk1">
+      <input type="checkbox" id="lgk">
+      <span>He leído y acepto el Aviso de Privacidad y el Compromiso de Ahorro Mutuo, reconozco la generación de mis comprobantes electrónicos de aportación y me obligo a cubrir todas mis aportaciones hasta el turno 11.</span>
+    </label>
+    <div class="lgc" id="lgk2" hidden style="justify-content:flex-end">
+      <button id="lgx" style="background:var(--mu);border-radius:999px">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal dedicado para subir INE posteriormente -->
+<div id="ine-modal" hidden>
+  <div class="lgb" style="max-width:500px">
+    <div style="padding:20px 24px 10px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;font-size:17px">📷 Subir fotografía de tu INE</h3>
+      <button id="btn-close-ine" style="background:transparent;color:var(--mu);border:0;font-size:22px;cursor:pointer;padding:0">✕</button>
+    </div>
+    <div style="padding:20px 24px">
+      <div class="mu" style="margin-bottom:14px">Por transparencia y respaldo del grupo, adjunta una foto legible de tu credencial (frente y reverso). Se guardan de manera privada en Drive.</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <label class="fl">📷 Seleccionar Frente<input type="file" id="modal-ine-f1" accept="image/*" hidden></label>
+          <span class="mu" id="modal-ine-s1">Sin archivo</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <label class="fl">📷 Seleccionar Reverso<input type="file" id="modal-ine-f2" accept="image/*" hidden></label>
+          <span class="mu" id="modal-ine-s2">Sin archivo</span>
+        </div>
+      </div>
+      <div class="er" id="ine-modal-error"></div>
+    </div>
+    <div class="lgc" style="justify-content:flex-end;gap:8px">
+      <button id="btn-cancel-ine" style="background:transparent;color:var(--mu);border:1px solid var(--ln)">Cancelar</button>
+      <button id="btn-save-ine">Guardar fotos</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal del Centro de Instrucciones y Ayuda -->
+<div id="help-modal" hidden>
+  <div class="lgb" style="max-width:640px">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;font-size:18px;display:flex;align-items:center;gap:8px">❓ Guía de Uso de la Tanda</h3>
+      <button id="help-close-x" style="background:transparent;color:var(--mu);border:0;font-size:22px;cursor:pointer">✕</button>
+    </div>
+    <div id="help-content">
+      <h3>1. ¿Cómo realizar mi aportación quincenal?</h3>
+      <p>Revisa la sección <b>"Cuenta para depositar al turno actual"</b>. Copia los datos bancarios del titular y realiza tu transferencia por <b>$1,000</b> (o el múltiplo si tienes más números).</p>
+
+      <h3>2. ¿Cómo reportar mi comprobante?</h3>
+      <p>Una vez hecha tu transferencia:
+      <br>a) Ve a la sección <b>"Chat y comprobantes"</b> y adjunta la foto de tu comprobante.
+      <br>b) En la tarjeta <b>"Mi aportación correspondiente"</b>, presiona el botón <b>"Ya envié mi comprobante · Solicitar revisión"</b>.</p>
+
+      <h3>3. ¿Cuándo me toca recibir mi turno?</h3>
+      <p>Cuando llegue tu fecha de entrega, los integrantes te transferirán a ti. Recuerda ingresar previamente tus datos bancarios en el recuadro azul para que todos sepan dónde depositarte. Al recibir cada pago, confírmalo en <b>"Aportaciones por confirmar"</b>.</p>
+
+      <h3>4. Fechas clave</h3>
+      <p>Las quincenas se entregan los días <b>1 y 16 de cada mes</b>. La fecha límite de pago es a más tardar los días <b>2 y 17</b>.</p>
+
+      <h3>5. Instalación de la Aplicación</h3>
+      <p>Puedes agregar esta app a la pantalla de inicio de tu celular para ingresar directo sin abrir el navegador usando el botón <b>"📲 Instalar App"</b>.</p>
+    </div>
+    <div class="lgc" style="justify-content:flex-end">
+      <button id="help-close-btn" style="background:var(--primary);border-radius:999px">Entendido</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Guía de Instalación según Dispositivo -->
+<div id="install-guide-modal" hidden>
+  <div class="lgb" style="max-width:480px">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;font-size:17px;display:flex;align-items:center;gap:6px">📲 Cómo instalar la App</h3>
+      <button id="guide-close-x" style="background:transparent;color:var(--mu);border:0;font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <div id="guide-content">
+      <div id="guide-ios-box">
+        <p><b>Para instalar en iPhone o iPad (Safari):</b></p>
+        <ol style="padding-left:20px;margin:8px 0;display:flex;flex-direction:column;gap:8px">
+          <li>Toca el botón <b>Compartir</b> (el recuadro con flecha hacia arriba ⎋ en la barra de Safari).</li>
+          <li>Baja en el menú y selecciona <b>"Agregar a la pantalla de inicio"</b> (➕).</li>
+          <li>Toca <b>"Agregar"</b> en la esquina superior derecha.</li>
+        </ol>
+        <div class="mu">¡Listo! Se creará el ícono en tu pantalla de inicio para entrar directo.</div>
+      </div>
+      <div id="guide-android-box" hidden>
+        <p><b>Para instalar en Android (Chrome):</b></p>
+        <ol style="padding-left:20px;margin:8px 0;display:flex;flex-direction:column;gap:8px">
+          <li>Toca los tres puntos de la esquina superior derecha (⋮).</li>
+          <li>Elige la opción <b>"Instalar aplicación"</b> o <b>"Agregar a la pantalla principal"</b>.</li>
+          <li>Confirma presionando <b>Instalar</b>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="lgc" style="justify-content:flex-end">
+      <button id="guide-close-btn" style="background:var(--primary);border-radius:999px">Entendido</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// URL pública de tu Apps Script
+const API = 'https://script.google.com/macros/s/AKfycbzhxh1mNcA4Yft2tXwnJCLGT5BVU-oyqusBlGFOjjPg8CIXsHkYd7Uuottc5-EPGEEL6w/exec'; 
+
+// Helper DOM (definido al inicio)
+const $ = id => document.getElementById(id);
+
+// --- LÓGICA DE INSTALACIÓN PWA ---
+let deferredPrompt = null;
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+function updateInstallUI() {
+  if (isStandalone) {
+    if ($('install-top-banner')) $('install-top-banner').hidden = true;
+    if ($('btn-top-install')) $('btn-top-install').hidden = true;
+    if ($('btn-login-install')) $('btn-login-install').hidden = true;
+    return;
+  }
+
+  const dismissed = sessionStorage.getItem('pwa_banner_dismissed') === '1';
+  if ($('install-top-banner')) {
+    $('install-top-banner').hidden = dismissed;
+  }
+  
+  if ($('btn-top-install')) $('btn-top-install').hidden = false;
+  if ($('btn-login-install')) $('btn-login-install').hidden = false;
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  updateInstallUI();
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  if ($('install-top-banner')) $('install-top-banner').hidden = true;
+  if ($('btn-top-install')) $('btn-top-install').hidden = true;
+  if ($('btn-login-install')) $('btn-login-install').hidden = true;
+});
+
+async function triggerPWAInstall() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      if ($('install-top-banner')) $('install-top-banner').hidden = true;
+    }
+    deferredPrompt = null;
+  } else if (isIOS) {
+    $('install-guide-modal').hidden = false;
+    $('guide-ios-box').hidden = false;
+    $('guide-android-box').hidden = true;
+  } else {
+    $('install-guide-modal').hidden = false;
+    $('guide-ios-box').hidden = !isIOS;
+    $('guide-android-box').hidden = isIOS;
+  }
+}
+
+if ($('btn-banner-install')) $('btn-banner-install').onclick = triggerPWAInstall;
+if ($('btn-top-install')) $('btn-top-install').onclick = triggerPWAInstall;
+if ($('btn-login-install')) $('btn-login-install').onclick = triggerPWAInstall;
+
+if ($('btn-banner-dismiss')) {
+  $('btn-banner-dismiss').onclick = () => {
+    $('install-top-banner').hidden = true;
+    sessionStorage.setItem('pwa_banner_dismissed', '1');
+  };
+}
+
+const closeGuide = () => { $('install-guide-modal').hidden = true; };
+if ($('guide-close-x')) $('guide-close-x').onclick = closeGuide;
+if ($('guide-close-btn')) $('guide-close-btn').onclick = closeGuide;
+
+document.addEventListener('DOMContentLoaded', updateInstallUI);
+// --- FIN LÓGICA DE INSTALACIÓN ---
+
+const D = [
+  [2026, 10, 1], [2026, 10, 16],
+  [2026, 11, 1], [2026, 11, 16],
+  [2027, 0, 1],  [2027, 0, 16],
+  [2027, 1, 1],  [2027, 1, 16],
+  [2027, 2, 1],  [2027, 2, 16],
+  [2027, 3, 1]
+].map(a => new Date(a[0], a[1], a[2]));
+
+const fmt = d => d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmtS = d => d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
+const dueD = q => { const d = D[q - 1]; return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1); };
+const esc = s => String(s).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+const N = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+// Datos configurados del Administrador y Aviso de Privacidad
+const CFG = {
+  nombre: 'Sergio Armando Cadena Huerta',
+  domicilio: 'Nicolás Bravo 11, Zona Centro, 91000, Xalapa, Veracruz',
+  correo: 'kdna.arse@gmail.com',
+  fecha: '30 de octubre de 2026',
+  ver: 'v2'
+};
+
+function legal() {
+  const c = k => `<b>${esc(CFG[k])}</b>`;
+  return `
+<h2>AVISO DE PRIVACIDAD</h2><div class="mu">Vigente a partir del ${c('fecha')}</div>
+<h3>1. Responsable</h3><p>${c('nombre')}, con domicilio en ${c('domicilio')} y correo ${c('correo')} (“el Administrador”), es responsable del tratamiento de tus datos personales.</p>
+<h3>2. Datos que se recaban</h3><p>Nombre completo, número de celular, imagen de tu credencial INE (frente y reverso), número(s) asignado(s) en la tanda, datos de cuenta bancaria o tarjeta compartidos, comprobantes de pago (imágenes), mensajes del chat, registro de aportaciones y entregas, y fecha, hora y tipo de dispositivo de tu aceptación. Son datos de identificación y financieros para el estricto control del ahorro. No se recaban datos sensibles ni de menores de edad.</p>
+<h3>3. Finalidades</h3><p>Administrar el sistema de tanda; verificar la identidad de los integrantes; generar los comprobantes y acreditaciones electrónicas de compromiso de ahorro; identificarte y darte acceso; registrar aportaciones, comprobantes y entregas; e informar el avance al grupo de ahorro mutuo.</p>
+<h3>4. Privacidad y resguardo</h3><p>Tu nombre completo e imágenes de tu INE solo son consultadas por el Administrador en Drive privado. Los demás integrantes solo ven tu nombre de pila, número asignado, tus comprobantes en el chat y la cuenta receptora de cada quincena.</p>
+<h2>COMPROMISO DE APORTACIÓN Y AHORRO MUTUO</h2>
+<h3>1. Naturaleza</h3><p>Es un esquema de ahorro voluntario y solidario entre particulares de 11 números y 11 quincenas. Cada número aporta $1,000 por quincena; en su turno recibe $10,000 acumulados y ese día no aporta.</p>
+<h3>2. Compromiso de aportación</h3><p>Me obligo formalmente a entregar con puntualidad todas mis aportaciones quincenales, de cada número asignado, <b>desde el turno 1 hasta el turno 11</b>, inclusive después de haber recibido mi turno correspondiente. Los pagos se deben realizar a más tardar los días <b>2 y 17 de cada mes</b>.</p>
+<h3>3. Comprobantes electrónicos de compromiso</h3><p>Por cada número y quincena se emite un comprobante electrónico con folio único por $1,000 a favor del receptor en turno. Al confirmarse la recepción de la aportación, el comprobante se acredita electrónicamente.</p>`;
+}
+
+function openLegal(ro) {
+  if (!ro && !$('lg').hidden) return;
+  $('lgt').innerHTML = legal();
+  $('lgk1').hidden = ro;
+  $('lgk2').hidden = !ro;
+  $('lgk').checked = false;
+  $('lgf').hidden = ro || !!(S.me && S.me.datos);
+  $('fn').value = '';
+  $('f1').value = '';
+  $('f2').value = '';
+  $('fs').textContent = '';
+  $('lgt').scrollTop = 0;
+  $('lg').hidden = false;
+}
+
+let TOK = null, S = {}, lastChat = 0;
+try { TOK = localStorage.getItem('tk'); } catch (e) {}
+
+async function api(a, d) {
+  if (!API || API.includes('PEGA_AQUI')) {
+    throw new Error('Debes configurar la URL de tu Apps Script en la variable API.');
+  }
+  const payload = Object.assign({ a: a, t: TOK }, d);
+  const r = await fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+  if (!r.ok) {
+    throw new Error(`Error de conexión con el servidor (${r.status})`);
+  }
+  const j = await r.json();
+  if (j.error) {
+    if (j.error === 'NOAUTH') {
+      TOK = null;
+      try { localStorage.removeItem('tk'); } catch (e) {}
+      show();
+    }
+    throw new Error(j.error === 'NOAUTH' ? 'Tu sesión expiró. Vuelve a ingresar.' : j.error);
+  }
+  return j;
+}
+
+const act = async (a, d) => {
+  try {
+    await api(a, d);
+    await load();
+  } catch (e) {
+    alert(e.message);
+  }
+};
+
+function show() {
+  const hasAccess = !!TOK;
+  $('login').hidden = hasAccess;
+  $('app').hidden = !hasAccess;
+  if ($('fab-help')) $('fab-help').hidden = !hasAccess;
+  updateInstallUI();
+  if (hasAccess) {
+    load();
+  }
+}
+
+// Control del Modal de Ayuda
+function openHelp() {
+  $('help-modal').hidden = false;
+  $('help-content').scrollTop = 0;
+}
+function closeHelp() {
+  $('help-modal').hidden = true;
+}
+$('fab-help').onclick = openHelp;
+$('top-help-btn').onclick = openHelp;
+$('help-close-x').onclick = closeHelp;
+$('help-close-btn').onclick = closeHelp;
+
+$('lb').onclick = async () => {
+  const phone = $('lp').value.trim();
+  const pin = $('lpin').value.trim();
+  $('le').textContent = '';
+  if (!phone) {
+    $('le').textContent = 'Escribe tu número de celular.';
+    return;
+  }
+  $('lb').disabled = true;
+  $('lb').textContent = 'Comprobando…';
+  try {
+    const j = await api('login', { phone: phone, pin: pin });
+    TOK = j.t;
+    try { localStorage.setItem('tk', TOK); } catch (e) {}
+    show();
+  } catch (e) {
+    if (e.message === 'NEED_PIN') {
+      $('lpin').hidden = false;
+      $('lpin').focus();
+      $('le').textContent = 'Eres administrador: escribe tu PIN de seguridad.';
+    } else {
+      $('le').textContent = e.message;
+    }
+  } finally {
+    $('lb').disabled = false;
+    $('lb').textContent = 'Entrar';
+  }
+};
+
+const handleEnter = e => { if (e.key === 'Enter') $('lb').click(); };
+$('lp').addEventListener('keydown', handleEnter);
+$('lpin').addEventListener('keydown', handleEnter);
+
+$('lgo').onclick = () => {
+  if (confirm('¿Deseas cerrar tu sesión?')) {
+    TOK = null;
+    try { localStorage.removeItem('tk'); } catch (e) {}
+    show();
+  }
+};
+
+async function load() {
+  try {
+    const j = await api('state');
+    if (!j.me.acc) {
+      S = { me: j.me };
+      openLegal(false);
+      return;
+    }
+    S = j;
+    S.pay = new Set(j.pay);
+    S.req = new Set(j.req);
+    S.con = new Set(j.con);
+    S.ent = new Set(j.ent);
+    
+    // Lectura protegida de cuentas
+    S.cta = {};
+    if (Array.isArray(j.cta)) {
+      j.cta.forEach(x => { if (x && x[0] != null) S.cta[String(x[0])] = String(x[1] || ''); });
+    } else if (j.cta && typeof j.cta === 'object') {
+      Object.entries(j.cta).forEach(([k, v]) => { S.cta[String(k)] = String(v || ''); });
+    }
+    
+    S.nm = {};
+    (j.pers || []).forEach(p => S.nm[p.n] = p.nombre || 'Pendiente');
+
+    all();
+  } catch (e) {
+    console.error('Error al cargar datos:', e);
+    $('cur').textContent = "Error al conectar";
+    $('dt').textContent = e.message;
+  }
+}
+
+const mine = n => (S.me && S.me.nums) ? S.me.nums.includes(n) : false;
+
+function cur() {
+  for (const n of N) {
+    if (!S.ent.has(n)) return n;
+  }
+  return 0;
+}
+
+function updateIneBanner() {
+  const alertEl = $('ine-alert');
+  if (!alertEl) return;
+  const dismissed = sessionStorage.getItem('ine_dismissed') === '1';
+  if (!S.me.admin && !S.me.hasIne && !dismissed) {
+    alertEl.hidden = false;
+  } else {
+    alertEl.hidden = true;
+  }
+}
+
+$('btn-later-ine').onclick = () => {
+  sessionStorage.setItem('ine_dismissed', '1');
+  $('ine-alert').hidden = true;
+};
+
+$('btn-open-ine').onclick = () => {
+  $('ine-modal-error').textContent = '';
+  $('modal-ine-f1').value = '';
+  $('modal-ine-f2').value = '';
+  $('modal-ine-s1').textContent = 'Sin archivo';
+  $('modal-ine-s2').textContent = 'Sin archivo';
+  $('ine-modal').hidden = false;
+};
+
+$('btn-close-ine').onclick = $('btn-cancel-ine').onclick = () => {
+  $('ine-modal').hidden = true;
+};
+
+$('modal-ine-f1').onchange = () => {
+  $('modal-ine-s1').textContent = $('modal-ine-f1').files[0] ? 'Frente listo ✔' : 'Sin archivo';
+};
+$('modal-ine-f2').onchange = () => {
+  $('modal-ine-s2').textContent = $('modal-ine-f2').files[0] ? 'Reverso listo ✔' : 'Sin archivo';
+};
+
+$('btn-save-ine').onclick = async () => {
+  const f1 = $('modal-ine-f1').files[0];
+  const f2 = $('modal-ine-f2').files[0];
+  if (!f1 && !f2) {
+    $('ine-modal-error').textContent = 'Selecciona al menos una foto de tu INE.';
+    return;
+  }
+  $('btn-save-ine').disabled = true;
+  $('btn-save-ine').textContent = 'Subiendo…';
+  try {
+    const d = {};
+    if (f1) d.f1 = await shrink(f1, 1400, 0.75);
+    if (f2) d.f2 = await shrink(f2, 1400, 0.75);
+    await api('upload_ine', d);
+    $('ine-modal').hidden = true;
+    sessionStorage.removeItem('ine_dismissed');
+    await load();
+    alert('Fotos de tu INE guardadas correctamente.');
+  } catch (err) {
+    $('ine-modal-error').textContent = err.message;
+  } finally {
+    $('btn-save-ine').disabled = false;
+    $('btn-save-ine').textContent = 'Guardar fotos';
+  }
+};
+
+function head() {
+  const c = cur();
+  if (!c) {
+    $('cur').textContent = "¡Tanda completada con éxito! 🎉";
+    $('dt').textContent = "Todas las entregas se han realizado.";
+    $('cd').textContent = "";
+    $('cd').className = '';
+  } else {
+    const d = D[c - 1];
+    $('cur').textContent = `Turno ${c} · ${S.nm[c] || 'Participante'}`;
+    $('dt').textContent = "Recibe $10,000 el " + fmt(d) + " · Aportaciones a más tardar el " + fmtS(dueD(c));
+    
+    const t = new Date();
+    t.setHours(0, 0, 0, 0);
+    const n = Math.round((d - t) / 864e5);
+    const el = $('cd');
+    el.className = n <= 3 ? 'alert' : '';
+    
+    el.textContent = n > 1 
+      ? (n <= 3 ? `¡Atención: solo faltan ${n} días! ` : `Faltan ${n} días `) + "para la entrega del turno"
+      : n === 1 ? "¡Falta 1 día! Mañana se realiza la entrega"
+      : n === 0 ? "¡Hoy es el día de entrega! Recuerda tener cubierta tu aportación"
+      : "Entrega pendiente de confirmar";
+
+    const a = S.cta[String(c)];
+    $('acc').textContent = a || "Aún no ha compartido sus datos bancarios.";
+
+    const m = mine(c) || S.me.admin;
+    $('accE').hidden = !m;
+    if (m) {
+      updateMyAccText();
+    }
+  }
+
+  $('pb').style.width = ((S.pay.size || 0) / 110 * 100) + '%';
+  $('pt').textContent = `${S.pay.size || 0} de 110 aportaciones cubiertas · ${S.ent.size || 0} de 11 entregados`;
+  
+  const nm = (S.me.nums || []).map(n => S.nm[n]);
+  const rolTxt = S.me.admin ? '👑 Administrador' : (nm.length ? '👤 ' + nm[0] + ` (Núm. ${S.me.nums.join(',')})` : '👤 Sin número asignado');
+  $('hi').innerHTML = rolTxt;
+}
+
+function updateMyAccText() {
+  const c = cur();
+  const m = mine(c);
+  const targetNum = m ? c : (S.me.nums && S.me.nums[0] ? S.me.nums[0] : c);
+  const existing = S.cta[String(targetNum)] || '';
+
+  if (existing) {
+    $('accStatus').innerHTML = `✅ Datos guardados para el <b>Número ${targetNum}</b>.`;
+    $('accFields').hidden = true;
+    $('btn-toggle-acc-edit').hidden = false;
+    $('btn-toggle-acc-edit').textContent = "Modificar datos";
+  } else {
+    $('accStatus').innerHTML = `Configura tus datos de cuenta para cuando sea tu turno:`;
+    $('accFields').hidden = false;
+    $('btn-toggle-acc-edit').hidden = true;
+  }
+}
+
+$('btn-toggle-acc-edit').onclick = () => {
+  const isHidden = $('accFields').hidden;
+  $('accFields').hidden = !isHidden;
+  $('btn-toggle-acc-edit').textContent = isHidden ? "Cancelar" : "Modificar datos";
+  if (isHidden) {
+    const c = cur();
+    const targetNum = mine(c) ? c : (S.me.nums && S.me.nums[0] ? S.me.nums[0] : c);
+    $('accT').value = S.cta[String(targetNum)] || '';
+    $('accT').focus();
+  }
+};
+
+function grid() {
+  const T0 = new Date();
+  T0.setHours(0, 0, 0, 0);
+  let h = '<tr><th class="n">Participante</th>';
+  for (const q of N) {
+    h += `<th>${q}<br><span class="mu" style="font-size:10px">${D[q - 1].getDate()}/${D[q - 1].getMonth() + 1}</span></th>`;
+  }
+  h += '</tr>';
+  const c = cur();
+  for (const n of N) {
+    h += `<tr class="${n === c ? 'cur' : ''}"><th class="n">${n} · ${esc(S.nm[n] || 'Libre')}${S.ent.has(n) ? ' 📦' : ''}</th>`;
+    for (const q of N) {
+      const k = n + '_' + q;
+      h += `<td class="${S.me.admin && q !== n ? 'ad' : ''}" data-k="${k}">${
+        q === n ? '🎁' : S.pay.has(k) ? '✅' : S.req.has(k) ? '⏳' : dueD(q) < T0 ? '⚠️' : ''
+      }</td>`;
+    }
+    h += '</tr>';
+  }
+  $('g').innerHTML = h;
+}
+
+$('g').onclick = e => {
+  const k = e.target.dataset && e.target.dataset.k;
+  if (k && S.me.admin && k.split('_')[0] !== k.split('_')[1]) {
+    act('pay', { k: k });
+  }
+};
+
+function pend() {
+  const G = {};
+  [...S.req].filter(k => !S.pay.has(k)).forEach(k => {
+    const [n, q] = k.split('_').map(Number);
+    const g = S.nm[n] + '|' + q;
+    G[g] = G[g] || { name: S.nm[n], q: q, ns: [], ks: [] };
+    G[g].ns.push(n);
+    G[g].ks.push(k);
+  });
+  const L = Object.values(G);
+  $('pend').innerHTML = L.length
+    ? L.map(g => {
+        const ok = g.ks.every(k => S.con.has(k));
+        const ks = g.ks.join(',');
+        let b = '';
+        if (mine(g.q) && !ok) {
+          b += `<button class="s" data-c="${ks}">Confirmar de recibido ($${g.ks.length * 1000})</button> `;
+        }
+        if (S.me.admin) {
+          b += `<button class="s" data-ps="${ks}">Marcar pagado${g.ks.length > 1 ? ' (todo)' : ''}</button> `;
+          if (g.ks.length > 1) {
+            g.ks.forEach((k, i) => b += `<button class="s" data-ps="${k}">Solo núm. ${g.ns[i]}</button> `);
+          }
+        }
+        return `<div class="q">
+          <b>${esc(g.name)}</b> (Núm. ${g.ns.join(' y ')}) → Quincena ${g.q} (Recibe: ${esc(S.nm[g.q])}) · <b>$${g.ks.length * 1000}</b><br>
+          <span class="badge ${ok ? 'badge-ok' : 'badge-warn'}">${ok ? '✔ Receptor ya confirmó recepción' : 'Esperando confirmación del receptor'}</span>
+          <div style="margin-top:8px">${b}</div>
+        </div>`;
+      }).join('')
+    : '<div class="mu">No hay aportaciones pendientes por revisar.</div>';
+}
+
+$('pend').onclick = e => {
+  const d = e.target.dataset;
+  if (d.c) act('con', { ks: d.c.split(',') });
+  if (d.ps) act('payset', { ks: d.ps.split(',') });
+};
+
+function mypay() {
+  const M = N.filter(mine);
+  if (!M.length) {
+    $('mp').innerHTML = '<div class="mu">Tu número aún no tiene lugar asignado en la tanda. Comunícate con el administrador.</div>';
+    return;
+  }
+
+  const c = cur();
+  if (!c) {
+    $('mp').innerHTML = '<div class="q" style="color:var(--primary);font-weight:700">🎉 La tanda ha finalizado. ¡Gracias por tu compromiso y cumplimiento!</div>';
+    return;
+  }
+
+  let overdueQ = 0;
+  for (let x = 1; x < c; x++) {
+    if (M.some(n => n !== x && !S.pay.has(n + '_' + x))) {
+      overdueQ = x;
+      break;
+    }
+  }
+
+  const q = overdueQ || c;
+  const isOverdue = overdueQ > 0;
+  const due = M.filter(n => n !== q && !S.pay.has(n + '_' + q));
+
+  if (!due.length) {
+    $('mp').innerHTML = `<div class="q" style="color:var(--primary);font-weight:700">
+      ✅ ¡Estás al corriente! Ya cubriste tu aportación para el Turno ${c}.
+      <div class="mu" style="font-weight:normal;margin-top:4px">
+        La aportación del siguiente turno se habilitará automáticamente al pasar la fecha del turno actual.
+      </div>
+    </div>`;
+    return;
+  }
+
+  const todo = due.filter(n => !S.req.has(n + '_' + q));
+  const monto = due.length * 1000;
+  const dueLimit = fmtS(dueD(q));
+
+  $('mp').innerHTML = `
+    <div class="q">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
+        <b style="font-size:15px">Quincena ${q} (${D[q - 1].getDate()}/${D[q - 1].getMonth() + 1})</b>
+        ${isOverdue ? '<span class="badge badge-warn">⚠️ Pago atrasado pendiente</span>' : '<span class="badge badge-info">Turno Activo</span>'}
+      </div>
+      <div style="margin:6px 0">
+        Aportar: <b style="font-size:17px;color:var(--primary)">$${monto}</b> a <b>${esc(S.nm[q] || 'Titular')}</b><br>
+        Fecha límite: <b>${dueLimit}</b>
+      </div>
+      <div class="mu">${due.length > 1 ? `Cubre tus números <b>${due.join(' y ')}</b> en una sola transferencia.` : `Corresponde a tu número <b>${due[0]}</b>.`}</div>
+      <div style="margin-top:10px">
+        ${todo.length 
+          ? `<button class="s" data-q="${q}" style="background:var(--accent-pink);font-weight:700">Ya envié mi comprobante · Solicitar revisión</button>` 
+          : `<span class="badge badge-info" style="font-size:12px;padding:6px 12px">⏳ Comprobante enviado · En revisión por el receptor</span>` + (due.length < M.length && M.length > 1 ? ` <span class="mu">(Restante núm: ${due.join(' y ')})</span>` : '')
+        }
+      </div>
+    </div>
+  `;
+}
+
+$('mp').onclick = e => {
+  if (e.target.dataset.q) act('req', { q: +e.target.dataset.q });
+};
+
+$('accB').onclick = () => {
+  const c = cur();
+  const targetNum = mine(c) ? c : (S.me.nums && S.me.nums[0] ? S.me.nums[0] : c);
+  if (targetNum) {
+    act('cta', { n: targetNum, text: $('accT').value });
+  }
+};
+
+function chat() {
+  if (!S.chat.length) return;
+  const l = S.chat[S.chat.length - 1].ts + ':' + S.chat.length;
+  if (l === lastChat) return;
+  lastChat = l;
+  
+  const el = $('chat');
+  const bot = el.scrollTop + el.clientHeight >= el.scrollHeight - 50;
+  el.innerHTML = '';
+  
+  S.chat.forEach(m => {
+    const d = document.createElement('div');
+    d.className = 'm';
+    const b = document.createElement('b');
+    b.textContent = m.name + ' · ' + new Date(m.ts).toLocaleString('es-MX', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    d.append(b);
+    if (m.text) {
+      const p = document.createElement('div');
+      p.textContent = m.text;
+      d.append(p);
+    }
+    if (m.img && /^[\w-]+$/.test(m.img)) {
+      const i = document.createElement('img');
+      i.src = 'https://drive.google.com/thumbnail?id=' + m.img + '&sz=w400';
+      i.dataset.id = m.img;
+      i.alt = "Comprobante adjunto";
+      d.append(i);
+    }
+    el.append(d);
+  });
+  if (bot) el.scrollTop = el.scrollHeight;
+}
+
+const shrink = (f, mx = 1000, ql = 0.65) => new Promise((ok, no) => {
+  const i = new Image();
+  i.onload = () => {
+    const k = Math.min(1, mx / Math.max(i.width, i.height));
+    const c = document.createElement('canvas');
+    c.width = i.width * k;
+    c.height = i.height * k;
+    c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+    ok(c.toDataURL('image/jpeg', ql));
+  };
+  i.onerror = no;
+  i.src = URL.createObjectURL(f);
+});
+
+$('cs').onclick = async () => {
+  const t = $('ct').value.trim();
+  const f = $('cf').files[0];
+  if (!t && !f) return;
+  $('cs').disabled = true;
+  $('cs').textContent = '...';
+  try {
+    const img = f ? await shrink(f) : '';
+    await api('chat', { text: t, img: img });
+    $('ct').value = "";
+    $('cf').value = "";
+    $('cn').textContent = "";
+    await load();
+  } catch (e) {
+    alert(e.message);
+  } finally {
+    $('cs').disabled = false;
+    $('cs').textContent = 'Enviar';
+  }
+};
+
+$('cf').onchange = () => {
+  $('cn').textContent = $('cf').files[0] ? 'Comprobante listo ✔' : '';
+};
+
+$('chat').onclick = e => {
+  const id = e.target.dataset && e.target.dataset.id;
+  if (id) {
+    $('ov').querySelector('img').src = 'https://drive.google.com/thumbnail?id=' + id + '&sz=w1200';
+    $('ov').hidden = false;
+  }
+};
+$('ov').onclick = () => {
+  $('ov').hidden = true;
+  $('ov').querySelector('img').removeAttribute('src');
+};
+
+function pgr() {
+  const T0 = new Date();
+  T0.setHours(0, 0, 0, 0);
+  const todos = S.pgr || [];
+  const L = todos.filter(x => mine(x[1]));
+  const o = $('pg').querySelector('details');
+  const op = o && o.open;
+  
+  const st = x => x[3] === 'Cancelado' 
+    ? '<span class="badge badge-ok">✅ Acreditado / Cumplido</span>' 
+    : dueD(x[2]) < T0 
+    ? '<span class="badge badge-warn">⚠️ Fuera de plazo</span>' 
+    : '<span class="badge badge-info">Compromiso Vigente</span>';
+    
+  const c = L.filter(x => x[3] === 'Cancelado').length;
+  let h = S.me.admin 
+    ? `<div class="mu" style="margin-bottom:6px">Total global: ${todos.filter(x => x[3] === 'Cancelado').length} cumplidos de ${todos.length} registros.</div>` 
+    : '';
+
+  h += L.length 
+    ? `<details${op ? ' open' : ''}><summary style="cursor:pointer;font-weight:600;padding:6px 0">${c} cumplidos · ${L.length - c} vigentes (Ver detalle)</summary>` 
+      + L.map(x => `<div class="q">Folio: <b>${esc(x[0])}</b> · Quincena ${x[2]} · $1,000 · Vencimiento: ${fmtS(dueD(x[2]))} · ${st(x)}</div>`).join('') 
+      + '</details>' 
+    : '<div class="mu">Aún no hay comprobantes generados para tus turnos.</div>';
+    
+  $('pg').innerHTML = h;
+}
+
+const gid = s => /^[\w-]+$/.test(s || '') ? s : '';
+const ext = p => {
+  if (!p.tel) return '';
+  const a = (S.acept || []).includes(p.tel);
+  const d = (S.dat || []).find(x => x.tel === p.tel);
+  const L = (id, t) => gid(id) ? ` · <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/${gid(id)}/view" style="color:var(--primary);font-weight:600">${t}</a>` : '';
+  return (a ? ' <span class="badge badge-ok">✔ Aceptó</span>' : '') + (d ? ` · ${esc(d.nombre)}${L(d.f, 'INE frente')}${L(d.r, 'reverso')}` : '');
+};
+
+function adm() {
+  const el = $('adm');
+  el.hidden = !S.me.admin;
+  if (!S.me.admin || el.contains(document.activeElement)) return;
+  el.innerHTML = '<h2>⚙️ Panel Administrador</h2>'
+    + '<div class="mu">Entregas realizadas (toca para marcar/desmarcar turno entregado):</div><div class="row">' + N.map(n => `<button class="s" data-d="${n}">${S.ent.has(n) ? '↩' : '📦'} Turno ${n}</button>`).join('') + '</div>'
+    + '<div class="mu" style="margin-top:10px">Integrantes y celulares (10 dígitos). El botón "Liberar" desvincula la sesión si cambiaron de teléfono:</div>'
+    + S.pers.map(p => `<div class="row"><b>${p.n}</b><input id="pn${p.n}" value="${esc(p.nombre)}" placeholder="Nombre"><input id="pt${p.n}" type="tel" value="${esc(p.tel || '')}" placeholder="Celular"><button class="s" data-s="${p.n}">Guardar</button>${ext(p)}${p.tel ? `<button class="s" style="background:#e11d48" data-r="${p.tel}">Liberar dispositivo</button>` : ''}</div>`).join('')
+    + '<div class="mu" style="margin-top:10px">Solicitudes de acceso pendientes (nuevos dispositivos bloqueados):</div>' + ((S.pend || []).length ? S.pend.map(t => `<div class="row">${esc(t)} <button class="s" data-r="${esc(t)}">Permitir entrada</button></div>`).join('') : '<div class="mu">Ninguna.</div>');
+}
+
+$('adm').onclick = e => {
+  const d = e.target.dataset;
+  if (d.d) act('ent', { n: +d.d });
+  if (d.r) act('reset', { phone: d.r });
+  if (d.s) act('person', { n: +d.s, nombre: $('pn' + d.s).value, phone: $('pt' + d.s).value });
+};
+
+function all() {
+  updateIneBanner();
+  head();
+  grid();
+  pend();
+  mypay();
+  pgr();
+  chat();
+  adm();
+}
+
+$('lgk').onchange = async () => {
+  if (!$('lgk').checked) return;
+  try {
+    const d = { ver: CFG.ver, ua: navigator.userAgent };
+    if (!$('lgf').hidden) {
+      const n = $('fn').value.trim();
+      const a = $('f1').files[0];
+      const b = $('f2').files[0];
+      if (n.split(/\s+/).length < 2) throw new Error('Escribe tu nombre completo.');
+      d.nombre = n;
+      if (a) d.f1 = await shrink(a, 1400, 0.7);
+      if (b) d.f2 = await shrink(b, 1400, 0.7);
+    }
+    await api('accept', d);
+    $('lg').hidden = true;
+    await load();
+  } catch (e) {
+    $('lgk').checked = false;
+    alert(e.message);
+  }
+};
+
+$('f1').onchange = $('f2').onchange = () => {
+  $('fs').textContent = ($('f1').files[0] ? 'Frente ✔ ' : '') + ($('f2').files[0] ? 'Reverso ✔' : '');
+};
+
+$('lgl').onclick = e => {
+  e.preventDefault();
+  openLegal(true);
+};
+$('lgx').onclick = () => { $('lg').hidden = true; };
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+
+setInterval(() => {
+  if (TOK && !document.hidden) load();
+}, 10000);
+
+show();
+</script>
+</body>
+</html>
