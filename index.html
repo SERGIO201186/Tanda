@@ -1054,6 +1054,17 @@
 
     <!-- PESTAÑA 6: PANEL ADMINISTRADOR -->
     <section id="view-admin" class="app-tab-panel" hidden>
+      <div class="card" id="apay" style="border-top:5px solid #16a34a" hidden>
+        <h2>✅ Registrar pago recibido</h2>
+        <div class="mu">Úsalo cuando el comprobante te llegue directo a ti (WhatsApp, efectivo, etc.). El pago queda como pagado, su pagaré se cancela y la persona recibe aviso.</div>
+        <label class="mu" for="apN" style="display:block;margin-top:8px">Número que paga</label>
+        <select id="apN" style="width:100%"></select>
+        <label class="mu" for="apQ" style="display:block;margin-top:8px">Quincena</label>
+        <select id="apQ" style="width:100%"></select>
+        <label id="apAllL" class="mu" style="display:flex;gap:8px;align-items:center;margin-top:8px" hidden><input type="checkbox" id="apAll"><span id="apAllT"></span></label>
+        <input id="apNote" maxlength="80" placeholder="Nota (opcional): efectivo, transferencia, folio…" style="width:100%;margin-top:8px">
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button id="apB">Marcar como pagado</button><span class="mu" id="apMsg"></span></div>
+      </div>
       <div class="card" id="adm" style="border-top:5px solid #0d9488"></div>
     </section>
 
@@ -2074,6 +2085,47 @@ const ext = p => {
   return (a ? ' <span class="badge badge-ok">✔ Aceptó</span>' : '') + (d ? ` · ${esc(d.nombre)}${L(d.f, 'INE frente')}${L(d.r, 'reverso')}` : '');
 };
 
+// ---- Registro manual de pagos (administrador) ----
+function manualPay() {
+  const card = $('apay');
+  card.hidden = !(S.me && S.me.admin);
+  if (card.hidden || card.contains(document.activeElement)) return;
+  const n0 = $('apN').value;
+  $('apN').innerHTML = N.map(n => `<option value="${n}">Núm. ${n} · ${esc(S.nm[n] || 'Pendiente')}</option>`).join('');
+  if (n0) $('apN').value = n0;
+  fillApQ();
+}
+function fillApQ() {
+  const n = +$('apN').value, q0 = $('apQ').value;
+  let first = 0;
+  $('apQ').innerHTML = N.filter(q => q !== n).map(q => {
+    const k = n + '_' + q, paid = S.pay.has(k);
+    if (!paid && !first) first = q;
+    return `<option value="${q}" ${paid ? 'disabled' : ''}>Quincena ${q} · límite ${fmtS(dueD(q))}${paid ? ' ✅ ya pagada' : S.req.has(k) ? ' ⏳ con solicitud' : ''}</option>`;
+  }).join('');
+  const keep = q0 && !S.pay.has(n + '_' + q0) && +q0 !== n;
+  $('apQ').value = keep ? q0 : (first || '');
+  const sibs = N.filter(x => x !== n && S.nm[x] && S.nm[x] !== 'Pendiente' && S.nm[x] === S.nm[n]);
+  $('apAllL').hidden = !sibs.length;
+  if (sibs.length) $('apAllT').textContent = 'Registrar también el núm. ' + sibs.join(' y ') + ' (misma persona, misma quincena)';
+}
+$('apN').onchange = fillApQ;
+$('apB').onclick = async () => {
+  const n = +$('apN').value, q = +$('apQ').value;
+  if (!n || !q) { $('apMsg').textContent = 'Elige número y quincena.'; return; }
+  const ks = [n + '_' + q];
+  if (!$('apAllL').hidden && $('apAll').checked) N.filter(x => x !== n && S.nm[x] === S.nm[n] && x !== q && !S.pay.has(x + '_' + q)).forEach(x => ks.push(x + '_' + q));
+  if (!confirm('¿Marcar como pagado: ' + (S.nm[n] || 'núm. ' + n) + ', núm. ' + ks.map(k => k.split('_')[0]).join(' y ') + ', quincena ' + q + '?')) return;
+  $('apB').disabled = true; $('apMsg').textContent = 'Guardando…';
+  try {
+    await api('payset', { ks, nota: $('apNote').value.trim() });
+    $('apNote').value = ''; $('apAll').checked = false;
+    $('apMsg').textContent = '✅ Registrado: ' + (S.nm[n] || 'núm. ' + n) + ', quincena ' + q + '.';
+    await load();
+  } catch (e) { $('apMsg').textContent = e.message; }
+  $('apB').disabled = false;
+};
+
 function adm() {
   const el = $('adm');
   el.hidden = !S.me.admin;
@@ -2176,7 +2228,7 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('mess
 
 function all() {
   // Cada parte se dibuja por separado: si una falla, las demás (por ejemplo el chat) siguen funcionando.
-  [updateIneBanner, head, grid, pend, mypay, pgr, chat, adm, renderNotif, maybeRegPush].forEach(fn => {
+  [updateIneBanner, head, grid, pend, mypay, pgr, chat, manualPay, adm, renderNotif, maybeRegPush].forEach(fn => {
     try { fn(); } catch (e) { console.error('Error en ' + fn.name + ':', e); }
   });
 }
