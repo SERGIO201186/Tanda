@@ -971,6 +971,10 @@
         <div class="acc-box" id="acc">—</div>
 
         <div id="accE" style="margin-top:12px" hidden>
+          <div id="accForBox" hidden style="margin-bottom:10px">
+            <label class="mu" for="accFor" style="font-weight:700">Como administrador puedes capturar los datos de cualquier número:</label>
+            <select id="accFor" style="width:100%;margin-top:4px"></select>
+          </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <span class="mu" style="font-weight:700" id="accStatus">Tus datos bancarios para recibir:</span>
             <button id="btn-toggle-acc-edit" class="s" style="background:transparent;color:var(--accent-blue);border:1px solid var(--accent-blue-border)">Modificar</button>
@@ -1056,7 +1060,7 @@
     <section id="view-admin" class="app-tab-panel" hidden>
       <div class="card" id="apay" style="border-top:5px solid #16a34a" hidden>
         <h2>✅ Registrar pago recibido</h2>
-        <div class="mu">Úsalo cuando el comprobante te llegue directo a ti (WhatsApp, efectivo, etc.). El pago queda como pagado, su pagaré se cancela y la persona recibe aviso.</div>
+        <div class="mu">Úsalo cuando el comprobante te llegue directo a ti (WhatsApp, efectivo, etc.). El pago queda como pagado, su compromiso de ahorro queda acreditado y la persona recibe aviso.</div>
         <label class="mu" for="apN" style="display:block;margin-top:8px">Número que paga</label>
         <select id="apN" style="width:100%"></select>
         <label class="mu" for="apQ" style="display:block;margin-top:8px">Quincena</label>
@@ -1777,30 +1781,53 @@ function fillAcc(d) {
   $('accName').value = (d && d.titular) || '';
   $('accErr').textContent = '';
 }
-function accTarget() { const c = cur(); return mine(c) ? c : (S.me.nums && S.me.nums[0] ? S.me.nums[0] : c); }
+let accEditing = false, accFor = 0; // mientras se escribe, la pantalla NO se redibuja ni se cierra el formulario
+function accTarget() {
+  if (S.me && S.me.admin && accFor) return accFor;
+  const c = cur(); return mine(c) ? c : (S.me.nums && S.me.nums[0] ? S.me.nums[0] : c);
+}
 
 function updateMyAccText() {
-  const targetNum = accTarget();
-  const existing = S.cta[String(targetNum).trim()];
+  const adm = !!S.me.admin;
+  $('accForBox').hidden = !adm;
+  if (adm) {
+    if (!accFor || !N.includes(accFor)) accFor = cur() || 1;
+    if (!accEditing) {
+      $('accFor').innerHTML = N.map(n => `<option value="${n}">Núm. ${n} · ${esc(S.nm[n] || 'Libre')}${S.cta[String(n)] && S.cta[String(n)].cuenta ? ' ✓' : ' (sin datos)'}</option>`).join('');
+      $('accFor').value = String(accFor);
+    }
+  }
+  if (accEditing) return;
+  const targetNum = accTarget(), existing = S.cta[String(targetNum).trim()];
+  const other = adm && !mine(targetNum);
+  const who = other ? `de <b>${esc(S.nm[targetNum] || 'núm. ' + targetNum)}</b> (Núm. ${targetNum})` : `para el <b>Número ${targetNum}</b>`;
   if (existing && existing.cuenta) {
-    $('accStatus').innerHTML = `✅ Datos bancarios guardados para el <b>Número ${targetNum}</b>:`;
+    $('accStatus').innerHTML = `✅ Datos bancarios guardados ${who}:`;
     $('accFields').hidden = true;
     $('btn-toggle-acc-edit').hidden = false;
     $('btn-toggle-acc-edit').textContent = "Modificar";
     fillAcc(existing);
-  } else if ($('accFields').hidden || !$('accFields').contains(document.activeElement)) {
-    $('accStatus').innerHTML = `Configura tus datos de cuenta para cuando sea tu turno:`;
+  } else {
+    $('accStatus').innerHTML = other ? `Captura los datos bancarios ${who}:` : `Configura tus datos de cuenta para cuando sea tu turno:`;
     $('accFields').hidden = false;
     $('btn-toggle-acc-edit').hidden = true;
-    if (!$('accBank').value && !$('accNum').value && !$('accName').value) fillAcc(null);
+    fillAcc(null);
   }
 }
+$('accFields').addEventListener('input', () => { accEditing = true; });
+$('accFor').onchange = () => { accFor = +$('accFor').value; accEditing = false; updateMyAccText(); };
 
 $('btn-toggle-acc-edit').onclick = () => {
-  const isHidden = $('accFields').hidden;
-  $('accFields').hidden = !isHidden;
-  $('btn-toggle-acc-edit').textContent = isHidden ? "Cancelar" : "Modificar";
-  if (isHidden) { fillAcc(S.cta[String(accTarget()).trim()]); $('accBank').focus(); }
+  if ($('accFields').hidden) {
+    accEditing = true;
+    $('accFields').hidden = false;
+    $('btn-toggle-acc-edit').textContent = "Cancelar";
+    fillAcc(S.cta[String(accTarget()).trim()]);
+    $('accBank').focus();
+  } else {
+    accEditing = false;
+    updateMyAccText();
+  }
 };
 
 function grid() {
@@ -1950,13 +1977,19 @@ $('mp').onclick = async e => {
   } catch (err) { alert(err.message); mypay(); }
 };
 
-$('accB').onclick = () => {
+$('accB').onclick = async () => {
   const targetNum = accTarget();
   const banco = $('accBank').value.trim(), cuenta = accDigits($('accNum').value), titular = $('accName').value.trim();
   const err = validAcc(banco, cuenta, titular);
   $('accErr').textContent = err;
   if (err || !targetNum) return;
-  act('cta', { n: targetNum, banco, cuenta, titular });
+  $('accB').disabled = true;
+  try {
+    await api('cta', { n: targetNum, banco, cuenta, titular });
+    accEditing = false;
+    await load();
+  } catch (e) { $('accErr').textContent = e.message; }
+  $('accB').disabled = false;
 };
 
 function chat() {
